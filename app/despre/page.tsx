@@ -3,6 +3,7 @@ import Image from "next/image";
 
 import { RevealOnScroll } from "../components/RevealOnScroll";
 import { brand, credentials, principles } from "../siteContent";
+import { aboutIntro, aboutSections } from "../../content/about";
 
 export const metadata = {
   title: "Despre Teodora Pălii | Nutriționist-Dietetician",
@@ -14,35 +15,41 @@ export default function AboutPage() {
   return (
     <main>
       <section className="section">
-        <div className="container about-grid">
+        <div className="container">
           <RevealOnScroll>
-            <Image
-              alt="Teodora Pălii"
-              className="about-photo"
-              height={1200}
-              src={brand.aboutImage}
-              width={900}
-            />
-          </RevealOnScroll>
-          <RevealOnScroll delay={90}>
-            <div className="section-heading" style={{ marginBottom: 0 }}>
+            <article className="about-story">
               <p className="eyebrow">Despre mine</p>
-              <h1 className="h1">Bună, sunt Teodora.</h1>
-              <p className="lead">
-                Sunt nutriționist-dietetician autorizat, cu studii de licență și
-                master în Nutriție și Dietetică, absolvite în cadrul
-                Universității de Medicină și Farmacie din Iași.
-              </p>
-              <p className="body-text">
-                Pentru mine, nutriția nu înseamnă reguli rigide sau liste
-                interminabile de alimente interzise. Înseamnă să înțelegem
-                nevoile fiecărei persoane și să construim soluții care pot fi
-                aplicate în viața reală.
-              </p>
+              <h1 className="h1 about-title">Bună, sunt Teodora Pălii.</h1>
+              <div className="about-float-media">
+                <Image
+                  alt="Teodora Pălii"
+                  className="about-photo"
+                  height={1200}
+                  src={brand.aboutImage}
+                  width={900}
+                />
+              </div>
+              {aboutIntro.map((paragraph) => (
+                <p className="lead" key={paragraph}>
+                  {paragraph}
+                </p>
+              ))}
+              <div className="about-copy-sections">
+                {aboutSections.map((section) => (
+                  <section className="about-copy-section" key={section.title}>
+                    <h2 className="h3">{section.title}</h2>
+                    {section.paragraphs.map((paragraph) => (
+                      <p className="body-text" key={paragraph}>
+                        {paragraph}
+                      </p>
+                    ))}
+                  </section>
+                ))}
+              </div>
               <Link className="button button-primary" href={brand.bookingUrl}>
                 Programează o consultație
               </Link>
-            </div>
+            </article>
           </RevealOnScroll>
         </div>
       </section>

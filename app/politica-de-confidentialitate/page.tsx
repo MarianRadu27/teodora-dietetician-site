@@ -1,20 +1,30 @@
-export const metadata = {
+import type { Metadata } from "next";
+
+import { LegalPageLayout } from "../components/legal/LegalPageLayout";
+import {
+  PrivacyContent,
+  privacyTocItems,
+} from "../../content/legal/privacy";
+import { legalConfig } from "../../config/legal";
+
+export const metadata: Metadata = {
   title: "Politica de confidențialitate | Teodora Pălii",
+  description:
+    "Informații despre modul în care sunt colectate, utilizate și protejate datele personale.",
+  alternates: {
+    canonical: "/politica-de-confidentialitate",
+  },
 };
 
 export default function PrivacyPolicyPage() {
   return (
-    <main className="section">
-      <div className="container">
-        <div className="section-heading">
-          <p className="eyebrow">Legal</p>
-          <h1 className="h1">Politica de confidențialitate</h1>
-          <p className="lead">
-            Această pagină este pregătită pentru textul final al politicii de
-            confidențialitate.
-          </p>
-        </div>
-      </div>
-    </main>
+    <LegalPageLayout
+      description="Informații despre modul în care sunt colectate, utilizate și protejate datele personale pe website."
+      lastUpdated={legalConfig.privacyLastUpdated}
+      title="Politica de confidențialitate"
+      tocItems={privacyTocItems}
+    >
+      <PrivacyContent />
+    </LegalPageLayout>
   );
 }

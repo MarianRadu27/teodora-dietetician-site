@@ -1,15 +1,31 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 
 import { SocialIcon } from "../components/SocialIcon";
 import { brand } from "../siteContent";
+import {
+  hasOfficeLocationMapUrl,
+  isOfficeLocationValueComplete,
+  officeLocation,
+} from "../../config/officeLocation";
 
-export const metadata = {
-  title: "Contact | Teodora Pălii Dietetician",
+export const metadata: Metadata = {
+  title: "Contact și consultații în Iași | Teodora Pălii",
   description:
-    "Contact Teodora Pălii, nutriționist-dietetician autorizat în Iași și online.",
+    "Date de contact și locația consultațiilor nutriționale desfășurate în Iași, la DietON – Centrul de Dietetică și Nutriție.",
+  alternates: {
+    canonical: "/contact",
+  },
 };
 
 export default function ContactPage() {
+  const optionalLocationDetails = [
+    ["Etaj", officeLocation.floor],
+    ["Cabinet", officeLocation.room],
+    ["Acces", officeLocation.accessInstructions],
+    ["Parcare", officeLocation.parkingInformation],
+  ].filter(([, value]) => isOfficeLocationValueComplete(value));
+
   return (
     <main>
       <section className="section">
@@ -73,6 +89,49 @@ export default function ContactPage() {
                 >
                   <SocialIcon name="facebook" />
                 </a>
+              </div>
+            </article>
+
+            <article className="soft-card contact-location-card">
+              <h2 className="h3">Consultații în cabinet</h2>
+              <p className="body-text" style={{ marginTop: 12 }}>
+                Consultațiile cu prezență fizică se desfășoară la:
+              </p>
+              <address className="office-address">
+                <strong>{officeLocation.name}</strong>
+                <span>{officeLocation.address}</span>
+                <span>{officeLocation.city}</span>
+              </address>
+              {optionalLocationDetails.length > 0 ? (
+                <dl className="office-detail-list">
+                  {optionalLocationDetails.map(([label, value]) => (
+                    <div key={label}>
+                      <dt>{label}</dt>
+                      <dd>{value}</dd>
+                    </div>
+                  ))}
+                </dl>
+              ) : null}
+              <p className="body-text">
+                Consultațiile se desfășoară numai pe bază de programare.
+              </p>
+              <div className="button-row">
+                {hasOfficeLocationMapUrl() ? (
+                  <a
+                    className="button button-secondary"
+                    href={officeLocation.mapUrl}
+                    rel="noopener noreferrer"
+                    target="_blank"
+                  >
+                    Deschide în Google Maps
+                  </a>
+                ) : null}
+                <Link
+                  className="button button-primary"
+                  href="/programare?modalitate=cabinet"
+                >
+                  Programează-te
+                </Link>
               </div>
             </article>
           </div>

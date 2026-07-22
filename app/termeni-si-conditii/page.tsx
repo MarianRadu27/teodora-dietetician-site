@@ -1,20 +1,27 @@
-export const metadata = {
+import type { Metadata } from "next";
+
+import { LegalPageLayout } from "../components/legal/LegalPageLayout";
+import { TermsContent, termsTocItems } from "../../content/legal/terms";
+import { legalConfig } from "../../config/legal";
+
+export const metadata: Metadata = {
   title: "Termeni și condiții | Teodora Pălii",
+  description:
+    "Condițiile de utilizare a website-ului, programare, anulare și reprogramare a consultațiilor.",
+  alternates: {
+    canonical: "/termeni-si-conditii",
+  },
 };
 
 export default function TermsPage() {
   return (
-    <main className="section">
-      <div className="container">
-        <div className="section-heading">
-          <p className="eyebrow">Legal</p>
-          <h1 className="h1">Termeni și condiții</h1>
-          <p className="lead">
-            Această pagină este pregătită pentru textul final al termenilor și
-            condițiilor.
-          </p>
-        </div>
-      </div>
-    </main>
+    <LegalPageLayout
+      description="Condițiile de utilizare a website-ului, regulile de programare și secțiunea de anulare și reprogramare."
+      lastUpdated={legalConfig.termsLastUpdated}
+      title="Termeni și condiții"
+      tocItems={termsTocItems}
+    >
+      <TermsContent />
+    </LegalPageLayout>
   );
 }

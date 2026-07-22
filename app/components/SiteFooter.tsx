@@ -1,7 +1,13 @@
 import Link from "next/link";
 
+import { CookieSettingsButton } from "./cookies/CookieSettingsButton";
 import { SocialIcon } from "./SocialIcon";
 import { brand } from "../siteContent";
+import {
+  getOfficeLocationAddress,
+  hasOfficeLocationMapUrl,
+  officeLocation,
+} from "../../config/officeLocation";
 
 export function SiteFooter() {
   return (
@@ -20,6 +26,23 @@ export function SiteFooter() {
           >
             {brand.location}
           </p>
+          <div className="footer-location">
+            <h3>Locația consultațiilor fizice</h3>
+            <p>
+              <strong>{officeLocation.name}</strong>
+              <br />
+              {getOfficeLocationAddress()}
+            </p>
+            {hasOfficeLocationMapUrl() ? (
+              <a
+                href={officeLocation.mapUrl}
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                Vezi pe hartă
+              </a>
+            ) : null}
+          </div>
         </div>
 
         <div>
@@ -27,7 +50,6 @@ export function SiteFooter() {
             Contact
           </h3>
           <div className="footer-link-list" style={{ marginTop: 14 }}>
-            <a href={brand.bookingUrl}>Programare</a>
             <a href={`mailto:${brand.email}`}>{brand.email}</a>
             <a href="tel:+40778186580">{brand.phoneDisplay}</a>
           </div>
@@ -84,6 +106,7 @@ export function SiteFooter() {
             </Link>
             <Link href="/politica-de-cookies">Politica de cookies</Link>
             <Link href="/termeni-si-conditii">Termeni și condiții</Link>
+            <CookieSettingsButton />
           </div>
         </div>
       </div>

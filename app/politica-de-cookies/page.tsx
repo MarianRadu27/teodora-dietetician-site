@@ -1,20 +1,29 @@
-export const metadata = {
+import type { Metadata } from "next";
+
+import { LegalPageLayout } from "../components/legal/LegalPageLayout";
+import {
+  CookiesContent,
+  cookiesTocItems,
+} from "../../content/legal/cookies";
+import { legalConfig } from "../../config/legal";
+
+export const metadata: Metadata = {
   title: "Politica de cookies | Teodora Pălii",
+  description: "Informații despre cookies și tehnologiile utilizate pe website.",
+  alternates: {
+    canonical: "/politica-de-cookies",
+  },
 };
 
 export default function CookiePolicyPage() {
   return (
-    <main className="section">
-      <div className="container">
-        <div className="section-heading">
-          <p className="eyebrow">Legal</p>
-          <h1 className="h1">Politica de cookies</h1>
-          <p className="lead">
-            Această pagină este pregătită pentru textul final al politicii de
-            cookies.
-          </p>
-        </div>
-      </div>
-    </main>
+    <LegalPageLayout
+      description="Informații despre cookies, tehnologii similare și preferințele care vor putea fi gestionate în viitor."
+      lastUpdated={legalConfig.cookiesLastUpdated}
+      title="Politica de cookies"
+      tocItems={cookiesTocItems}
+    >
+      <CookiesContent />
+    </LegalPageLayout>
   );
 }
