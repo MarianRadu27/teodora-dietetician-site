@@ -12,8 +12,8 @@ export const brand = {
     "https://wa.me/40778186580?text=Buna%2C%20as%20vrea%20sa%20programez%20o%20consultatie.",
   instagramUrl: "https://www.instagram.com/dietetician.teodora/?hl=en",
   facebookUrl: "https://www.facebook.com/profile.php?id=61574269958054",
-  heroImage: "/images/teodora-approach.jpg",
-  aboutImage: "/images/teodora-approach.jpg",
+  heroImage: "/images/Teodora-fruit-donut3-transparent.PNG",
+  aboutImage: "/images/Teodora-fruit-donut1.jpeg",
 };
 
 export const navItems = [
@@ -26,41 +26,44 @@ export const navItems = [
 ];
 
 export const credentials = [
-  "Licență în Nutriție și Dietetică",
-  "Master în Nutriție și Dietetică",
-  "Membru al Colegiului Dieteticienilor din România",
+  "Licență și Master în Nutriție și Dietetică",
+  "Membru al Colegiul Dieteticienilor din România",
 ];
 
 export const patientNeeds = [
-  "Vrei să scazi în greutate fără diete extreme.",
-  "Ai nevoie de sprijin în gestionarea unei afecțiuni metabolice.",
-  "Te confrunți cu probleme digestive.",
-  "Nu mai știi ce informații despre alimentație să crezi.",
-  "Ai încercat mai multe diete, dar rezultatele nu s-au menținut.",
-  "Vrei o relație mai echilibrată cu alimentația.",
+  "Îți dorești să îți gestionezi greutatea într-un mod echilibrat, fără diete extreme",
+  "Ai o afecțiune în care alimentația are un rol important și ai nevoie de sprijin nutrițional specializat",
+  "Te confrunți cu probleme digestive care îți afectează confortul și viața de zi cu zi",
+  "Te simți copleșit de informațiile contradictorii despre alimentație și nu mai știi ce să alegi",
+  "Ai urmat mai multe diete, dar rezultatele nu s-au menținut pe termen lung",
+  "Vrei să îți formezi obiceiuri alimentare mai sănătoase, fără reguli rigide",
 ];
 
 export const services = [
   {
     slug: "consultatie-initiala",
+    label: "PUNCTUL DE PLECARE",
     title: "Consultație nutrițională inițială",
     description:
-      "Evaluarea alimentației, obiectivelor, stilului de viață și istoricului relevant.",
-    buttonLabel: "Vezi consultația inițială",
+      "Evaluăm alimentația, istoricul medical, stilul de viață și obiectivele tale, pentru a stabili direcția potrivită de intervenție.",
+    href: "/servicii#consultatie-initiala",
+    featured: true,
   },
   {
-    slug: "monitorizare",
-    title: "Monitorizare nutrițională",
+    slug: "plan-nutritional-personalizat",
+    label: "MODALITATE DE COLABORARE",
+    title: "Plan nutrițional personalizat",
     description:
-      "Urmărirea progresului, ajustarea recomandărilor și sprijin pentru aplicarea lor în viața de zi cu zi.",
-    buttonLabel: "Vezi monitorizarea",
+      "Primești un plan structurat pe mese, adaptat programului, preferințelor și nevoilor tale nutriționale.",
+    href: "/servicii#plan-nutritional-personalizat",
   },
   {
-    slug: "pachet-personalizat",
-    title: "Pachet nutrițional personalizat",
+    slug: "consiliere-educatie-nutritionala",
+    label: "MODALITATE DE COLABORARE",
+    title: "Consiliere și educație nutrițională",
     description:
-      "Un proces structurat pentru persoanele care au nevoie de evaluare, planificare și monitorizare pe o perioadă mai lungă.",
-    buttonLabel: "Vezi pachetul",
+      "Înveți să îți organizezi singur mesele și să faci alegeri alimentare potrivite, fără să depinzi de un meniu fix.",
+    href: "/servicii#consiliere-educatie-nutritionala",
   },
 ];
 

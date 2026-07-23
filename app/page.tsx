@@ -20,25 +20,27 @@ export default function HomePage() {
     <main>
       <section className="hero">
         <div className="container hero-grid">
+          <h1 className="h1 hero-title">
+            <span>Nutriție personalizată,</span>
+            <span>fără diete extreme.</span>
+          </h1>
+
           <div className="hero-copy">
-            <h1 className="h1">Nutriție personalizată, fără diete rigide</h1>
             <p className="lead">
-              Te ajut să construiești o alimentație echilibrată și realistă,
-              adaptată obiectivelor, stării tale de sănătate și stilului tău de
-              viață.
+              Cu răbdare și explicații clare, construim împreună un plan
+              realist ușor de integrat în viața de zi cu zi. Nu cred în
+              perfecțiune sau restricții inutile, ci în progres, consecvență și
+              alegeri potrivite în funcție de obiectivele, nevoile și stilul de
+              viață al fiecărui pacient
             </p>
             <div className="button-row">
               <Link className="button button-primary" href={brand.bookingUrl}>
                 Programează o consultație
               </Link>
-              <Link className="button button-secondary" href="/#cum-lucram">
-                Vezi cum putem lucra împreună
+              <Link className="button button-secondary" href="/#modul-de-lucru">
+                Cum putem lucra împreună?
               </Link>
             </div>
-            <p className="hero-meta">
-              <span>{brand.role}</span>
-              <span>{brand.location}</span>
-            </p>
           </div>
 
           <div className="hero-photo-wrap">
@@ -50,18 +52,11 @@ export default function HomePage() {
               src={brand.heroImage}
               width={900}
             />
-            <div className="approach-note">
-              <p className="eyebrow">La ce să te aștepți</p>
-              <h2 className="h3">Recommandări clare, adaptate vieții tale.</h2>
-              <p className="body-text" style={{ marginTop: 8 }}>
-                Stabilim pași realiști, explicăm motivele din spatele recomandărilor și ajustăm planul pe parcurs.
-              </p>
-            </div>
           </div>
         </div>
       </section>
 
-      <section className="credibility-strip section-tight">
+      <section className="credibility-strip home-credentials-strip section-tight">
         <div className="container credibility-grid">
           {credentials.map((item, index) => (
             <RevealOnScroll delay={index * 70} key={item}>
@@ -77,13 +72,15 @@ export default function HomePage() {
       <section className="section">
         <div className="container">
           <RevealOnScroll>
-            <div className="section-heading center">
-              <p className="eyebrow">Nevoi și obiective</p>
-              <h2 className="h2">Te pot ajuta dacă…</h2>
+            <div className="section-heading needs-heading">
+              <p className="eyebrow">CUM TE POT SPRIJINI</p>
+              <h2 className="h2">
+                Te regăsești în una dintre aceste situații?
+              </h2>
             </div>
           </RevealOnScroll>
 
-          <div className="card-grid grid-3">
+          <div className="card-grid grid-3 needs-grid">
             {patientNeeds.map((item, index) => (
               <RevealOnScroll delay={index * 70} key={item}>
                 <article className="soft-card need-card">
@@ -99,36 +96,49 @@ export default function HomePage() {
       <section className="section" id="servicii">
         <div className="container">
           <RevealOnScroll>
-            <div className="section-heading">
-              <p className="eyebrow">Servicii</p>
-              <h2 className="h2">Cum putem lucra împreună</h2>
+            <div className="section-heading home-services-heading">
+              <p className="eyebrow">SERVICII</p>
+              <h2 className="h2">Sprijin nutrițional adaptat nevoilor tale</h2>
               <p className="lead">
-                Alege forma de colaborare potrivită nevoilor și obiectivelor
-                tale.
+                Colaborarea începe cu o consultație inițială, în urma căreia
+                alegem împreună modalitatea de lucru potrivită obiectivelor,
+                stării tale de sănătate și stilului tău de viață.
               </p>
             </div>
           </RevealOnScroll>
 
-          <div className="card-grid grid-3">
+          <div className="card-grid grid-3 home-services-grid">
             {services.map((service, index) => (
               <RevealOnScroll delay={index * 80} key={service.slug}>
-                <article className="soft-card service-card">
+                <Link
+                  className={`soft-card service-card home-service-card ${
+                    service.featured ? "home-service-card-featured" : ""
+                  }`.trim()}
+                  href={service.href}
+                >
+                  <p className="eyebrow service-card-label">{service.label}</p>
                   <h3 className="h3">{service.title}</h3>
                   <p className="body-text">{service.description}</p>
-                  <Link
-                    className="button button-secondary"
-                    href={`/servicii#${service.slug}`}
-                  >
-                    {service.buttonLabel}
-                  </Link>
-                </article>
+                </Link>
               </RevealOnScroll>
             ))}
           </div>
+
+          <RevealOnScroll delay={320}>
+            <div className="home-services-actions">
+              <Link className="button button-primary" href="/servicii">
+                Vezi toate serviciile și tarifele
+              </Link>
+              <p>
+                Detalii complete despre fiecare serviciu, prețuri și modalități
+                de colaborare.
+              </p>
+            </div>
+          </RevealOnScroll>
         </div>
       </section>
 
-      <section className="section" id="cum-lucram">
+      <section className="section" id="modul-de-lucru">
         <div className="container">
           <RevealOnScroll>
             <div className="section-heading center">
@@ -149,6 +159,30 @@ export default function HomePage() {
                   </h3>
                   <p className="body-text" style={{ marginTop: 10 }}>
                     {step.text}
+                  </p>
+                </article>
+              </RevealOnScroll>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="container">
+          <RevealOnScroll>
+            <div className="section-heading center">
+              <p className="eyebrow">Modul meu de lucru</p>
+              <h2 className="h2">Principiile care stau la baza colaborării</h2>
+            </div>
+          </RevealOnScroll>
+
+          <div className="card-grid grid-4">
+            {principles.map((item, index) => (
+              <RevealOnScroll delay={index * 70} key={item.title}>
+                <article className="principle-card">
+                  <h3 className="h3">{item.title}</h3>
+                  <p className="body-text" style={{ marginTop: 10 }}>
+                    {item.text}
                   </p>
                 </article>
               </RevealOnScroll>
@@ -188,30 +222,6 @@ export default function HomePage() {
               </Link>
             </div>
           </RevealOnScroll>
-        </div>
-      </section>
-
-      <section className="section">
-        <div className="container">
-          <RevealOnScroll>
-            <div className="section-heading center">
-              <p className="eyebrow">Modul meu de lucru</p>
-              <h2 className="h2">Principiile care stau la baza colaborării</h2>
-            </div>
-          </RevealOnScroll>
-
-          <div className="card-grid grid-4">
-            {principles.map((item, index) => (
-              <RevealOnScroll delay={index * 70} key={item.title}>
-                <article className="principle-card">
-                  <h3 className="h3">{item.title}</h3>
-                  <p className="body-text" style={{ marginTop: 10 }}>
-                    {item.text}
-                  </p>
-                </article>
-              </RevealOnScroll>
-            ))}
-          </div>
         </div>
       </section>
 
