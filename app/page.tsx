@@ -7,9 +7,8 @@ import {
   credentials,
   faqCategories,
   patientNeeds,
-  principles,
-  processSteps,
   services,
+  workProcess,
 } from "./siteContent";
 
 const SHOW_TESTIMONIALS = false;
@@ -76,6 +75,9 @@ export default function HomePage() {
               <h2 className="h2">
                 Te regăsești în una dintre aceste situații?
               </h2>
+              <p className="lead">
+                Fiecare persoană pornește de la nevoi diferite, iar sprijinul nutrițional potrivit poate face diferența.
+              </p>
             </div>
           </RevealOnScroll>
 
@@ -141,46 +143,26 @@ export default function HomePage() {
         <div className="container">
           <RevealOnScroll>
             <div className="section-heading working-method-heading">
-              <p className="eyebrow">MODUL DE LUCRU</p>
-              <h2 className="h2">
-                Un mod de lucru clar, construit în jurul nevoilor tale
-              </h2>
-              <p className="lead">
-                Colaborarea noastră începe cu o evaluare atentă, continuă cu
-                recomandări adaptate ție și se dezvoltă treptat, prin pași
-                realiști și susținere pe parcurs.
-              </p>
+              <p className="eyebrow">{workProcess.eyebrow}</p>
+              <h2 className="h2">{workProcess.title}</h2>
+              <p className="lead">{workProcess.introduction}</p>
             </div>
           </RevealOnScroll>
 
-          <div className="process-grid work-steps-grid">
-            {processSteps.map((step, index) => (
+          <div className="process-grid work-process-grid">
+            {workProcess.steps.map((step, index) => (
               <RevealOnScroll delay={index * 90} key={step.title}>
-                <article className="soft-card work-step-card">
-                  <div className="work-step-header">
-                    <span className="process-step-number">{index + 1}</span>
-                    <h3 className="h3">{step.title}</h3>
+                <article className="work-process-card">
+                  <div className="work-step-topline">
+                    <span className="process-step-number">{step.number}</span>
+                    <span className="work-step-principle">
+                      {step.principle}
+                    </span>
                   </div>
-                  <p className="body-text">{step.text}</p>
-                </article>
-              </RevealOnScroll>
-            ))}
-          </div>
-
-          <RevealOnScroll delay={290}>
-            <p className="body-text work-transition">
-              Fiecare etapă a colaborării este ghidată de câteva principii
-              simple, menite să facă recomandările{" "}
-              <strong>mai clare, mai realiste și mai ușor de aplicat</strong>.
-            </p>
-          </RevealOnScroll>
-
-          <div className="card-grid grid-4 principles-grid">
-            {principles.map((item, index) => (
-              <RevealOnScroll delay={index * 70} key={item.title}>
-                <article className="soft-card principle-card work-principle-card">
-                  <h3 className="h3">{item.title}</h3>
-                  <p className="body-text">{item.text}</p>
+                  <div className="work-step-copy">
+                    <h3 className="h3">{step.title}</h3>
+                    <p className="body-text">{step.description}</p>
+                  </div>
                 </article>
               </RevealOnScroll>
             ))}
@@ -204,7 +186,7 @@ export default function HomePage() {
               alt="Teodora Pălii, nutriționist-dietetician autorizat"
               className="about-photo home-about-photo"
               height={1200}
-              src={brand.aboutImage}
+              src={brand.aboutHomeImage}
               width={900}
             />
           </RevealOnScroll>

@@ -2,8 +2,10 @@ import Link from "next/link";
 import Image from "next/image";
 
 import { RevealOnScroll } from "../components/RevealOnScroll";
-import { brand, credentials, principles } from "../siteContent";
+import { brand } from "../siteContent";
 import { aboutIntro, aboutSections } from "../../content/about";
+
+const consultationSectionTitle = "Cum lucrez în consultații";
 
 export const metadata = {
   title: "Despre Teodora Pălii | Nutriționist-Dietetician",
@@ -18,7 +20,6 @@ export default function AboutPage() {
         <div className="container">
           <RevealOnScroll>
             <article className="about-story">
-              <p className="eyebrow">Despre mine</p>
               <h1 className="h1 about-title">Bună, sunt Teodora Pălii.</h1>
               <div className="about-float-media">
                 <Image
@@ -35,62 +36,56 @@ export default function AboutPage() {
                 </p>
               ))}
               <div className="about-copy-sections">
-                {aboutSections.map((section) => (
-                  <section className="about-copy-section" key={section.title}>
-                    <h2 className="h3">{section.title}</h2>
-                    {section.paragraphs.map((paragraph) => (
-                      <p className="body-text" key={paragraph}>
-                        {paragraph}
-                      </p>
-                    ))}
-                  </section>
-                ))}
+                {aboutSections.map((section) => {
+                  const isConsultationSection =
+                    section.title === consultationSectionTitle;
+
+                  return (
+                    <section
+                      className={`about-copy-section ${
+                        isConsultationSection
+                          ? "about-consultation-section"
+                          : ""
+                      }`.trim()}
+                      key={section.title}
+                    >
+                      {isConsultationSection ? (
+                        <div className="about-consultation-grid">
+                          <Image
+                            alt="Teodora Pălii în cabinet"
+                            className="about-consultation-photo"
+                            height={1200}
+                            src={brand.aboutImage1}
+                            width={900}
+                          />
+                          <div className="about-consultation-copy">
+                            <h2 className="h3">{section.title}</h2>
+                            {section.paragraphs.map((paragraph) => (
+                              <p className="body-text" key={paragraph}>
+                                {paragraph}
+                              </p>
+                            ))}
+                          </div>
+                        </div>
+                      ) : (
+                        <>
+                          <h2 className="h3">{section.title}</h2>
+                          {section.paragraphs.map((paragraph) => (
+                            <p className="body-text" key={paragraph}>
+                              {paragraph}
+                            </p>
+                          ))}
+                        </>
+                      )}
+                    </section>
+                  );
+                })}
               </div>
               <Link className="button button-primary" href={brand.bookingUrl}>
                 Programează o consultație
               </Link>
             </article>
           </RevealOnScroll>
-        </div>
-      </section>
-
-      <section className="section about-band">
-        <div className="container">
-          <div className="card-grid grid-4">
-            {credentials.map((item, index) => (
-              <RevealOnScroll delay={index * 70} key={item}>
-                <article className="soft-card">
-                  <span aria-hidden="true" className="credential-dot" />
-                  <p className="body-text" style={{ marginTop: 14 }}>
-                    <strong>{item}</strong>
-                  </p>
-                </article>
-              </RevealOnScroll>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section">
-        <div className="container">
-          <RevealOnScroll>
-            <div className="section-heading center">
-              <p className="eyebrow">Principii</p>
-              <h2 className="h2">Cum abordez colaborarea</h2>
-            </div>
-          </RevealOnScroll>
-          <div className="card-grid grid-4">
-            {principles.map((item, index) => (
-              <RevealOnScroll delay={index * 70} key={item.title}>
-                <article className="principle-card">
-                  <h3 className="h3">{item.title}</h3>
-                  <p className="body-text" style={{ marginTop: 10 }}>
-                    {item.text}
-                  </p>
-                </article>
-              </RevealOnScroll>
-            ))}
-          </div>
         </div>
       </section>
 

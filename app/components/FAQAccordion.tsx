@@ -111,7 +111,7 @@ export function FAQCategoryAccordion({ categories }: FAQCategoryAccordionProps) 
                 type="button"
               >
                 <span>{category.title}</span>
-                <span aria-hidden="true">{isOpen ? "âˆ’" : "+"}</span>
+                <span aria-hidden="true">{isOpen ? "-" : "+"}</span>
               </button>
             </h2>
             <div
@@ -168,7 +168,7 @@ export function FAQAccordion({ idPrefix = "faq", items }: FAQAccordionProps) {
               type="button"
             >
               <span>{item.question}</span>
-              <span aria-hidden="true">{isOpen ? "−" : "+"}</span>
+              <span aria-hidden="true">{isOpen ? "-" : "+"}</span>
             </button>
             <div
               aria-labelledby={buttonId}

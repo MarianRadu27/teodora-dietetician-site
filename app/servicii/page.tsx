@@ -1,8 +1,5 @@
 import { AdditionalServiceCard } from "../components/services/AdditionalServiceCard";
-import { CollaborationPathsSection } from "../components/services/CollaborationPathsSection";
 import { CollaborationSteps } from "../components/services/CollaborationSteps";
-import { FollowUpSection } from "../components/services/FollowUpSection";
-import { InitialConsultationSection } from "../components/services/InitialConsultationSection";
 import { ServicesAudience } from "../components/services/ServicesAudience";
 import { ServicesFinalCta } from "../components/services/ServicesFinalCta";
 import { ServicesHero } from "../components/services/ServicesHero";
@@ -21,9 +18,6 @@ export default function ServicesPage() {
       <ServicesAudience />
       <ServicesPricingGrid />
       <CollaborationSteps />
-      <InitialConsultationSection />
-      <CollaborationPathsSection />
-      <FollowUpSection />
       <AdditionalServiceCard />
       <ServicesFinalCta />
     </main>

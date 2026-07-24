@@ -9,7 +9,6 @@ export function ServicesHero() {
       <div className="container">
         <RevealOnScroll>
           <div className="services-hero-copy">
-            <p className="eyebrow">Servicii</p>
             <h1 className="h1">{servicesHero.title}</h1>
             <p className="lead">{servicesHero.intro}</p>
             <p className="services-info-note">{servicesHero.minorNotice}</p>

@@ -13,7 +13,10 @@ export const brand = {
   instagramUrl: "https://www.instagram.com/dietetician.teodora/?hl=en",
   facebookUrl: "https://www.facebook.com/profile.php?id=61574269958054",
   heroImage: "/images/Teodora-fruit-donut3-transparent.PNG",
-  aboutImage: "/images/Teodora-fruit-donut1.JPEG",
+  aboutImage: "/images/Teodora-Graduation1.JPEG",
+  aboutImage1: "/images/Teodora-cabinet.JPEG",
+  aboutHomeImage: "/images/Teodora-lemons.PNG",
+  contacImage: "/images/Teodora-fruit-phone.PNG",
 };
 
 export const navItems = [
@@ -31,12 +34,12 @@ export const credentials = [
 ];
 
 export const patientNeeds = [
-  "Îți dorești să îți gestionezi greutatea într-un mod echilibrat, fără diete extreme",
-  "Ai o afecțiune în care alimentația are un rol important și ai nevoie de sprijin nutrițional specializat",
-  "Te confrunți cu probleme digestive care îți afectează confortul și viața de zi cu zi",
-  "Te simți copleșit de informațiile contradictorii despre alimentație și nu mai știi ce să alegi",
-  "Ai urmat mai multe diete, dar rezultatele nu s-au menținut pe termen lung",
-  "Vrei să îți formezi obiceiuri alimentare mai sănătoase, fără reguli rigide",
+  "Îți dorești să îți gestionezi greutatea într-un mod echilibrat, fără diete extreme.",
+  "Ai o afecțiune în care alimentația are un rol important și ai nevoie de sprijin nutrițional specializat.",
+  "Te confrunți cu probleme digestive care îți afectează confortul și viața de zi cu zi.",
+  "Te simți copleșit de informațiile contradictorii despre alimentație și nu mai știi ce să alegi.",
+  "Ai urmat mai multe diete, dar rezultatele nu s-au menținut pe termen lung.",
+  "Îți dorești să construiești obiceiuri alimentare echilibrate, pe care să le poți menține fără reguli rigide.",
 ];
 
 export const services = [
@@ -67,20 +70,35 @@ export const services = [
   },
 ];
 
-export const processSteps = [
-  {
-    title: "Ne cunoaștem",
-    text: "Discutăm despre obiective, alimentație, stil de viață, analize și dificultățile pe care le întâmpini.",
-  },
-  {
-    title: "Stabilim direcția potrivită",
-    text: "Construim împreună abordarea potrivită pentru tine, fie prin plan nutrițional personalizat, fie prin consiliere și educație nutrițională.",
-  },
-  {
-    title: "Urmărim evoluția",
-    text: "Evaluăm ce funcționează, clarificăm dificultățile și ajustăm recomandările pe parcurs.",
-  },
-];
+export const workProcess = {
+  eyebrow: "MODUL DE LUCRU",
+  title: "Un proces clar, adaptat nevoilor tale",
+  introduction:
+    "Trei etape simple, bazate pe personalizare, educație, echilibru și recomandări ușor de aplicat.",
+  steps: [
+    {
+      number: "1",
+      principle: "PERSONALIZARE",
+      title: "Ne cunoaștem",
+      description:
+        "Discutăm despre obiectivele tale, starea de sănătate, programul zilnic, preferințele alimentare și dificultățile întâmpinate, pentru a înțelege ce ți se potrivește cu adevărat.",
+    },
+    {
+      number: "2",
+      principle: "EDUCAȚIE ȘI ECHILIBRU",
+      title: "Stabilim direcția potrivită",
+      description:
+        "Construim împreună o abordare echilibrată și îți explic motivele din spatele recomandărilor, fără reguli rigide sau împărțirea alimentelor în „bune” și „rele”.",
+    },
+    {
+      number: "3",
+      principle: "APLICABILITATE",
+      title: "Aplicăm și ajustăm",
+      description:
+        "Integrăm recomandările treptat în viața ta de zi cu zi, urmărim ce funcționează și facem ajustări realiste, care pot fi menținute pe termen lung.",
+    },
+  ],
+};
 
 export const principles = [
   {

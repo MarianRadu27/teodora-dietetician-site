@@ -18,7 +18,6 @@ export default function BlogPage() {
       <section className="section">
         <div className="container">
           <div className="section-heading center">
-            <p className="eyebrow">Blog</p>
             <h1 className="h1">Articole educative despre nutriție</h1>
             <p className="lead">
               Blogul va include materiale clare și aplicabile despre alimentație,

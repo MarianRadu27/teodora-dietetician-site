@@ -15,11 +15,10 @@ export default function FAQPage() {
         <div className="container">
           <RevealOnScroll>
             <div className="section-heading faq-page-heading">
-              <p className="eyebrow">Întrebări frecvente</p>
-              <h1 className="h1">Răspunsuri înainte de prima consultație</h1>
+              <h1 className="h1">Întrebări firești, răspunsuri clare</h1>
               <p className="lead">
-                Câteva răspunsuri orientative despre modul de lucru. Detaliile
-                finale se discută în funcție de obiectivele tale.
+                Alege categoria care te interesează și găsește rapid informațiile 
+                de care ai nevoie despre consultații și colaborare.
               </p>
             </div>
           </RevealOnScroll>
