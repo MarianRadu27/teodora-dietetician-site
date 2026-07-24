@@ -1,12 +1,11 @@
 import Link from "next/link";
 import Image from "next/image";
 
-import { FAQAccordion } from "./components/FAQAccordion";
 import { RevealOnScroll } from "./components/RevealOnScroll";
 import {
   brand,
   credentials,
-  faqItems,
+  faqCategories,
   patientNeeds,
   principles,
   processSteps,
@@ -141,49 +140,47 @@ export default function HomePage() {
       <section className="section" id="modul-de-lucru">
         <div className="container">
           <RevealOnScroll>
-            <div className="section-heading center">
-              <p className="eyebrow">Proces</p>
+            <div className="section-heading working-method-heading">
+              <p className="eyebrow">MODUL DE LUCRU</p>
               <h2 className="h2">
-                Un proces clar, construit în jurul nevoilor tale
+                Un mod de lucru clar, construit în jurul nevoilor tale
               </h2>
+              <p className="lead">
+                Colaborarea noastră începe cu o evaluare atentă, continuă cu
+                recomandări adaptate ție și se dezvoltă treptat, prin pași
+                realiști și susținere pe parcurs.
+              </p>
             </div>
           </RevealOnScroll>
 
-          <div className="process-grid">
+          <div className="process-grid work-steps-grid">
             {processSteps.map((step, index) => (
               <RevealOnScroll delay={index * 90} key={step.title}>
-                <article className="soft-card">
-                  <span className="process-step-number">{index + 1}</span>
-                  <h3 className="h3" style={{ marginTop: 18 }}>
-                    {step.title}
-                  </h3>
-                  <p className="body-text" style={{ marginTop: 10 }}>
-                    {step.text}
-                  </p>
+                <article className="soft-card work-step-card">
+                  <div className="work-step-header">
+                    <span className="process-step-number">{index + 1}</span>
+                    <h3 className="h3">{step.title}</h3>
+                  </div>
+                  <p className="body-text">{step.text}</p>
                 </article>
               </RevealOnScroll>
             ))}
           </div>
-        </div>
-      </section>
 
-      <section className="section">
-        <div className="container">
-          <RevealOnScroll>
-            <div className="section-heading center">
-              <p className="eyebrow">Modul meu de lucru</p>
-              <h2 className="h2">Principiile care stau la baza colaborării</h2>
-            </div>
+          <RevealOnScroll delay={290}>
+            <p className="body-text work-transition">
+              Fiecare etapă a colaborării este ghidată de câteva principii
+              simple, menite să facă recomandările{" "}
+              <strong>mai clare, mai realiste și mai ușor de aplicat</strong>.
+            </p>
           </RevealOnScroll>
 
-          <div className="card-grid grid-4">
+          <div className="card-grid grid-4 principles-grid">
             {principles.map((item, index) => (
               <RevealOnScroll delay={index * 70} key={item.title}>
-                <article className="principle-card">
+                <article className="soft-card principle-card work-principle-card">
                   <h3 className="h3">{item.title}</h3>
-                  <p className="body-text" style={{ marginTop: 10 }}>
-                    {item.text}
-                  </p>
+                  <p className="body-text">{item.text}</p>
                 </article>
               </RevealOnScroll>
             ))}
@@ -193,32 +190,51 @@ export default function HomePage() {
 
       <section className="section about-band" id="despre">
         <div className="container about-grid">
-          <RevealOnScroll>
+          <RevealOnScroll className="home-about-heading-item">
+            <div className="section-heading home-about-heading">
+              <p className="eyebrow">
+                Cunoaște specialistul din spatele recomandărilor
+              </p>
+              <h2 className="h2">Bună, sunt Teodora Pălii.</h2>
+            </div>
+          </RevealOnScroll>
+
+          <RevealOnScroll className="home-about-media" delay={70}>
             <img
-              alt="Teodora Pălii"
-              className="about-photo"
+              alt="Teodora Pălii, nutriționist-dietetician autorizat"
+              className="about-photo home-about-photo"
               height={1200}
               src={brand.aboutImage}
               width={900}
             />
           </RevealOnScroll>
-          <RevealOnScroll delay={90}>
-            <div className="section-heading" style={{ marginBottom: 0 }}>
-              <p className="eyebrow">Despre Teodora</p>
-              <h2 className="h2">Bună, sunt Teodora.</h2>
-              <p className="lead">
-                Sunt nutriționist-dietetician autorizat, cu studii de licență și
-                master în Nutriție și Dietetică, absolvite în cadrul
-                Universității de Medicină și Farmacie din Iași.
+
+          <RevealOnScroll className="home-about-copy" delay={120}>
+            <div className="home-about-copy-stack">
+              <p className="body-text">
+                Sunt <strong>nutriționist-dietetician autorizat</strong>,
+                membră a Colegiului Dieteticienilor din România, cu studii de
+                licență și master în nutriție și dietetică absolvite în cadrul
+                Universității de Medicină și Farmacie ”Grigore T. Popa” din
+                Iași.
               </p>
               <p className="body-text">
-                Pentru mine, nutriția nu înseamnă reguli rigide sau liste
-                interminabile de alimente interzise. Înseamnă să înțelegem
-                nevoile fiecărei persoane și să construim soluții care pot fi
-                aplicate în viața reală.
+                În cadrul consultațiilor, îmi propun să înțeleg nu doar
+                obiectivele tale, ci și programul zilnic, obiceiurile
+                alimentare, preferințele și dificultățile pe care le întâmpini.
+                Consider că recomandările sunt cu adevărat utile doar atunci
+                când pot fi aplicate în viața reală.
+              </p>
+              <p className="body-text">
+                Pun accent pe <strong>comunicare deschisă</strong>,{" "}
+                <strong>explicații clare</strong> și{" "}
+                <strong>recomandări realiste</strong>, adaptate stării tale de
+                sănătate și stilului tău de viață. Scopul meu este să înțelegi
+                schimbările propuse și să dobândești treptat încrederea necesară
+                pentru a face alegeri alimentare potrivite pe termen lung.
               </p>
               <Link className="button button-secondary" href="/despre">
-                Află mai multe despre Teodora
+                Află mai multe despre mine
               </Link>
             </div>
           </RevealOnScroll>
@@ -241,14 +257,25 @@ export default function HomePage() {
       <section className="section" id="faq">
         <div className="container">
           <RevealOnScroll>
-            <div className="section-heading center">
+            <div className="section-heading home-faq-heading">
               <p className="eyebrow">Întrebări frecvente</p>
-              <h2 className="h2">Răspunsuri pentru prima discuție</h2>
+              <h2 className="h2">Întrebări firești, răspunsuri clare</h2>
+              <p className="lead">
+                Alege categoria care te interesează și găsește rapid
+                informațiile de care ai nevoie despre consultații și colaborare.
+              </p>
             </div>
           </RevealOnScroll>
-          <RevealOnScroll>
-            <FAQAccordion items={faqItems} />
-          </RevealOnScroll>
+
+          <div className="faq-category-grid">
+            {faqCategories.map((category, index) => (
+              <RevealOnScroll delay={index * 70} key={category.id}>
+                <Link className="faq-category-card" href={category.href}>
+                  <span>{category.title}</span>
+                </Link>
+              </RevealOnScroll>
+            ))}
+          </div>
         </div>
       </section>
 

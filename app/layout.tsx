@@ -7,6 +7,8 @@ import { SiteHeader } from "./components/SiteHeader";
 import { brand } from "./siteContent";
 import "./globals.css";
 
+const siteUrl = "https://dieteticianteodora.ro";
+
 const inter = Inter({
   subsets: ["latin", "latin-ext"],
   variable: "--font-inter",
@@ -18,7 +20,7 @@ const fraunces = Fraunces({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://dieteticianteodora.ro"),
+  metadataBase: new URL(siteUrl),
   title: "Nutriționist-Dietetician autorizat în Iași și online | Teodora Pălii",
   description:
     "Consultații nutriționale personalizate pentru scădere în greutate, afecțiuni metabolice și digestive și o relație echilibrată cu alimentația.",
@@ -34,9 +36,9 @@ export const metadata: Metadata = {
     url: "/",
     images: [
       {
-        url: "/images/teodora-approach.jpg",
-        width: 900,
-        height: 1200,
+        url: brand.heroImage,
+        width: 1200,
+        height: 675,
         alt: "Teodora Pălii, nutriționist-dietetician autorizat",
       },
     ],
@@ -46,7 +48,7 @@ export const metadata: Metadata = {
     title: "Teodora Pălii | Nutriționist-Dietetician autorizat",
     description:
       "Consultații nutriționale personalizate în Iași și online.",
-    images: ["/images/teodora-approach.jpg"],
+    images: [brand.heroImage],
   },
 };
 
@@ -58,7 +60,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     description:
       "Consultații nutriționale personalizate pentru scădere în greutate, afecțiuni metabolice și digestive și o relație echilibrată cu alimentația.",
     url: "https://dieteticianteodora.ro",
-    image: "https://dieteticianteodora.ro/images/teodora-approach.jpg",
+    image: `${siteUrl}${brand.heroImage}`,
     email: brand.email,
     telephone: "+40778186580",
     address: {

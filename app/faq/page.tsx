@@ -1,6 +1,6 @@
-import { FAQAccordion } from "../components/FAQAccordion";
+import { FAQCategoryAccordion } from "../components/FAQAccordion";
 import { RevealOnScroll } from "../components/RevealOnScroll";
-import { brand, faqItems } from "../siteContent";
+import { brand, faqCategories } from "../siteContent";
 
 export const metadata = {
   title: "Întrebări frecvente | Teodora Pălii",
@@ -14,7 +14,7 @@ export default function FAQPage() {
       <section className="section">
         <div className="container">
           <RevealOnScroll>
-            <div className="section-heading center">
+            <div className="section-heading faq-page-heading">
               <p className="eyebrow">Întrebări frecvente</p>
               <h1 className="h1">Răspunsuri înainte de prima consultație</h1>
               <p className="lead">
@@ -23,8 +23,9 @@ export default function FAQPage() {
               </p>
             </div>
           </RevealOnScroll>
+
           <RevealOnScroll>
-            <FAQAccordion items={faqItems} />
+            <FAQCategoryAccordion categories={faqCategories} />
           </RevealOnScroll>
         </div>
       </section>

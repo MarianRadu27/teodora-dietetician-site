@@ -520,11 +520,58 @@ select:focus-visible {
   margin: 0;
 }
 
+.working-method-heading {
+  max-width: none;
+}
+
+.working-method-heading .eyebrow {
+  text-align: center;
+}
+
+.working-method-heading .h2 {
+  max-width: none;
+  text-align: left;
+}
+
+.working-method-heading .lead {
+  max-width: none;
+  text-align: left;
+}
+
 .process-grid {
   display: grid;
   gap: 18px;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   position: relative;
+}
+
+.work-steps-grid {
+  align-items: stretch;
+}
+
+.work-steps-grid .reveal,
+.principles-grid .reveal {
+  display: grid;
+  height: 100%;
+}
+
+.work-step-card {
+  cursor: default;
+  display: grid;
+  gap: 14px;
+  height: 100%;
+  text-align: left;
+  transition: box-shadow 180ms ease;
+}
+
+.work-step-card:hover {
+  box-shadow: 0 14px 32px rgba(46, 51, 47, 0.07);
+}
+
+.work-step-header {
+  align-items: center;
+  display: flex;
+  gap: 12px;
 }
 
 .process-step-number {
@@ -537,6 +584,27 @@ select:focus-visible {
   height: 42px;
   justify-content: center;
   width: 42px;
+}
+
+.work-transition {
+  margin: 28px 0 20px;
+  max-width: 920px;
+  text-align: left;
+}
+
+.work-transition strong {
+  color: var(--color-green-dark);
+}
+
+.principles-grid {
+  align-items: stretch;
+}
+
+.work-principle-card {
+  display: grid;
+  gap: 12px;
+  height: 100%;
+  text-align: left;
 }
 
 .services-hero {
@@ -1023,7 +1091,7 @@ select:focus-visible {
   align-items: center;
   display: grid;
   gap: 48px;
-  grid-template-columns: minmax(280px, 0.78fr) minmax(0, 1fr);
+  grid-template-columns: minmax(280px, 0.44fr) minmax(0, 0.56fr);
 }
 
 .about-photo {
@@ -1035,6 +1103,45 @@ select:focus-visible {
   object-fit: cover;
   object-position: center top;
   width: 100%;
+}
+
+.home-about-heading-item {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.home-about-heading {
+  margin-bottom: 0;
+  max-width: none;
+}
+
+.home-about-heading .eyebrow,
+.home-about-heading .h2 {
+  text-align: left;
+}
+
+.home-about-media {
+  grid-column: 1;
+  grid-row: 1 / span 2;
+}
+
+.home-about-copy {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+.home-about-copy-stack {
+  display: grid;
+  gap: 16px;
+  justify-items: start;
+}
+
+.home-about-copy-stack strong {
+  color: var(--color-green-dark);
+}
+
+.home-about-copy-stack .button {
+  margin-top: 8px;
 }
 
 .about-story {
@@ -1102,6 +1209,133 @@ select:focus-visible {
 .principle-card {
   border-top: 3px solid rgba(102, 120, 98, 0.38);
   padding-top: 18px;
+}
+
+.home-faq-heading {
+  max-width: none;
+}
+
+.home-faq-heading .eyebrow {
+  text-align: center;
+}
+
+.home-faq-heading .h2,
+.home-faq-heading .lead {
+  max-width: none;
+  text-align: left;
+}
+
+.faq-category-grid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.faq-category-grid .reveal {
+  display: grid;
+  height: 100%;
+}
+
+.faq-category-card {
+  align-items: center;
+  background:
+    linear-gradient(180deg, rgba(237, 243, 234, 0.86), rgba(255, 255, 255, 0.74)),
+    var(--color-white);
+  border: 1px solid rgba(65, 86, 64, 0.18);
+  border-radius: var(--radius-md);
+  color: var(--color-text);
+  display: flex;
+  font-family: var(--font-fraunces), Georgia, "Times New Roman", serif;
+  font-size: 1.18rem;
+  font-weight: 700;
+  justify-content: center;
+  line-height: 1.2;
+  min-height: 132px;
+  padding: 22px;
+  text-align: center;
+  text-decoration: none;
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease;
+}
+
+.faq-category-card:hover {
+  border-color: rgba(65, 86, 64, 0.3);
+  box-shadow: 0 14px 32px rgba(46, 51, 47, 0.08);
+  transform: translateY(-2px);
+}
+
+.faq-category-card:focus-visible {
+  outline: 3px solid rgba(200, 144, 115, 0.7);
+  outline-offset: 4px;
+}
+
+.faq-page-heading {
+  max-width: none;
+}
+
+.faq-page-heading .eyebrow {
+  text-align: center;
+}
+
+.faq-page-heading .h1,
+.faq-page-heading .lead {
+  max-width: none;
+  text-align: left;
+}
+
+.faq-category-stack {
+  display: grid;
+  gap: 14px;
+}
+
+.faq-category-section {
+  background: rgba(255, 255, 255, 0.74);
+  border: 1px solid rgba(65, 86, 64, 0.16);
+  border-radius: var(--radius-md);
+  display: grid;
+  overflow: hidden;
+}
+
+.faq-category-title {
+  margin: 0;
+}
+
+.faq-category-toggle {
+  align-items: center;
+  background:
+    linear-gradient(180deg, rgba(237, 243, 234, 0.84), rgba(255, 255, 255, 0.72)),
+    var(--color-white);
+  border: 0;
+  color: var(--color-text);
+  cursor: pointer;
+  display: flex;
+  font-size: clamp(1.8rem, 2.8vw, 2.7rem);
+  font-weight: 700;
+  gap: 18px;
+  justify-content: space-between;
+  letter-spacing: 0;
+  line-height: 1.08;
+  padding: 24px 28px;
+  scroll-margin-top: 104px;
+  text-align: left;
+  width: 100%;
+}
+
+.faq-category-toggle:hover {
+  background:
+    linear-gradient(180deg, rgba(226, 236, 221, 0.92), rgba(255, 255, 255, 0.78)),
+    var(--color-white);
+}
+
+.faq-category-toggle:focus-visible {
+  outline: 3px solid rgba(200, 144, 115, 0.7);
+  outline-offset: -3px;
+}
+
+.faq-category-panel {
+  padding: 0 18px 18px;
 }
 
 .faq-list {
@@ -1887,6 +2121,18 @@ select:focus-visible {
     min-height: 520px;
   }
 
+  .home-about-heading-item,
+  .home-about-media,
+  .home-about-copy {
+    grid-column: 1;
+    grid-row: auto;
+  }
+
+  .home-about-media {
+    max-width: 520px;
+    width: 100%;
+  }
+
   .credibility-grid,
   .grid-4,
   .audience-grid {
@@ -1895,6 +2141,7 @@ select:focus-visible {
 
   .grid-3,
   .process-grid,
+  .faq-category-grid,
   .booking-service-grid,
   .compact-services-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1943,10 +2190,15 @@ select:focus-visible {
     width: 100%;
   }
 
+  .home-about-copy .button {
+    width: fit-content;
+  }
+
   .credibility-grid,
   .grid-3,
   .grid-4,
   .process-grid,
+  .faq-category-grid,
   .collaboration-path-grid,
   .follow-up-grid,
   .services-mode-note-grid,
