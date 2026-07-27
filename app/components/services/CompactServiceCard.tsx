@@ -1,92 +1,102 @@
-import Link from "next/link";
+"use client";
 
-import {
-  getServiceDurationLabel,
-  getServicePriceLabel,
-  nutritionPlanOptions,
-  type NutritionService,
-} from "../../../config/nutritionServices";
+import Link from "next/link";
+import { useState, type MouseEvent } from "react";
+
+import type { ServicePricingCard } from "../../../config/nutritionServices";
 
 type CompactServiceCardProps = {
-  highlight?: boolean;
-  service: NutritionService;
+  service: ServicePricingCard;
 };
 
-function getDetailsHref(service: NutritionService) {
-  return `/servicii#${service.detailsAnchor}`;
-}
+const stepperDetailTargets = new Set([
+  "consultatie-initiala",
+  "plan-nutritional-personalizat",
+  "consiliere-educatie-nutritionala",
+  "monitorizare-plan",
+  "consiliere-nutritionala",
+]);
 
-function getBookingLabel(service: NutritionService) {
-  if (!service.bookingEnabled) {
-    return null;
-  }
+export function CompactServiceCard({ service }: CompactServiceCardProps) {
+  const [detailsOpen, setDetailsOpen] = useState(false);
+  const inlineDetails = service.detailsAction.content ?? [];
+  const hasInlineDetails = inlineDetails.length > 0;
+  const detailsPanelId = `${service.id}-details`;
+  const primaryButtonClass =
+    service.primaryAction.variant === "secondary"
+      ? "button button-secondary compact-service-button"
+      : "button button-primary compact-service-button";
 
-  return "Programează-te";
-}
+  const handleDetailsClick = (event: MouseEvent<HTMLAnchorElement>) => {
+    const targetId = service.detailsAction.href?.split("#")[1];
 
-export function CompactServiceCard({
-  highlight = false,
-  service,
-}: CompactServiceCardProps) {
-  const bookingLabel = getBookingLabel(service);
-  const isPlan = service.id === "plan-nutritional-personalizat";
+    if (
+      !targetId ||
+      !stepperDetailTargets.has(targetId) ||
+      window.location.pathname !== "/servicii"
+    ) {
+      return;
+    }
+
+    event.preventDefault();
+    window.history.pushState(null, "", `/servicii#${targetId}`);
+    window.dispatchEvent(
+      new CustomEvent("services-detail-target", {
+        detail: { targetId },
+      }),
+    );
+  };
 
   return (
     <article
-      className={`soft-card compact-service-card ${
-        highlight ? "compact-service-card-highlight" : ""
+      className={`compact-service-card ${
+        service.featured ? "compact-service-card-featured" : ""
       }`.trim()}
     >
-      <div>
-        {highlight ? <p className="services-path-tag">Punct de pornire</p> : null}
+      <div className="compact-service-copy">
+        {service.badge ? (
+          <p className="services-path-tag">{service.badge}</p>
+        ) : null}
         <h3 className="h3">{service.title}</h3>
-      </div>
-
-      {isPlan ? (
-        <ul className="compact-plan-list">
-          {nutritionPlanOptions.map((option) => (
-            <li key={option.id}>
-              {option.durationMonths} {option.durationMonths === 1 ? "lună" : "luni"} –{" "}
-              {option.priceLei.toLocaleString("ro-RO")} de lei
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <dl className="compact-service-meta">
-          <div>
-            <dt>Durată</dt>
-            <dd>{getServiceDurationLabel(service)}</dd>
-          </div>
-          <div>
-            <dt>Preț</dt>
-            <dd>{getServicePriceLabel(service)}</dd>
-          </div>
-        </dl>
-      )}
-
-      <div className="compact-service-notes">
-        {service.modalityLabel ? <p>{service.modalityLabel}</p> : null}
-        {service.audienceLabel ? <p>{service.audienceLabel}</p> : null}
+        <p className="compact-service-meta-line">{service.meta}</p>
+        {service.note ? (
+          <p className="compact-service-note">{service.note}</p>
+        ) : null}
+        <p className="compact-service-description">{service.description}</p>
       </div>
 
       <div className="compact-service-actions">
-        {bookingLabel && service.bookingQuery ? (
-          <Link className="button button-primary" href={service.bookingQuery}>
-            {bookingLabel}
-          </Link>
-        ) : null}
-        {isPlan ? (
-          <Link
-            className="button button-secondary"
-            href="/programare?serviciu=consultatie-initiala"
-          >
-            Începe cu consultația inițială
-          </Link>
-        ) : null}
-        <Link className="compact-details-link" href={getDetailsHref(service)}>
-          {isPlan ? "Vezi variantele planului" : "Vezi detalii"}
+        <Link className={primaryButtonClass} href={service.primaryAction.href}>
+          {service.primaryAction.label}
         </Link>
+        {hasInlineDetails ? (
+          <button
+            aria-controls={detailsPanelId}
+            aria-expanded={detailsOpen}
+            className="button button-secondary compact-service-button"
+            onClick={() => setDetailsOpen((isOpen) => !isOpen)}
+            type="button"
+          >
+            {service.detailsAction.label}
+          </button>
+        ) : (
+          <Link
+            className="button button-secondary compact-service-button"
+            href={service.detailsAction.href ?? "#"}
+            onClick={handleDetailsClick}
+          >
+            {service.detailsAction.label}
+          </Link>
+        )}
       </div>
+
+      {hasInlineDetails && detailsOpen ? (
+        <div className="compact-service-inline-details" id={detailsPanelId}>
+          {inlineDetails.map((detail) => (
+            <p key={detail}>{detail}</p>
+          ))}
+        </div>
+      ) : null}
     </article>
   );
 }

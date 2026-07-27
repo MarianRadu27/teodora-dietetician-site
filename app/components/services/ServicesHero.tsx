@@ -10,7 +10,7 @@ export function ServicesHero() {
         <RevealOnScroll>
           <div className="services-hero-copy">
             <h1 className="h1">{servicesHero.title}</h1>
-            <div className="button-row">
+            <div className="button-row services-hero-actions">
               <Link
                 className="button button-primary"
                 href="/programare?serviciu=consultatie-initiala"

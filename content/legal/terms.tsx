@@ -7,23 +7,23 @@ export const termsTocItems: LegalTocItem[] = [
   { id: "furnizor", title: "Identificarea furnizorului" },
   { id: "rol-website", title: "Rolul website-ului" },
   { id: "servicii", title: "Serviciile prezentate" },
-  { id: "informatii-publicate", title: "Caracterul informatiilor publicate" },
-  { id: "programare", title: "Efectuarea programarii" },
-  { id: "consultatii-online", title: "Consultatiile online" },
-  { id: "consultatii-cabinet", title: "Consultatiile in cabinet" },
+  { id: "informatii-publicate", title: "Caracterul informațiilor publicate" },
+  { id: "programare", title: "Efectuarea programării" },
+  { id: "consultatii-online", title: "Consultațiile online" },
+  { id: "consultatii-cabinet", title: "Consultațiile în cabinet" },
   {
     id: "locatia-consultatiilor-fizice",
-    title: "Locatia consultatiilor fizice",
+    title: "Locația consultațiilor fizice",
   },
-  { id: "anulare-si-reprogramare", title: "Anularea si reprogramarea" },
-  { id: "tarife", title: "Tarife si plata" },
-  { id: "obligatii-utilizator", title: "Obligatiile utilizatorului" },
+  { id: "anulare-si-reprogramare", title: "Anularea și reprogramarea" },
+  { id: "tarife", title: "Tarife și plată" },
+  { id: "obligatii-utilizator", title: "Obligațiile utilizatorului" },
   { id: "rezultate", title: "Rezultatele serviciilor" },
-  { id: "proprietate-intelectuala", title: "Proprietatea intelectuala" },
-  { id: "servicii-externe", title: "Servicii si linkuri externe" },
+  { id: "proprietate-intelectuala", title: "Proprietatea intelectuală" },
+  { id: "servicii-externe", title: "Servicii și linkuri externe" },
   { id: "disponibilitate", title: "Disponibilitatea website-ului" },
-  { id: "reclamatii", title: "Reclamatii si solutionarea neintelegerilor" },
-  { id: "lege", title: "Legea aplicabila" },
+  { id: "reclamatii", title: "Reclamații și soluționarea neînțelegerilor" },
+  { id: "lege", title: "Legea aplicabilă" },
   { id: "modificare", title: "Modificarea termenilor" },
 ];
 
@@ -40,7 +40,7 @@ export function TermsContent() {
           <li>Titular: {legalConfig.ownerName}</li>
           <li>Profesie: {legalConfig.professionalTitle}</li>
           <li>
-            Cod de identificare fiscala: <LegalValue value={legalConfig.taxId} />
+            Cod de identificare fiscală: <LegalValue value={legalConfig.taxId} />
           </li>
           <li>
             Sediu profesional:{" "}
@@ -56,24 +56,24 @@ export function TermsContent() {
             Cod de membru: <LegalValue value={legalConfig.memberCode} />
           </li>
           <li>
-            Situatie TVA: <LegalValue value={legalConfig.vatStatus} />
+            Situație TVA: <LegalValue value={legalConfig.vatStatus} />
           </li>
         </ul>
-        <p>In continuare, furnizorul va fi denumit „Prestatorul”.</p>
+        <p>În continuare, furnizorul va fi denumit „Prestatorul”.</p>
       </section>
 
       <section className="legal-section" id="rol-website">
         <h2>Rolul website-ului</h2>
         <p>Website-ul are rolul de a:</p>
         <ul>
-          <li>prezenta activitatea si serviciile Prestatorului;</li>
-          <li>furniza informatii cu caracter general si educational;</li>
-          <li>permite solicitarea programarilor;</li>
+          <li>prezenta activitatea și serviciile Prestatorului;</li>
+          <li>furniza informații cu caracter general și educațional;</li>
+          <li>permite solicitarea programărilor;</li>
           <li>facilita comunicarea cu persoanele interesate.</li>
         </ul>
         <p>
-          Utilizarea website-ului presupune consultarea si respectarea
-          prezentelor conditii.
+          Utilizarea website-ului presupune consultarea și respectarea
+          prezentelor condiții.
         </p>
       </section>
 
@@ -81,107 +81,108 @@ export function TermsContent() {
         <h2>Serviciile prezentate</h2>
         <p>Serviciile pot include:</p>
         <ul>
-          <li>educatie nutritionala;</li>
-          <li>servicii de nutritie generala;</li>
-          <li>consultatii nutritionale initiale;</li>
-          <li>consultatii de control;</li>
-          <li>consultatii online;</li>
-          <li>consultatii in cabinet;</li>
+          <li>educație nutrițională;</li>
+          <li>servicii de nutriție generală;</li>
+          <li>consultații nutriționale inițiale;</li>
+          <li>consultații de control;</li>
+          <li>consultații online;</li>
+          <li>consultații în cabinet;</li>
+          {/*
           <li>
-            <LegalPlaceholder>[ALTE SERVICII CARE VOR FI ADAUGATE]</LegalPlaceholder>.
+           <LegalPlaceholder>[ALTE SERVICII CARE VOR FI ADĂUGATE]</LegalPlaceholder>. 
           </li>
+          */}
         </ul>
         <p>
-          Descrierea, durata, tariful si conditiile specifice fiecarui serviciu
-          sunt afisate pe pagina serviciului sau in interfata de programare.
+          Descrierea, durata, tariful și condițiile specifice fiecărui serviciu
+          sunt afișate pe pagina serviciului sau în interfața de programare.
         </p>
         <p>
           Prestatorul poate modifica structura serviciilor, cu respectarea
-          programarilor deja confirmate.
+          programărilor deja confirmate.
         </p>
       </section>
 
       <section className="legal-section" id="informatii-publicate">
-        <h2>Caracterul informatiilor publicate</h2>
+        <h2>Caracterul informațiilor publicate</h2>
         <p>
-          Materialele de pe website au caracter general, informativ si
-          educational.
+          Materialele de pe website au caracter general, informativ și
+          educațional.
         </p>
         <p>Acestea:</p>
         <ul>
-          <li>nu reprezinta un diagnostic;</li>
-          <li>nu constituie un plan nutritional individual;</li>
-          <li>nu inlocuiesc evaluarea personalizata;</li>
+          <li>nu reprezintă un diagnostic;</li>
+          <li>nu constituie un plan nutrițional individual;</li>
+          <li>nu înlocuiesc evaluarea personalizată;</li>
           <li>
-            nu inlocuiesc consultatia medicala, investigatiile sau tratamentul
+            nu înlocuiesc consultația medicală, investigațiile sau tratamentul
             prescris de medic;
           </li>
-          <li>nu sunt destinate gestionarii urgentelor medicale.</li>
+          <li>nu sunt destinate gestionării urgențelor medicale.</li>
         </ul>
         <p>
-          Pentru o recomandare individuala este necesara evaluarea situatiei
-          concrete in cadrul unei consultatii.
+          Pentru o recomandare individuală este necesară evaluarea situației
+          concrete în cadrul unei consultații.
         </p>
         <p>
-          In caz de urgenta medicala, utilizati serviciile medicale de urgenta si
+          În caz de urgență medicală, utilizați serviciile medicale de urgență și
           nu formularul de programare, emailul sau WhatsApp.
         </p>
       </section>
 
       <section className="legal-section" id="programare">
-        <h2>Efectuarea programarii</h2>
-        <p>Programarile sunt gestionate prin Cal.com.</p>
+        <h2>Efectuarea programării</h2>
+        <p>Programările sunt gestionate prin Cal.com.</p>
         <p>Pentru programare, utilizatorul va putea selecta:</p>
         <ol>
           <li>serviciul;</li>
-          <li>modalitatea online sau in cabinet;</li>
-          <li>data si ora disponibile;</li>
+          <li>modalitatea online sau în cabinet;</li>
+          <li>data și ora disponibile;</li>
           <li>datele solicitate pentru confirmare.</li>
         </ol>
         <p>
-          Programarea este considerata inregistrata dupa finalizarea procesului
-          si primirea mesajului de confirmare.
+          Programarea este considerată înregistrată după finalizarea procesului
+          și primirea mesajului de confirmare.
         </p>
         <p>
           Utilizatorul este responsabil pentru furnizarea unor date de contact
           corecte.
         </p>
         <p>
-          Confirmarea automata nu inlocuieste eventualele informatii suplimentare
-          privind plata, documentele necesare sau conditiile specifice
+          Confirmarea automată nu înlocuiește eventualele informații suplimentare
+          privind plata, documentele necesare sau condițiile specifice
           serviciului.
         </p>
       </section>
 
       <section className="legal-section" id="consultatii-online">
-        <h2>Consultatiile online</h2>
-        <p>Pentru consultatiile online, utilizatorul este responsabil sa dispuna de:</p>
+        <h2>Consultațiile online</h2>
+        <p>Pentru consultațiile online, utilizatorul este responsabil să dispună de:</p>
         <ul>
           <li>un dispozitiv compatibil;</li>
-          <li>conexiune stabila la internet;</li>
-          <li>acces la platforma indicata;</li>
-          <li>un spatiu adecvat si suficient de privat.</li>
+          <li>conexiune stabilă la internet;</li>
+          <li>acces la platforma indicată;</li>
+          <li>un spațiu adecvat și suficient de privat.</li>
         </ul>
         <p>
-          Linkul consultatiei va fi transmis prin{" "}
-          <LegalPlaceholder>[EMAIL/GOOGLE MEET/CAL.COM]</LegalPlaceholder>.
+          Linkul consultației va fi transmis prin email.
         </p>
         <p>
-          Prestatorul nu raspunde pentru imposibilitatea desfasurarii
-          consultatiei cauzata exclusiv de dispozitivul, conexiunea sau setarile
+          Prestatorul nu răspunde pentru imposibilitatea desfășurării
+          consultației cauzată exclusiv de dispozitivul, conexiunea sau setările
           utilizatorului.
         </p>
       </section>
 
       <section className="legal-section" id="consultatii-cabinet">
-        <h2>Consultatiile in cabinet</h2>
+        <h2>Consultațiile în cabinet</h2>
         <p>
-          Consultatiile fizice se desfasoara la {officeLocation.name}, la adresa{" "}
-          {getOfficeLocationAddress()}, comunicata si in confirmarea programarii.
+          Consultațiile fizice se desfășoară la {officeLocation.name}, la adresa{" "}
+          {getOfficeLocationAddress()}, comunicată și în confirmarea programării.
         </p>
         <p>
-          Utilizatorul trebuie sa se prezinte la ora stabilita si sa respecte
-          regulile comunicate pentru accesul in cabinet.
+          Utilizatorul trebuie să se prezinte la ora stabilită și să respecte
+          regulile comunicate pentru accesul în cabinet.
         </p>
       </section>
 
@@ -215,180 +216,128 @@ export function TermsContent() {
         className="legal-section legal-highlight-section"
         id="anulare-si-reprogramare"
       >
-        <p className="eyebrow">Sectiune importanta</p>
-        <h2>Anularea si reprogramarea consultatiilor</h2>
+        <p className="eyebrow">Secțiune importantă</p>
+        <h2>Anularea și reprogramarea consultațiilor</h2>
+        {/*
         <p className="legal-note">
-          Aceasta sectiune trebuie afisata vizibil si trebuie confirmate valorile
-          dintre paranteze inaintea publicarii.
+          Această secțiune trebuie afișată vizibil și trebuie confirmate valorile
+          dintre paranteze înaintea publicării.
         </p>
-
-        <h3>Anularea de catre client</h3>
+        */}
+        <h3>Anularea de către client</h3>
         <p>
-          Programarea poate fi anulata fara costuri cu cel putin{" "}
-          <strong>{legalConfig.cancellationNoticeHours} de ore</strong> inaintea
+          Programarea poate fi anulată fără costuri cu cel puțin{" "}
+          <strong>{legalConfig.cancellationNoticeHours} de ore</strong> înaintea
           orei stabilite, prin linkul din emailul de confirmare sau prin
           contactarea Prestatorului.
         </p>
-        <p>
-          Pentru anularile efectuate cu mai putin de{" "}
-          <strong>{legalConfig.cancellationNoticeHours} de ore</strong> inainte:
-        </p>
-        <ul>
-          <li>
-            <LegalPlaceholder>[NU SE PERCEPE NICIO TAXA]</LegalPlaceholder>;
-          </li>
-          <li>
-            <LegalPlaceholder>[AVANSUL NU SE RESTITUIE]</LegalPlaceholder>;
-          </li>
-          <li>
-            <LegalPlaceholder>
-              [SE ACHITA O TAXA DE ANULARE DE ___ LEI]
-            </LegalPlaceholder>
-            .
-          </li>
-        </ul>
-        <p>Se va pastra numai varianta aleasa de Prestator.</p>
 
         <h3>Reprogramarea</h3>
         <p>
-          Consultatia poate fi reprogramata cu cel putin{" "}
-          <strong>{legalConfig.cancellationNoticeHours} de ore</strong> inainte,
-          in limita intervalelor disponibile.
+          Consultația poate fi reprogramată cu cel puțin{" "}
+          <strong>{legalConfig.cancellationNoticeHours} de ore</strong> înainte,
+          în limita intervalelor disponibile.
         </p>
         <p>
-          Reprogramarile solicitate dupa acest termen vor fi analizate in functie
-          de situatie si de disponibilitate.
+          Reprogramările solicitate după acest termen vor fi analizate în funcție
+          de situație și de disponibilitate.
         </p>
 
         <h3>Neprezentarea</h3>
-        <p>Daca persoana nu se prezinta si nu anunta:</p>
+        <p>Dacă persoana nu se prezintă și nu anunță:</p>
         <ul>
           <li>
-            <LegalPlaceholder>
-              [PROGRAMAREA SE CONSIDERA EFECTUATA SI AVANSUL NU SE RESTITUIE]
-            </LegalPlaceholder>
-            ;
-          </li>
-          <li>
-            <LegalPlaceholder>
-              [POATE FI REPROGRAMATA O SINGURA DATA]
-            </LegalPlaceholder>
-            ;
-          </li>
-          <li>
-            <LegalPlaceholder>[NU EXISTA NICIO PENALIZARE]</LegalPlaceholder>.
+              Poate fi reprogramată o singură dată;
           </li>
         </ul>
-        <p>Se va pastra numai regula aleasa.</p>
 
-        <h3>Intarzierea</h3>
+        <h3>Întârzierea</h3>
         <p>
-          O intarziere mai mare de{" "}
+          O întârziere mai mare de{" "}
           <strong>{legalConfig.lateArrivalMinutes} minute</strong> poate conduce
           la:
         </p>
         <ul>
-          <li>reducerea duratei consultatiei;</li>
+          <li>reducerea duratei consultației;</li>
           <li>reprogramarea acesteia;</li>
           <li>
-            imposibilitatea desfasurarii consultatiei, daca ar afecta
-            programarile urmatoare.
+            imposibilitatea desfășurării consultației, dacă ar afecta
+            programările următoare.
           </li>
         </ul>
 
-        <h3>Anularea de catre Prestator</h3>
+        <h3>Anularea de către Prestator</h3>
         <p>
-          Daca Prestatorul nu poate desfasura consultatia, clientului i se va
+          Dacă Prestatorul nu poate desfășura consultația, clientului i se va
           oferi:
         </p>
         <ul>
-          <li>reprogramarea intr-un interval convenabil;</li>
+          <li>reprogramarea într-un interval convenabil;</li>
           <li>
-            restituirea integrala a sumei achitate in avans, daca este cazul.
+            restituirea integrală a sumei achitate în avans, dacă este cazul.
           </li>
         </ul>
         <p>
-          Prestatorul va informa clientul cat mai curand posibil folosind datele
+          Prestatorul va informa clientul cât mai curând posibil folosind datele
           de contact furnizate.
         </p>
 
-        <h3>Situatii exceptionale</h3>
+        <h3>Situații excepționale</h3>
         <p>
-          In cazuri medicale, familiale sau tehnice neprevazute, partile pot
-          conveni o solutie diferita de regulile generale, fara ca aceasta sa
-          creeze obligatia aplicarii aceleiasi exceptii in alte situatii.
+          În cazuri medicale, familiale sau tehnice neprevăzute, părțile pot
+          conveni o soluție diferită de regulile generale, fără ca aceasta să
+          creeze obligația aplicării aceleiași excepții în alte situații.
         </p>
       </section>
 
       <section className="legal-section" id="tarife">
-        <h2>Tarife si plata</h2>
+        <h2>Tarife și plată</h2>
         <p>
-          Tarifele sunt afisate pe website, in interfata de programare sau sunt
-          comunicate inaintea confirmarii serviciului.
+          Tarifele sunt afișate pe website, în interfața de programare sau sunt
+          comunicate înaintea confirmării serviciului.
         </p>
         <p>Tarifele:</p>
         <ul>
           <li>
-            <LegalPlaceholder>[INCLUD TVA]</LegalPlaceholder>;
-          </li>
-          <li>
-            <LegalPlaceholder>
-              [NU INCLUD TVA, PRESTATORUL FIIND NEPLATITOR DE TVA]
-            </LegalPlaceholder>
-            .
+            Nu includ TVA, prestatorul fiind neplătitor de TVA.
           </li>
         </ul>
-        <p>Plata poate fi efectuata prin:</p>
+        <p>Plata poate fi efectuată prin:</p>
         <ul>
           <li>
-            <LegalPlaceholder>[NUMERAR]</LegalPlaceholder>;
+            Numerar;
           </li>
           <li>
-            <LegalPlaceholder>[CARD LA CABINET]</LegalPlaceholder>;
+            Card la cabinet;
           </li>
           <li>
-            <LegalPlaceholder>[TRANSFER BANCAR]</LegalPlaceholder>;
-          </li>
-          <li>
-            <LegalPlaceholder>[LINK DE PLATA]</LegalPlaceholder>;
-          </li>
-          <li>
-            <LegalPlaceholder>[ALTA METODA]</LegalPlaceholder>.
+            Transfer bancar;
           </li>
         </ul>
-        <p>La momentul publicarii:</p>
+        <p>La momentul publicării:</p>
         <ul>
           <li>
-            <LegalPlaceholder>
-              [WEBSITE-UL NU COLECTEAZA PLATI ONLINE]
-            </LegalPlaceholder>
-            ;
-          </li>
-          <li>
-            <LegalPlaceholder>
-              [PLATILE ONLINE SUNT PROCESATE PRIN FURNIZORUL ___]
-            </LegalPlaceholder>
-            .
+              Website-ul nu colectează plăți online;
           </li>
         </ul>
         <p>
-          Prestatorul nu solicita transmiterea datelor cardului prin email,
-          WhatsApp sau campurile libere ale programarii.
+          Prestatorul nu solicită transmiterea datelor cardului prin email,
+          WhatsApp sau câmpurile libere ale programării.
         </p>
       </section>
 
       <section className="legal-section" id="obligatii-utilizator">
-        <h2>Obligatiile utilizatorului</h2>
-        <p>Utilizatorul se obliga:</p>
+        <h2>Obligațiile utilizatorului</h2>
+        <p>Utilizatorul se obligă:</p>
         <ul>
-          <li>sa furnizeze informatii corecte;</li>
-          <li>sa nu foloseasca website-ul in scopuri ilegale sau abuzive;</li>
-          <li>sa nu incerce accesarea neautorizata a sistemelor;</li>
-          <li>sa respecte programarea si regulile comunicate;</li>
-          <li>sa informeze Prestatorul despre imposibilitatea participarii;</li>
-          <li>sa nu copieze sau distribuie neautorizat materialele primite;</li>
+          <li>să furnizeze informații corecte;</li>
+          <li>să nu folosească website-ul în scopuri ilegale sau abuzive;</li>
+          <li>să nu încerce accesarea neautorizată a sistemelor;</li>
+          <li>să respecte programarea și regulile comunicate;</li>
+          <li>să informeze Prestatorul despre imposibilitatea participării;</li>
+          <li>să nu copieze sau distribuie neautorizat materialele primite;</li>
           <li>
-            sa nu introduca informatii medicale detaliate in campurile publice de
+            să nu introducă informații medicale detaliate în câmpurile publice de
             programare.
           </li>
         </ul>
@@ -397,48 +346,48 @@ export function TermsContent() {
       <section className="legal-section" id="rezultate">
         <h2>Rezultatele serviciilor</h2>
         <p>
-          Rezultatele pot varia in functie de situatia individuala, implicare,
-          consecventa, stil de viata, conditii medicale si alti factori.
+          Rezultatele pot varia în funcție de situația individuală, implicare,
+          consecvență, stil de viață, condiții medicale și alți factori.
         </p>
-        <p>Prestatorul nu garanteaza:</p>
+        <p>Prestatorul nu garantează:</p>
         <ul>
-          <li>obtinerea unei anumite greutati;</li>
-          <li>pierderea unui anumit numar de kilograme;</li>
-          <li>obtinerea rezultatelor intr-un termen fix;</li>
+          <li>obținerea unei anumite greutăți;</li>
+          <li>pierderea unui anumit număr de kilograme;</li>
+          <li>obținerea rezultatelor într-un termen fix;</li>
           <li>
-            vindecarea sau tratarea unei afectiuni prin simpla utilizare a
+            vindecarea sau tratarea unei afecțiuni prin simpla utilizare a
             materialelor website-ului.
           </li>
         </ul>
       </section>
 
       <section className="legal-section" id="proprietate-intelectuala">
-        <h2>Proprietatea intelectuala</h2>
+        <h2>Proprietatea intelectuală</h2>
         <p>
-          Textele, materialele educationale, elementele grafice, fotografiile,
-          logo-ul si structura website-ului sunt protejate de legislatia privind
-          drepturile de autor si proprietatea intelectuala.
+          Textele, materialele educaționale, elementele grafice, fotografiile,
+          logo-ul și structura website-ului sunt protejate de legislația privind
+          drepturile de autor și proprietatea intelectuală.
         </p>
         <p>
           Acestea nu pot fi copiate, reproduse, modificate, publicate,
-          distribuite sau utilizate comercial fara acordul titularului
-          drepturilor, cu exceptiile permise de lege.
+          distribuite sau utilizate comercial fără acordul titularului
+          drepturilor, cu excepțiile permise de lege.
         </p>
       </section>
 
       <section className="legal-section" id="servicii-externe">
-        <h2>Servicii si linkuri externe</h2>
+        <h2>Servicii și linkuri externe</h2>
         <p>
-          Website-ul poate utiliza sau contine legaturi catre servicii externe,
-          precum Cal.com, Google Meet, Google Calendar, WhatsApp, Facebook si
+          Website-ul poate utiliza sau conține legături către servicii externe,
+          precum Cal.com, Google Meet, Google Calendar, WhatsApp, Facebook și
           Instagram.
         </p>
         <p>
-          Prestatorul nu controleaza integral functionarea, disponibilitatea si
+          Prestatorul nu controlează integral funcționarea, disponibilitatea și
           politicile acestor servicii.
         </p>
         <p>
-          Utilizarea serviciilor externe poate fi supusa propriilor termeni si
+          Utilizarea serviciilor externe poate fi supusă propriilor termeni și
           politici.
         </p>
       </section>
@@ -446,40 +395,40 @@ export function TermsContent() {
       <section className="legal-section" id="disponibilitate">
         <h2>Disponibilitatea website-ului</h2>
         <p>
-          Prestatorul urmareste mentinerea website-ului functional si actualizat,
-          dar nu garanteaza functionarea neintrerupta sau lipsa completa a
+          Prestatorul urmărește menținerea website-ului funcțional și actualizat,
+          dar nu garantează funcționarea neîntreruptă sau lipsa completă a
           erorilor.
         </p>
         <p>
-          Website-ul poate fi temporar indisponibil pentru mentenanta,
-          actualizari, defectiuni tehnice sau situatii independente de Prestator.
+          Website-ul poate fi temporar indisponibil pentru mentenanță,
+          actualizări, defecțiuni tehnice sau situații independente de Prestator.
         </p>
       </section>
 
       <section className="legal-section" id="reclamatii">
-        <h2>Reclamatii si solutionarea neintelegerilor</h2>
-        <p>Pentru sesizari sau reclamatii, ne puteti contacta la:</p>
+        <h2>Reclamații și soluționarea neînțelegerilor</h2>
+        <p>Pentru sesizări sau reclamații, ne puteți contacta la:</p>
         <ul>
           <li>Email: {legalConfig.email}</li>
           <li>Telefon: {legalConfig.phone}</li>
         </ul>
         <p>
-          Partile vor incerca solutionarea amiabila a eventualelor neintelegeri.
+          Părțile vor încerca soluționarea amiabilă a eventualelor neînțelegeri.
         </p>
         <p>
-          In lipsa unei solutii amiabile, se vor aplica dispozitiile legale si
-          competenta autoritatilor sau instantelor stabilite prin lege.
+          În lipsa unei soluții amiabile, se vor aplica dispozițiile legale și
+          competența autorităților sau instanțelor stabilite prin lege.
         </p>
       </section>
 
       <section className="legal-section" id="lege">
-        <h2>Legea aplicabila</h2>
+        <h2>Legea aplicabilă</h2>
         <p>
-          Prezentelor conditii li se aplica legislatia din Romania si legislatia
-          Uniunii Europene aplicabila.
+          Prezentelor condiții li se aplică legislația din România și legislația
+          Uniunii Europene aplicabilă.
         </p>
         <p>
-          Nicio prevedere nu limiteaza drepturile imperative recunoscute
+          Nicio prevedere nu limitează drepturile imperative recunoscute
           consumatorilor sau persoanelor vizate prin lege.
         </p>
       </section>
@@ -487,12 +436,12 @@ export function TermsContent() {
       <section className="legal-section" id="modificare">
         <h2>Modificarea termenilor</h2>
         <p>
-          Termenii pot fi actualizati atunci cand se modifica serviciile,
-          modalitatile de programare, tarifele, furnizorii sau cerintele legale.
+          Termenii pot fi actualizați atunci când se modifică serviciile,
+          modalitățile de programare, tarifele, furnizorii sau cerințele legale.
         </p>
         <p>
-          Versiunea actualizata va fi publicata pe website impreuna cu data
-          ultimei actualizari.
+          Versiunea actualizată va fi publicată pe website împreună cu data
+          ultimei actualizări.
         </p>
       </section>
     </>

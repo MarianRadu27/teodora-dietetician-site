@@ -11,7 +11,7 @@ type LegalTableOfContentsProps = {
 
 export function LegalTableOfContents({ items }: LegalTableOfContentsProps) {
   return (
-    <nav aria-label="Cuprins pagina legala" className="legal-toc">
+    <nav aria-label="Cuprins pagina legală" className="legal-toc">
       <h2 className="h3">Cuprins</h2>
       <ol>
         {items.map((item) => (

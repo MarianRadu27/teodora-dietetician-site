@@ -18,7 +18,7 @@ export default function HomePage() {
     <main>
       <section className="hero">
         <div className="container hero-grid">
-          <h1 className="h1 hero-title">
+          <h1 className="h1 hero-title title-left">
             <span>Nutriție personalizată,</span>
             <span>fără diete extreme.</span>
           </h1>
@@ -177,7 +177,7 @@ export default function HomePage() {
               <p className="eyebrow">
                 Cunoaște specialistul din spatele recomandărilor
               </p>
-              <h2 className="h2">Bună, sunt Teodora Pălii.</h2>
+              <h2 className="h2 title-left">Bună, sunt Teodora Pălii.</h2>
             </div>
           </RevealOnScroll>
 

@@ -43,7 +43,7 @@ export function LegalPageLayout({
 
           <div className="legal-return">
             <Link className="button button-secondary" href="/">
-              Revino la pagina principala
+              Revino la pagina principală
             </Link>
           </div>
         </article>

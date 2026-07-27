@@ -22,7 +22,7 @@ export function CollaborationPathCard({ path }: CollaborationPathCardProps) {
         <p className="body-text">{path.summary}</p>
       </div>
 
-      <ServicesAccordion buttonLabel="Cui i se potrivește această variantă?">
+      <ServicesAccordion buttonLabel={path.suitabilityTitle}>
         <ul className="services-check-list">
           {path.suitability.map((item) => (
             <li key={item}>{item}</li>

@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 import {
-  servicesAudience,
+  servicesAudienceGroups,
   servicesExclusions,
 } from "../../../config/nutritionServices";
 import { RevealOnScroll } from "../RevealOnScroll";
@@ -11,11 +11,7 @@ export function ServicesAudience() {
     <section className="section about-band services-audience-section">
       <div className="container">
         <RevealOnScroll>
-          <div className="services-section-heading-row">
-            <div>
-              <p className="eyebrow">Cui se adresează</p>
-              <h2 className="h2">Cui se adresează serviciile?</h2>
-            </div>
+          <div className="section-heading services-audience-heading">
             <p className="lead">
               Serviciile sunt gândite pentru persoane aflate în etape diferite,
               cu obiective și nevoi nutriționale variate.
@@ -23,25 +19,58 @@ export function ServicesAudience() {
           </div>
         </RevealOnScroll>
 
-        <div className="audience-grid">
-          {servicesAudience.map((item, index) => (
-            <RevealOnScroll delay={index * 40} key={item.title}>
-              <article className="soft-card audience-card">
-                <span className="credential-dot" aria-hidden="true" />
-                <div>
-                  <h3>{item.title}</h3>
-                  <p>{item.description}</p>
-                </div>
-              </article>
-            </RevealOnScroll>
+        <div className="services-audience-grid">
+          {servicesAudienceGroups.audiences.map((item, index) => (
+            <div
+              className="services-audience-slot"
+              key={item.title}
+              style={{ gridColumn: 1, gridRow: index + 1 }}
+            >
+              <RevealOnScroll delay={index * 50}>
+                <article className="services-audience-card">
+                  <h3 className="h3">{item.title}</h3>
+                  <p className="services-audience-description">
+                    <span
+                      aria-hidden="true"
+                      className="services-audience-line"
+                    />
+                    <span>{item.description}</span>
+                  </p>
+                </article>
+              </RevealOnScroll>
+            </div>
+          ))}
+
+          {servicesAudienceGroups.goals.map((item, index) => (
+            <div
+              className="services-audience-slot"
+              key={item.title}
+              style={{ gridColumn: 2, gridRow: index + 1 }}
+            >
+              <RevealOnScroll delay={(index + 4) * 50}>
+                <article className="services-audience-card">
+                  <h3 className="h3">{item.title}</h3>
+                  <p className="services-audience-description">
+                    <span
+                      aria-hidden="true"
+                      className="services-audience-line"
+                    />
+                    <span>{item.description}</span>
+                  </p>
+                </article>
+              </RevealOnScroll>
+            </div>
           ))}
         </div>
 
         <RevealOnScroll>
           <div className="services-note-stack">
-            <p className="services-exclusion-note">{servicesExclusions}</p>
+            <p className="services-exclusion-note">
+              <span aria-hidden="true" className="services-note-line" />
+              <span>{servicesExclusions}</span>
+            </p>
             <Link
-              className="button button-secondary services-audience-secondary-cta"
+              className="button button-primary services-audience-secondary-cta"
               href="#traseu"
             >
               Descoperă cum decurge colaborarea

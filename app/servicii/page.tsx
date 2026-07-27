@@ -1,4 +1,3 @@
-import { AdditionalServiceCard } from "../components/services/AdditionalServiceCard";
 import { CollaborationSteps } from "../components/services/CollaborationSteps";
 import { ServicesAudience } from "../components/services/ServicesAudience";
 import { ServicesFinalCta } from "../components/services/ServicesFinalCta";
@@ -18,7 +17,6 @@ export default function ServicesPage() {
       <ServicesAudience />
       <ServicesPricingGrid />
       <CollaborationSteps />
-      <AdditionalServiceCard />
       <ServicesFinalCta />
     </main>
   );

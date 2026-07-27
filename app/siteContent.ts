@@ -2,7 +2,7 @@ export const brand = {
   name: "Teodora Pălii",
   role: "Nutriționist-Dietetician autorizat",
   shortRole: "Dietetician autorizat",
-  location: "Consultații online sau in Iași",
+  location: "Consultații online sau în Iași",
   email: "dietetician.teodora@gmail.com",
   phoneDisplay: "0778 186 580",
   bookingUrl: "/programare",

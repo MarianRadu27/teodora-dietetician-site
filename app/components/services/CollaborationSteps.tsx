@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 import {
   collaborationPaths,
@@ -34,20 +34,82 @@ const steps = [
   },
 ];
 
+const detailTargetSteps: Record<string, number> = {
+  "consultatie-initiala": 0,
+  "plan-nutritional-personalizat": 1,
+  "consiliere-educatie-nutritionala": 1,
+  "monitorizare-plan": 2,
+  "consiliere-nutritionala": 2,
+};
+
+type ServicesDetailTargetEvent = CustomEvent<{
+  targetId: string;
+}>;
+
 export function CollaborationSteps() {
-  const [activeStep, setActiveStep] = useState(0);
+  const [activeStep, setActiveStep] = useState<number | null>(null);
   const stepRefs = useRef<Array<HTMLDivElement | null>>([]);
 
-  const activateStep = (index: number) => {
+  const activateStep = useCallback((index: number, targetId?: string) => {
     setActiveStep(index);
 
     window.requestAnimationFrame(() => {
-      stepRefs.current[index]?.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
+      window.requestAnimationFrame(() => {
+        const targetElement = targetId
+          ? document.getElementById(targetId)
+          : stepRefs.current[index];
+
+        targetElement?.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
       });
     });
+  }, []);
+
+  const toggleStep = (index: number) => {
+    if (activeStep === index) {
+      setActiveStep(null);
+      return;
+    }
+
+    activateStep(index);
   };
+
+  useEffect(() => {
+    const openTarget = (targetId: string) => {
+      const stepIndex = detailTargetSteps[targetId];
+
+      if (stepIndex === undefined) {
+        return;
+      }
+
+      activateStep(stepIndex, targetId);
+    };
+
+    const openHashTarget = () => {
+      const targetId = decodeURIComponent(window.location.hash.replace("#", ""));
+
+      openTarget(targetId);
+    };
+
+    const openClickedTarget = (event: Event) => {
+      const targetId = (event as ServicesDetailTargetEvent).detail?.targetId;
+
+      if (targetId) {
+        openTarget(targetId);
+      }
+    };
+
+    openHashTarget();
+    window.addEventListener("hashchange", openHashTarget);
+    window.addEventListener("services-detail-target", openClickedTarget);
+
+    return () => {
+      window.removeEventListener("hashchange", openHashTarget);
+      window.removeEventListener("services-detail-target", openClickedTarget);
+    };
+  }, [activateStep]);
 
   return (
     <section className="section services-route-section" id="traseu">
@@ -87,7 +149,7 @@ export function CollaborationSteps() {
                       aria-expanded={isActive}
                       className="services-stepper-tab"
                       id={`services-step-trigger-${index}`}
-                      onClick={() => activateStep(index)}
+                      onClick={() => toggleStep(index)}
                       type="button"
                     >
                       <span className="services-stepper-number">

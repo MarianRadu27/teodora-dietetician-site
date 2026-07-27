@@ -15,7 +15,7 @@ export function CookieSettingsButton() {
       }}
       type="button"
     >
-      Setari cookies
+      Setări cookies
     </button>
   );
 }

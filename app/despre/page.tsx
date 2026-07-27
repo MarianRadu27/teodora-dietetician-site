@@ -15,7 +15,7 @@ export const metadata = {
 
 export default function AboutPage() {
   return (
-    <main>
+    <main className="about-page">
       <section className="section">
         <div className="container">
           <RevealOnScroll>
@@ -92,7 +92,7 @@ export default function AboutPage() {
       <section className="section final-cta">
         <div className="container">
           <div className="section-heading center" style={{ marginBottom: 24 }}>
-            <h2 className="h2">Vrei să discutăm despre obiectivele tale?</h2>
+            <h2 className="h2 title-center">Vrei să discutăm despre obiectivele tale?</h2>
             <p className="lead">
               Primul pas este o conversație în care vedem ce ai nevoie și cum
               putem lucra împreună.

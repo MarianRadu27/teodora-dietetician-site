@@ -1,8 +1,7 @@
 export type NutritionServiceCategory =
   | "initial"
   | "collaboration-path"
-  | "follow-up"
-  | "additional";
+  | "follow-up";
 
 export type NutritionService = {
   id: string;
@@ -42,6 +41,26 @@ export type CollaborationPath = {
   explanation: string;
   ctaLabel: string;
   bookingQuery: string;
+};
+
+export type ServicePricingCard = {
+  id: string;
+  title: string;
+  badge?: string;
+  meta: string;
+  description: string;
+  note?: string;
+  primaryAction: {
+    label: string;
+    href: string;
+    variant?: "primary" | "secondary";
+  };
+  detailsAction: {
+    label: string;
+    href?: string;
+    content?: string[];
+  };
+  featured?: boolean;
 };
 
 export const servicesHero = {
@@ -188,32 +207,6 @@ export const nutritionServices: NutritionService[] = [
       "recomandări adaptate stării de sănătate",
     ],
   },
-  {
-    id: "analiza-compozitie-corporala",
-    title: "Analiza compoziției corporale",
-    category: "additional",
-    description:
-      "Analiza prin bioimpedanță, realizată cu analizorul Seca mBCA 515, oferă informații despre compoziția corporală și poate include parametri precum greutatea, masa musculară, masa de țesut adipos și procentul de apă din organism.",
-    durationMinutes: 10,
-    priceLei: 60,
-    durationLabel: "Aproximativ 10 minute",
-    priceLabel: "60 de lei",
-    modalityLabel: "Disponibilă numai în cabinet",
-    audienceLabel: "Evaluare separată sau parte din monitorizare",
-    detailsAnchor: "analiza-compozitiei-corporale",
-    availableOnline: false,
-    availableInOffice: true,
-    existingClientsOnly: false,
-    bookingEnabled: true,
-    bookingQuery:
-      "/programare?modalitate=cabinet&serviciu=analiza-compozitie-corporala",
-    features: [
-      "durată: aproximativ 10 minute",
-      "disponibilă numai în cabinet",
-      "rezultatele sunt explicate în cadrul ședinței",
-      "poate fi utilizată pentru evaluarea inițială sau pentru urmărirea evoluției",
-    ],
-  },
 ];
 
 export const nutritionPlanOptions: NutritionPlanOption[] = [
@@ -245,7 +238,7 @@ export const collaborationPaths: CollaborationPath[] = [
     summary:
       "Potrivit dacă îți dorești un plan structurat pe mese, adaptat nevoilor nutriționale, programului zilnic, preferințelor și obiectivelor tale.",
     orientationLabel: "Mai multă structură și claritate",
-    suitabilityTitle: "Cui i se potrivește această modalitate?",
+    suitabilityTitle: "Potrivit dacă:",
     suitability: [
       "îți este dificil să îți organizezi mesele singur",
       "ai nevoie de claritate și structură",
@@ -264,7 +257,7 @@ export const collaborationPaths: CollaborationPath[] = [
     summary:
       "Potrivită dacă nu îți dorești un meniu fix, ci vrei să înțelegi principiile unei alimentații echilibrate și să înveți să îți organizezi singur mesele.",
     orientationLabel: "Mai multă flexibilitate și autonomie",
-    suitabilityTitle: "Cui i se potrivește această modalitate?",
+    suitabilityTitle: "Potrivit dacă:",
     suitability: [
       "vrei flexibilitate și nu îți place să urmezi un plan exact",
       "vrei să înțelegi „de ce” și „cum”, nu doar „ce să mănânci”",
@@ -278,36 +271,136 @@ export const collaborationPaths: CollaborationPath[] = [
   },
 ];
 
-export const servicesAudience = [
+export const servicesPricingCards: ServicePricingCard[] = [
   {
-    title: "Copii și adolescenți",
-    description: "cu părintele sau reprezentantul legal",
+    id: "consultatie-initiala",
+    featured: true,
+    badge: "Punct de pornire",
+    title: "Consultație nutrițională inițială",
+    meta: "90 de minute · 390 de lei · Online sau în cabinet",
+    description:
+      "Evaluare completă a alimentației, istoricului medical, stilului de viață și obiectivelor tale, pentru stabilirea direcției potrivite.",
+    primaryAction: {
+      label: "Programare",
+      href: "/programare?serviciu=consultatie-initiala",
+      variant: "primary",
+    },
+    detailsAction: {
+      label: "Detalii",
+      href: "/servicii#consultatie-initiala",
+    },
   },
   {
-    title: "Adulți",
-    description: "pentru obiective nutriționale personale",
+    id: "plan-nutritional-personalizat",
+    title: "Plan nutrițional personalizat",
+    meta: "Disponibil pentru 1, 2 sau 3 luni",
+    note: "Prețul și termenul de realizare variază în funcție de perioada aleasă.",
+    description:
+      "Plan alimentar structurat, adaptat nevoilor, programului și preferințelor tale.",
+    primaryAction: {
+      label: "Începe cu consultația",
+      href: "/programare?serviciu=consultatie-initiala",
+      variant: "secondary",
+    },
+    detailsAction: {
+      label: "Detalii",
+      href: "/servicii#plan-nutritional-personalizat",
+    },
   },
   {
-    title: "Persoane vârstnice",
-    description: "cu nevoi adaptate etapei de viață",
+    id: "monitorizare-plan",
+    title: "Monitorizare și ajustare a planului nutrițional",
+    meta: "30 de minute · 150 de lei",
+    description:
+      "Analizăm progresul, discutăm dificultățile întâmpinate și ajustăm recomandările în funcție de evoluția ta.",
+    note: "Recomandată la aproximativ 2-3 săptămâni.",
+    primaryAction: {
+      label: "Programare",
+      href: "/programare?serviciu=monitorizare-plan",
+      variant: "primary",
+    },
+    detailsAction: {
+      label: "Detalii",
+      href: "/servicii#monitorizare-plan",
+    },
   },
   {
-    title: "Susținere în afecțiuni",
-    description: "în context medical și metabolic",
+    id: "consiliere-nutritionala",
+    title: "Ședință de consiliere și educație nutrițională",
+    meta: "60 de minute · 200 de lei",
+    description:
+      "Înveți să îți organizezi mesele și să faci alegeri potrivite, fără să depinzi de un meniu fix.",
+    note: "Recomandată la aproximativ 2-4 săptămâni.",
+    primaryAction: {
+      label: "Programare",
+      href: "/programare?serviciu=consiliere-nutritionala",
+      variant: "primary",
+    },
+    detailsAction: {
+      label: "Detalii",
+      href: "/servicii#consiliere-nutritionala",
+    },
   },
   {
-    title: "Gestionarea greutății",
-    description: "cu obiective realiste și monitorizare",
-  },
-  {
-    title: "Stil de viață",
-    description: "pentru obiceiuri mai clare și aplicabile",
-  },
-  {
-    title: "Educație nutrițională",
-    description: "pentru mai multă autonomie alimentară",
+    id: "analiza-compozitie-corporala",
+    title: "Analiza compoziției corporale",
+    meta: "10 minute · 60 de lei",
+    description:
+      "Este inclusă doar în consultația nutrițională inițială, pentru celelalte ședințe trebuie solicitată separat.",
+    primaryAction: {
+      label: "Programare",
+      href: "/programare?modalitate=cabinet&serviciu=analiza-compozitie-corporala",
+      variant: "primary",
+    },
+    detailsAction: {
+      label: "Detalii",
+      content: [
+        "Analiza prin bioimpedanță, realizată cu analizorul Seca mBCA 515, oferă informații despre compoziția corporală și poate include parametri precum greutatea, masa musculară, masa de țesut adipos și procentul de apă din organism.",
+        "Utilă pentru monitorizarea evoluției.",
+        "Disponibilă doar în cabinet.",
+      ],
+    },
   },
 ];
+
+export const servicesAudienceGroups = {
+  audiences: [
+    {
+      title: "Copii și adolescenți",
+      description: "cu părintele sau reprezentantul legal",
+    },
+    {
+      title: "Adulți",
+      description: "pentru obiective nutriționale personale",
+    },
+    {
+      title: "Persoane vârstnice",
+      description: "cu nevoi adaptate etapei de viață",
+    },
+    {
+      title: "Suport nutrițional în afecțiuni",
+      description: "în context medical și metabolic",
+    },
+  ],
+  goals: [
+    {
+      title: "Gestionarea greutății",
+      description: "cu obiective realiste și monitorizare",
+    },
+    {
+      title: "Stil de viață",
+      description: "pentru obiceiuri mai clare și aplicabile",
+    },
+    {
+      title: "Educație nutrițională",
+      description: "pentru mai multă autonomie alimentară",
+    },
+    {
+      title: "Obiceiuri alimentare echilibrate",
+      description: "ușor de integrat în viața de zi cu zi",
+    },
+  ],
+};
 
 export const servicesExclusions =
   "În prezent, serviciile nu includ nutriția în sarcină și nutriția sportivă.";
@@ -328,7 +421,7 @@ export function formatServiceDuration(durationMinutes: number | null): string {
   }
 
   if (durationMinutes === 10) {
-    return "aproximativ 10 minute";
+    return "10 minute";
   }
 
   return `${durationMinutes} de minute`;

@@ -4,12 +4,12 @@ import { cookieInventory, legalConfig } from "../../config/legal";
 
 export const cookiesTocItems: LegalTocItem[] = [
   { id: "ce-sunt-cookies", title: "Ce sunt cookies" },
-  { id: "tehnologii", title: "Ce tehnologii utilizeaza website-ul" },
+  { id: "tehnologii", title: "Ce tehnologii utilizează website-ul" },
   { id: "categorii", title: "Categorii de cookies" },
   { id: "cal-com", title: "Cal.com" },
   { id: "lista-cookies", title: "Lista cookies utilizate" },
-  { id: "preferinte", title: "Alegerea si modificarea preferintelor" },
-  { id: "browser", title: "Setarile browserului" },
+  { id: "preferinte", title: "Alegerea și modificarea preferințelor" },
+  { id: "browser", title: "Setările browserului" },
   { id: "actualizare", title: "Actualizarea politicii" },
 ];
 
@@ -19,36 +19,36 @@ export function CookiesContent() {
       <section className="legal-section" id="ce-sunt-cookies">
         <h2>Ce sunt cookies</h2>
         <p>
-          Cookies sunt fisiere de mici dimensiuni sau tehnologii similare care
-          pot fi stocate sau accesate pe dispozitivul utilizatorului atunci cand
-          acesta viziteaza un website.
+          Cookies sunt fișiere de mici dimensiuni sau tehnologii similare care
+          pot fi stocate sau accesate pe dispozitivul utilizatorului atunci când
+          acesta vizitează un website.
         </p>
         <p>
-          Acestea pot fi utilizate pentru functionarea tehnica a website-ului,
-          memorarea preferintelor, securitate, analiza sau marketing.
+          Acestea pot fi utilizate pentru funcționarea tehnică a website-ului,
+          memorarea preferințelor, securitate, analiză sau marketing.
         </p>
       </section>
 
       <section className="legal-section" id="tehnologii">
-        <h2>Ce tehnologii utilizeaza website-ul</h2>
+        <h2>Ce tehnologii utilizează website-ul</h2>
         <p>
-          La data ultimei actualizari, website-ul nu utilizeaza in mod
-          intentionat cookies de analiza sau marketing proprii.
+          La data ultimei actualizări, website-ul nu utilizează în mod
+          intenționat cookies de analiză sau marketing proprii.
         </p>
         <p>Website-ul poate utiliza:</p>
         <ul>
-          <li>tehnologii strict necesare functionarii si securitatii;</li>
+          <li>tehnologii strict necesare funcționării și securității;</li>
           <li>
-            tehnologii necesare memorarii preferintelor privind cookies, daca va
-            fi activat un manager de consimtamant;
+            tehnologii necesare memorării preferințelor privind cookies, dacă va
+            fi activat un manager de consimțământ;
           </li>
-          <li>tehnologii asociate integrarii serviciului Cal.com;</li>
+          <li>tehnologii asociate integrării serviciului Cal.com;</li>
           <li>
-            tehnologii furnizate de platforma de gazduire sau de securitate.
+            tehnologii furnizate de platforma de găzduire sau de securitate.
           </li>
         </ul>
         <p>
-          Lista exacta trebuie actualizata dupa scanarea versiunii finale a
+          Lista exactă trebuie actualizată după scanarea versiunii finale a
           website-ului.
         </p>
       </section>
@@ -57,61 +57,61 @@ export function CookiesContent() {
         <h2>Categorii de cookies</h2>
         <h3>Cookies strict necesare</h3>
         <p>
-          Acestea sunt necesare pentru functionarea website-ului, securitate sau
-          furnizarea unei functii solicitate de utilizator.
+          Acestea sunt necesare pentru funcționarea website-ului, securitate sau
+          furnizarea unei funcții solicitate de utilizator.
         </p>
         <p>
-          In mod obisnuit, nu pot fi dezactivate din panoul website-ului, dar pot
-          fi blocate din browser. Blocarea lor poate afecta functionarea anumitor
+          În mod obișnuit, nu pot fi dezactivate din panoul website-ului, dar pot
+          fi blocate din browser. Blocarea lor poate afecta funcționarea anumitor
           componente.
         </p>
 
-        <h3>Cookies de preferinte</h3>
+        <h3>Cookies de preferințe</h3>
         <p>
-          Acestea pot memora alegeri precum preferintele privind cookies sau
-          anumite setari ale interfetei.
+          Acestea pot memora alegeri precum preferințele privind cookies sau
+          anumite setări ale interfeței.
         </p>
 
-        <h3>Cookies de analiza</h3>
+        <h3>Cookies de analiză</h3>
         <p>
-          Acestea ajuta la intelegerea modului in care este utilizat website-ul.
+          Acestea ajută la înțelegerea modului în care este utilizat website-ul.
         </p>
         <p>
-          La momentul publicarii acestei versiuni, Google Analytics nu este
+          La momentul publicării acestei versiuni, Google Analytics nu este
           activat.
         </p>
         <p>
-          Daca va fi introdus ulterior, cookies de analiza vor fi activate numai
-          dupa exprimarea optiunii utilizatorului, iar politica va fi actualizata.
+          Dacă va fi introdus ulterior, cookies de analiză vor fi activate numai
+          după exprimarea opțiunii utilizatorului, iar politica va fi actualizată.
         </p>
 
         <h3>Cookies de marketing</h3>
         <p>
-          Acestea pot fi utilizate pentru publicitate, masurarea campaniilor sau
-          urmarirea utilizatorului pe mai multe website-uri.
+          Acestea pot fi utilizate pentru publicitate, măsurarea campaniilor sau
+          urmărirea utilizatorului pe mai multe website-uri.
         </p>
         <p>
-          La momentul publicarii acestei versiuni, website-ul nu utilizeaza in
-          mod intentionat cookies de marketing.
+          La momentul publicării acestei versiuni, website-ul nu utilizează în
+          mod intenționat cookies de marketing.
         </p>
       </section>
 
       <section className="legal-section" id="cal-com">
         <h2>Cal.com</h2>
-        <p>Pagina de programare utilizeaza serviciul extern Cal.com.</p>
+        <p>Pagina de programare utilizează serviciul extern Cal.com.</p>
         <p>
-          Atunci cand componenta Cal.com este incarcata sau utilizata, furnizorul
-          poate prelucra informatii tehnice si poate utiliza cookies sau
+          Atunci când componenta Cal.com este încărcată sau utilizată, furnizorul
+          poate prelucra informații tehnice și poate utiliza cookies sau
           tehnologii similare conform propriei politici.
         </p>
         <p>
-          Calendarul Cal.com va fi incarcat numai atunci cand utilizatorul
-          acceseaza sau solicita functia de programare, in functie de
-          implementarea tehnica aleasa.
+          Calendarul Cal.com va fi încărcat numai atunci când utilizatorul
+          accesează sau solicită funcția de programare, în funcție de
+          implementarea tehnică aleasă.
         </p>
         <p>
-          Informatii suplimentare sunt disponibile in politica de
-          confidentialitate a Cal.com:{" "}
+          Informații suplimentare sunt disponibile în politica de
+          confidențialitate a Cal.com:{" "}
           <a
             href={legalConfig.calPrivacyUrl}
             rel="noopener noreferrer"
@@ -126,7 +126,7 @@ export function CookiesContent() {
       <section className="legal-section" id="lista-cookies">
         <h2>Lista cookies utilizate</h2>
         <p>
-          Tabelul urmator trebuie completat dupa scanarea tehnica a website-ului
+          Tabelul următor trebuie completat după scanarea tehnică a website-ului
           publicat.
         </p>
         <div className="legal-table-wrap">
@@ -137,16 +137,16 @@ export function CookiesContent() {
                 <th>Furnizor</th>
                 <th>Scop</th>
                 <th>Categorie</th>
-                <th>Durata</th>
+                <th>Durată</th>
               </tr>
             </thead>
             <tbody>
               {cookieInventory.length === 0 ? (
                 <tr>
                   <td colSpan={5}>
-                    Inventarul tehnic va fi actualizat dupa verificarea
-                    versiunii finale a website-ului. Acest mesaj trebuie inlocuit
-                    inaintea lansarii publice.
+                    Inventarul tehnic va fi actualizat după verificarea
+                    versiunii finale a website-ului. Acest mesaj trebuie înlocuit
+                    înaintea lansării publice.
                   </td>
                 </tr>
               ) : (
@@ -170,51 +170,51 @@ export function CookiesContent() {
       </section>
 
       <section className="legal-section" id="preferinte">
-        <h2>Alegerea si modificarea preferintelor</h2>
+        <h2>Alegerea și modificarea preferințelor</h2>
         <p>
-          Atunci cand website-ul va utiliza cookies optionale, utilizatorul va
+          Atunci când website-ul va utiliza cookies opționale, utilizatorul va
           putea:
         </p>
         <ul>
-          <li>accepta toate categoriile optionale;</li>
-          <li>refuza toate categoriile optionale;</li>
+          <li>accepta toate categoriile opționale;</li>
+          <li>refuza toate categoriile opționale;</li>
           <li>selecta individual categoriile;</li>
           <li>modifica ulterior alegerea.</li>
         </ul>
         <p>
-          Preferintele vor putea fi redeschise prin butonul{" "}
-          <strong>„Setari cookies”</strong> din footer.
+          Preferințele vor putea fi redeschise prin butonul{" "}
+          <strong>„Setări cookies”</strong> din footer.
         </p>
         <p>
-          Butonul „Setari cookies” nu conduce catre o pagina noua. Acesta
-          redeschide panoul in care utilizatorul isi poate modifica alegerile.
+          Butonul „Setări cookies” nu conduce către o pagină nouă. Acesta
+          redeschide panoul în care utilizatorul își poate modifica alegerile.
         </p>
         <p>
-          Daca website-ul nu utilizeaza cookies optionale si nu exista un panou
-          functional de consimtamant, butonul nu va fi afisat.
+          Dacă website-ul nu utilizează cookies opționale și nu există un panou
+          funcțional de consimțământ, butonul nu va fi afișat.
         </p>
         <p className="legal-note">
-          Momentan managerul de consimtamant este dezactivat in cod prin{" "}
+          Momentan managerul de consimțământ este dezactivat în cod prin{" "}
           <LegalPlaceholder>COOKIE_CONSENT_ENABLED = false</LegalPlaceholder>.
         </p>
       </section>
 
       <section className="legal-section" id="browser">
-        <h2>Setarile browserului</h2>
+        <h2>Setările browserului</h2>
         <p>
-          Majoritatea browserelor permit vizualizarea, blocarea sau stergerea
+          Majoritatea browserelor permit vizualizarea, blocarea sau ștergerea
           cookies.
         </p>
         <p>
-          Blocarea tuturor cookies poate afecta functionarea website-ului sau a
-          calendarului de programari.
+          Blocarea tuturor cookies poate afecta funcționarea website-ului sau a
+          calendarului de programări.
         </p>
       </section>
 
       <section className="legal-section" id="actualizare">
         <h2>Actualizarea politicii</h2>
         <p>
-          Politica va fi actualizata atunci cand se modifica tehnologiile,
+          Politica va fi actualizată atunci când se modifică tehnologiile,
           furnizorii sau scopurile pentru care sunt utilizate cookies.
         </p>
       </section>
