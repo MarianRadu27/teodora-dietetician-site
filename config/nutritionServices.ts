@@ -46,10 +46,6 @@ export type CollaborationPath = {
 
 export const servicesHero = {
   title: "Servicii de nutriție și dietetică",
-  intro:
-    "Servicii de nutriție clinică, consiliere pentru adoptarea unui stil de viață sănătos și educație nutrițională, adaptate nevoilor copiilor, adolescenților, adulților și persoanelor vârstnice.",
-  minorNotice:
-    "Consultațiile pentru minori se desfășoară împreună cu părintele sau reprezentantul legal.",
 };
 
 export const initialConsultationModeNotes = {

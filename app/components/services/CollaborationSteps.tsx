@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 import {
   collaborationPaths,
@@ -22,24 +22,32 @@ const educationFollowUp = getNutritionService("consiliere-nutritionala");
 const steps = [
   {
     number: "1",
-    title: "Consultație inițială",
-    description: "Evaluăm situația actuală și stabilim direcția potrivită.",
+    title: "Consultație nutrițională inițială",
   },
   {
     number: "2",
-    title: "Alegerea modalității",
-    description:
-      "Alegem între plan personalizat sau consiliere nutrițională.",
+    title: "Alegerea modalității de colaborare",
   },
   {
     number: "3",
-    title: "Monitorizare",
-    description: "Urmărim evoluția și ajustăm recomandările.",
+    title: "Monitorizarea în funcție de modalitatea aleasă",
   },
 ];
 
 export function CollaborationSteps() {
   const [activeStep, setActiveStep] = useState(0);
+  const stepRefs = useRef<Array<HTMLDivElement | null>>([]);
+
+  const activateStep = (index: number) => {
+    setActiveStep(index);
+
+    window.requestAnimationFrame(() => {
+      stepRefs.current[index]?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    });
+  };
 
   return (
     <section className="section services-route-section" id="traseu">
@@ -59,56 +67,72 @@ export function CollaborationSteps() {
         </RevealOnScroll>
 
         <RevealOnScroll>
-          <div className="services-stepper">
-            <div
-              aria-label="Pașii colaborării"
-              className="services-stepper-list"
-              role="tablist"
-            >
+          <div aria-label="Pașii colaborării" className="services-stepper">
+            <div className="services-stepper-list">
               {steps.map((step, index) => {
                 const isActive = activeStep === index;
 
                 return (
-                  <button
-                    aria-controls={`services-step-panel-${index}`}
-                    aria-selected={isActive}
-                    className={`services-stepper-tab ${
+                  <div
+                    className={`services-stepper-item ${
                       isActive ? "is-active" : ""
                     }`.trim()}
-                    id={`services-step-tab-${index}`}
                     key={step.number}
-                    onClick={() => setActiveStep(index)}
-                    role="tab"
-                    type="button"
+                    ref={(element) => {
+                      stepRefs.current[index] = element;
+                    }}
                   >
-                    <span className="services-stepper-number">
-                      {step.number}
-                    </span>
-                    <span>
-                      <strong>{step.title}</strong>
-                      <small>{step.description}</small>
-                    </span>
-                  </button>
+                    <button
+                      aria-controls={`services-step-panel-${index}`}
+                      aria-expanded={isActive}
+                      className="services-stepper-tab"
+                      id={`services-step-trigger-${index}`}
+                      onClick={() => activateStep(index)}
+                      type="button"
+                    >
+                      <span className="services-stepper-number">
+                        {step.number}
+                      </span>
+                      <span>
+                        <strong>{step.title}</strong>
+                      </span>
+                    </button>
+
+                    <div
+                      aria-labelledby={`services-step-trigger-${index}`}
+                      className="services-stepper-panel"
+                      hidden={!isActive}
+                      id={`services-step-panel-${index}`}
+                      role="region"
+                    >
+                      {index === 0 ? <InitialConsultationPanel /> : null}
+                      {index === 1 ? <CollaborationPathsPanel /> : null}
+                      {index === 2 ? <FollowUpPanel /> : null}
+
+                      <div className="services-stepper-actions">
+                        {index > 0 ? (
+                          <button
+                            className="button button-secondary"
+                            onClick={() => activateStep(index - 1)}
+                            type="button"
+                          >
+                            Înapoi
+                          </button>
+                        ) : null}
+                        {index < steps.length - 1 ? (
+                          <button
+                            className="button button-primary"
+                            onClick={() => activateStep(index + 1)}
+                            type="button"
+                          >
+                            Înainte
+                          </button>
+                        ) : null}
+                      </div>
+                    </div>
+                  </div>
                 );
               })}
-            </div>
-
-            <div className="services-stepper-panels">
-              {steps.map((step, index) => (
-                <div
-                  aria-labelledby={`services-step-tab-${index}`}
-                  className="services-stepper-panel"
-                  hidden={activeStep !== index}
-                  id={`services-step-panel-${index}`}
-                  key={step.number}
-                  role="tabpanel"
-                  tabIndex={0}
-                >
-                  {index === 0 ? <InitialConsultationPanel /> : null}
-                  {index === 1 ? <CollaborationPathsPanel /> : null}
-                  {index === 2 ? <FollowUpPanel /> : null}
-                </div>
-              ))}
             </div>
           </div>
         </RevealOnScroll>

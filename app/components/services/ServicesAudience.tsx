@@ -1,7 +1,8 @@
+import Link from "next/link";
+
 import {
   servicesAudience,
   servicesExclusions,
-  servicesHero,
 } from "../../../config/nutritionServices";
 import { RevealOnScroll } from "../RevealOnScroll";
 
@@ -12,7 +13,7 @@ export function ServicesAudience() {
         <RevealOnScroll>
           <div className="services-section-heading-row">
             <div>
-            <p className="eyebrow">Cui se adresează</p>
+              <p className="eyebrow">Cui se adresează</p>
               <h2 className="h2">Cui se adresează serviciile?</h2>
             </div>
             <p className="lead">
@@ -38,8 +39,13 @@ export function ServicesAudience() {
 
         <RevealOnScroll>
           <div className="services-note-stack">
-            <p className="services-info-note">{servicesHero.minorNotice}</p>
             <p className="services-exclusion-note">{servicesExclusions}</p>
+            <Link
+              className="button button-secondary services-audience-secondary-cta"
+              href="#traseu"
+            >
+              Descoperă cum decurge colaborarea
+            </Link>
           </div>
         </RevealOnScroll>
       </div>
