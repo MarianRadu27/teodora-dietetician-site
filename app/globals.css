@@ -406,7 +406,7 @@ select:focus-visible {
 
 .needs-heading .lead {
   max-width: none;
-  text-align: left;
+  text-align: center;
 }
 
 .card-grid {
@@ -427,6 +427,14 @@ select:focus-visible {
   border: 1px solid var(--color-line);
   border-radius: var(--radius-md);
   padding: 24px;
+}
+
+.blog-page-heading {
+  max-width: 1100px;
+}
+
+.blog-page-heading .h1 {
+  font-size: clamp(2.4rem, 5vw, 4.4rem);
 }
 
 .blog-card {
@@ -560,6 +568,10 @@ select:focus-visible {
   margin: 0;
 }
 
+.article-body p {
+  text-align: justify;
+}
+
 .article-body h2,
 .article-body h3 {
   color: var(--color-text);
@@ -615,16 +627,6 @@ select:focus-visible {
   border-radius: 6px;
   outline: 3px solid rgba(200, 144, 115, 0.7);
   outline-offset: 3px;
-}
-
-.article-body :where(
-  .article-text-accent-green,
-  .article-text-dark-green,
-  .article-text-warning-terracotta,
-  .article-text-gold,
-  .article-text-dark-gray
-) {
-  font-weight: 800;
 }
 
 .article-text-accent-green {
@@ -722,7 +724,7 @@ select:focus-visible {
 
 .home-services-heading .lead {
   max-width: none;
-  text-align: left;
+  text-align: center;
 }
 
 .home-services-grid {
@@ -806,7 +808,7 @@ select:focus-visible {
 
 .working-method-heading .lead {
   max-width: none;
-  text-align: left;
+  text-align: center;
 }
 
 .process-grid {
@@ -1780,7 +1782,7 @@ select:focus-visible {
 
 .home-faq-heading .lead {
   max-width: none;
-  text-align: left;
+  text-align: center;
 }
 
 .faq-category-grid {

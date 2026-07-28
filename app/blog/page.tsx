@@ -36,13 +36,8 @@ export default async function BlogPage() {
     <main>
       <section className="section">
         <div className="container">
-          <div className="section-heading center">
+          <div className="section-heading center blog-page-heading">
             <h1 className="h1">Articole educative despre nutriție</h1>
-            <p className="lead">
-              Blogul va include materiale clare și aplicabile despre alimentație,
-              obiceiuri zilnice și relația cu mâncarea. Nu publicăm articole
-              false doar ca să umplem pagina.
-            </p>
           </div>
 
           {articles.length > 0 ? (
