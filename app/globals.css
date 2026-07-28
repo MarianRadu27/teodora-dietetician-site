@@ -2677,7 +2677,7 @@ select:focus-visible {
   .hero-photo {
     height: auto;
     max-width: none;
-    transform: translateX(-3%) translateY(12px);
+    transform: translateX(4%) translateY(12px);
     width: min(132%, 520px);
   }
 
