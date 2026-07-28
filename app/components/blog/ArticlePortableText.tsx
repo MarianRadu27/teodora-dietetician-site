@@ -9,6 +9,28 @@ type LinkMarkValue = {
   blank?: boolean;
 };
 
+const textColorClassNames = {
+  accentGreen: "article-text-accent-green",
+  darkGreen: "article-text-dark-green",
+  warningTerracotta: "article-text-warning-terracotta",
+  goldText: "article-text-gold",
+  darkGray: "article-text-dark-gray",
+} as const;
+
+type TextColorName = keyof typeof textColorClassNames;
+
+type TextColorMarkValue = {
+  color?: string;
+};
+
+function getTextColorClassName(color?: string) {
+  if (!color || !(color in textColorClassNames)) {
+    return null;
+  }
+
+  return textColorClassNames[color as TextColorName];
+}
+
 function getImageSize(image: SanityMainImage, maxWidth: number) {
   const dimensions = image.asset?.metadata?.dimensions;
   const originalWidth = dimensions?.width ?? maxWidth;
@@ -60,6 +82,17 @@ const components: PortableTextComponents = {
   marks: {
     strong: ({ children }) => <strong>{children}</strong>,
     em: ({ children }) => <em>{children}</em>,
+    textColor: ({ children, value }) => {
+      const className = getTextColorClassName(
+        (value as TextColorMarkValue | undefined)?.color,
+      );
+
+      if (!className) {
+        return <>{children}</>;
+      }
+
+      return <span className={className}>{children}</span>;
+    },
     link: ({ children, value }) => {
       const link = value as LinkMarkValue | undefined;
       const href = link?.href;

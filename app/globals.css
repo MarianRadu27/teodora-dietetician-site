@@ -502,8 +502,13 @@ select:focus-visible {
   margin-bottom: 34px;
 }
 
+.article-header .eyebrow {
+  justify-self: center;
+  text-align: center;
+}
+
 .article-header .h1 {
-  font-size: clamp(2.45rem, 5vw, 4.7rem);
+  font-size: clamp(2rem, 4vw, 3.4rem);
   line-height: 1;
 }
 
@@ -547,8 +552,8 @@ select:focus-visible {
   color: var(--color-text);
   display: grid;
   font-size: 1.07rem;
-  gap: 22px;
-  line-height: 1.82;
+  gap: 16px;
+  line-height: 1.30;
 }
 
 .article-body :where(p, h2, h3, blockquote, ul, ol) {
@@ -565,11 +570,11 @@ select:focus-visible {
 }
 
 .article-body h2 {
-  font-size: clamp(1.85rem, 3vw, 2.75rem);
+  font-size: clamp(1.45rem, 2.2vw, 2rem);
 }
 
 .article-body h3 {
-  font-size: clamp(1.42rem, 2vw, 1.95rem);
+  font-size: clamp(1.2rem, 1.5vw, 1.45rem);
 }
 
 .article-body blockquote {
@@ -610,6 +615,36 @@ select:focus-visible {
   border-radius: 6px;
   outline: 3px solid rgba(200, 144, 115, 0.7);
   outline-offset: 3px;
+}
+
+.article-body :where(
+  .article-text-accent-green,
+  .article-text-dark-green,
+  .article-text-warning-terracotta,
+  .article-text-gold,
+  .article-text-dark-gray
+) {
+  font-weight: 800;
+}
+
+.article-text-accent-green {
+  color: #4f765a;
+}
+
+.article-text-dark-green {
+  color: #294235;
+}
+
+.article-text-warning-terracotta {
+  color: #a64f3d;
+}
+
+.article-text-gold {
+  color: #8a6a32;
+}
+
+.article-text-dark-gray {
+  color: #3f4541;
 }
 
 .article-body-image {
