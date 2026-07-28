@@ -5,6 +5,7 @@ import { client } from "../../sanity/client";
 import { urlFor } from "../../sanity/image";
 import { BLOG_ARTICLES_QUERY } from "../../sanity/queries";
 import type { BlogArticleCard } from "../../sanity/types";
+import { formatReadingTime } from "../../lib/readingTime";
 
 export const metadata = {
   title: "Blog nutriție | Teodora Pălii",
@@ -50,6 +51,9 @@ export default async function BlogPage() {
                 const publishedDate = article.publishedAt
                   ? dateFormatter.format(new Date(article.publishedAt))
                   : null;
+                const readingTime = formatReadingTime(
+                  article.bodyPlainText ?? article.excerpt,
+                );
                 const articleHref = article.slug ? `/blog/${article.slug}` : "/blog";
 
                 return (
@@ -76,9 +80,14 @@ export default async function BlogPage() {
 
                       <div className="blog-card-meta">
                         <p className="eyebrow">{article.category?.title ?? "Articol"}</p>
-                        {publishedDate ? (
-                          <time dateTime={article.publishedAt}>{publishedDate}</time>
-                        ) : null}
+                        <div className="blog-card-meta-details">
+                          {publishedDate ? (
+                            <time dateTime={article.publishedAt}>{publishedDate}</time>
+                          ) : null}
+                          {readingTime ? (
+                            <span className="reading-time">{readingTime}</span>
+                          ) : null}
+                        </div>
                       </div>
 
                       <h2 className="h3">{article.title}</h2>

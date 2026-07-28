@@ -27,9 +27,9 @@ export function BookingServiceList({
       >
         ← Înapoi la alegerea modalității
       </button>
-      <div className="section-heading">
+      <div className="section-heading booking-calendar-heading">
         <p className="eyebrow">Pasul 2</p>
-        <h2 className="h2">{bookingModeContent[mode].serviceTitle}</h2>
+        <h2 className="h2 title-left">{bookingModeContent[mode].serviceTitle}</h2>
         <p className="lead">{bookingModeContent[mode].serviceSubtitle}</p>
       </div>
       <div className="booking-service-grid">

@@ -14,6 +14,10 @@ import type {
   BlogArticleSlug,
   SanityMainImage,
 } from "../../../sanity/types";
+import {
+  formatReadingTime,
+  getReadingTimeMinutes,
+} from "../../../lib/readingTime";
 
 type BlogArticlePageProps = {
   params: Promise<{
@@ -132,6 +136,10 @@ export default async function BlogArticlePage({ params }: BlogArticlePageProps) 
   const updatedDate = isDifferentDay(article.publishedAt, article.updatedAt)
     ? formatDate(article.updatedAt)
     : null;
+  const readingTime = formatReadingTime(article.bodyPlainText ?? article.excerpt);
+  const readingTimeMinutes = getReadingTimeMinutes(
+    article.bodyPlainText ?? article.excerpt,
+  );
   const mainImageUrl = imageUrl(article.mainImage, 1400, 880);
   const articleUrl = `/blog/${article.slug}`;
   const jsonLd = {
@@ -142,6 +150,7 @@ export default async function BlogArticlePage({ params }: BlogArticlePageProps) 
     image: mainImageUrl ? [mainImageUrl] : undefined,
     datePublished: article.publishedAt,
     dateModified: article.updatedAt || article.publishedAt,
+    timeRequired: readingTimeMinutes ? `PT${readingTimeMinutes}M` : undefined,
     mainEntityOfPage: {
       "@type": "WebPage",
       "@id": articleUrl,
@@ -171,6 +180,9 @@ export default async function BlogArticlePage({ params }: BlogArticlePageProps) 
                 ) : null}
                 {updatedDate ? (
                   <time dateTime={article.updatedAt}>Actualizat la {updatedDate}</time>
+                ) : null}
+                {readingTime ? (
+                  <span className="reading-time">{readingTime}</span>
                 ) : null}
               </div>
             </header>

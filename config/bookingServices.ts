@@ -36,8 +36,8 @@ export const bookingServices: BookingService[] = [
     durationMinutes: 30,
     priceLei: 150,
     calLinks: {
-      online: "teodora-palii/[SLUG-CAL-MONITORIZARE-ONLINE]",
-      office: "teodora-palii/monitorizare-nutritionala",
+      online: "teodora-palii/monitorizare-plan-nutritional-online",
+      office: "teodora-palii/monitorizare-plan-nutritional-cabinet",
     },
     availableOnline: true,
     availableInOffice: true,
@@ -50,8 +50,8 @@ export const bookingServices: BookingService[] = [
     durationMinutes: 60,
     priceLei: 200,
     calLinks: {
-      online: "teodora-palii/[SLUG-CAL-CONSILIERE-ONLINE]",
-      office: "teodora-palii/[SLUG-CAL-CONSILIERE-CABINET]",
+      online: "teodora-palii/sedinta-educatie-nutritionala-online",
+      office: "teodora-palii/sedinta-educatie-nutritionala-cabinet",
     },
     availableOnline: true,
     availableInOffice: true,
@@ -65,7 +65,7 @@ export const bookingServices: BookingService[] = [
     priceLei: 60,
     calLinks: {
       online: null,
-      office: "teodora-palii/[SLUG-CAL-ANALIZA-CORPORALA]",
+      office: "teodora-palii/analiza-compozitiei-corporale-cabinet",
     },
     availableOnline: false,
     availableInOffice: true,

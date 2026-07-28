@@ -17,7 +17,7 @@ export default function BookingPage() {
     <main>
       <section className="section">
         <div className="container">
-          <div className="section-heading center">
+          <div className="section-heading center booking-page-heading">
             <h1 className="h1">Programează o consultație nutrițională</h1>
             <p className="lead">
               Alege cum dorești să se desfășoare consultația, apoi selectează

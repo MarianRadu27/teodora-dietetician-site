@@ -193,9 +193,9 @@ export function BookingFlow() {
           </button>
           <div className="booking-calendar-grid">
             <div>
-              <div className="section-heading">
+              <div className="section-heading booking-calendar-heading">
                 <p className="eyebrow">Pasul 3</p>
-                <h2 className="h2" id="booking-calendar-title">
+                <h2 className="h2 title-left" id="booking-calendar-title">
                   Alege data și ora
                 </h2>
                 <p className="lead">

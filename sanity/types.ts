@@ -32,6 +32,7 @@ export type BlogArticleCard = {
   title?: string;
   slug?: string;
   excerpt?: string;
+  bodyPlainText?: string;
   publishedAt?: string;
   updatedAt?: string;
   featured?: boolean;
