@@ -1,4 +1,3 @@
-import { LegalPlaceholder } from "../../app/components/legal/LegalPlaceholder";
 import type { LegalTocItem } from "../../app/components/legal/LegalTableOfContents";
 import { cookieInventory, legalConfig } from "../../config/legal";
 
@@ -35,22 +34,15 @@ export function CookiesContent() {
           La data ultimei actualizări, website-ul nu utilizează în mod
           intenționat cookies de analiză sau marketing proprii.
         </p>
-        <p>Website-ul poate utiliza:</p>
+        <p>Website-ul poate utiliza doar tehnologii necesare pentru:</p>
         <ul>
-          <li>tehnologii strict necesare funcționării și securității;</li>
+          <li>funcționarea, livrarea și securitatea website-ului;</li>
+          <li>protecția și performanța oferite de platforma de găzduire;</li>
           <li>
-            tehnologii necesare memorării preferințelor privind cookies, dacă va
-            fi activat un manager de consimțământ;
-          </li>
-          <li>tehnologii asociate integrării serviciului Cal.com;</li>
-          <li>
-            tehnologii furnizate de platforma de găzduire sau de securitate.
+            încărcarea calendarului Cal.com atunci când utilizatorul deschide
+            funcția de programare.
           </li>
         </ul>
-        <p>
-          Lista exactă trebuie actualizată după scanarea versiunii finale a
-          website-ului.
-        </p>
       </section>
 
       <section className="legal-section" id="categorii">
@@ -125,10 +117,6 @@ export function CookiesContent() {
 
       <section className="legal-section" id="lista-cookies">
         <h2>Lista cookies utilizate</h2>
-        <p>
-          Tabelul următor trebuie completat după scanarea tehnică a website-ului
-          publicat.
-        </p>
         <div className="legal-table-wrap">
           <table className="legal-table">
             <thead>
@@ -144,9 +132,10 @@ export function CookiesContent() {
               {cookieInventory.length === 0 ? (
                 <tr>
                   <td colSpan={5}>
-                    Inventarul tehnic va fi actualizat după verificarea
-                    versiunii finale a website-ului. Acest mesaj trebuie înlocuit
-                    înaintea lansării publice.
+                    La data ultimei actualizări, website-ul nu utilizează în mod
+                    intenționat cookies proprii de analiză sau marketing. Dacă vor
+                    fi introduse ulterior astfel de tehnologii, această listă va
+                    fi actualizată înainte de activarea lor.
                   </td>
                 </tr>
               ) : (
@@ -163,10 +152,6 @@ export function CookiesContent() {
             </tbody>
           </table>
         </div>
-        <p>
-          Cookies detectate, dar care nu mai sunt utilizate, trebuie eliminate
-          din tabel.
-        </p>
       </section>
 
       <section className="legal-section" id="preferinte">
@@ -182,20 +167,17 @@ export function CookiesContent() {
           <li>modifica ulterior alegerea.</li>
         </ul>
         <p>
-          Preferințele vor putea fi redeschise prin butonul{" "}
-          <strong>„Setări cookies”</strong> din footer.
+          Preferințele vor putea fi redeschise printr-un buton dedicat din
+          footer.
         </p>
         <p>
-          Butonul „Setări cookies” nu conduce către o pagină nouă. Acesta
-          redeschide panoul în care utilizatorul își poate modifica alegerile.
+          Acest buton nu conduce către o pagină nouă. El redeschide panoul în care
+          utilizatorul își poate modifica alegerile.
         </p>
         <p>
-          Dacă website-ul nu utilizează cookies opționale și nu există un panou
-          funcțional de consimțământ, butonul nu va fi afișat.
-        </p>
-        <p className="legal-note">
-          Momentan managerul de consimțământ este dezactivat în cod prin{" "}
-          <LegalPlaceholder>COOKIE_CONSENT_ENABLED = false</LegalPlaceholder>.
+          În prezent, website-ul nu afișează un panou de consimțământ pentru
+          cookies opționale, deoarece nu folosește în mod intenționat cookies de
+          analiză sau marketing.
         </p>
       </section>
 

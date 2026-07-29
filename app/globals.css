@@ -441,6 +441,25 @@ select:focus-visible {
   font-size: clamp(2.4rem, 5vw, 4.4rem);
 }
 
+.home-blog-section {
+  background: rgba(255, 255, 255, 0.28);
+}
+
+.home-blog-heading {
+  margin-bottom: 28px;
+}
+
+.home-blog-grid-single {
+  grid-template-columns: minmax(0, 430px);
+  justify-content: center;
+}
+
+.home-blog-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
+
 .blog-card {
   display: flex;
   flex-direction: column;
@@ -2311,8 +2330,13 @@ select:focus-visible {
 .booking-frame {
   border: 0;
   display: block;
+  height: 760px;
   min-height: 760px;
   width: 100%;
+}
+
+.booking-mobile-calendar-action {
+  display: none;
 }
 
 .booking-frame-loading,
@@ -2487,6 +2511,11 @@ select:focus-visible {
   display: grid;
   gap: 16px;
   margin-bottom: 30px;
+}
+
+.legal-header .lead {
+  text-align: center;
+  margin-inline: auto;
 }
 
 .legal-updated {
@@ -2999,6 +3028,25 @@ select:focus-visible {
 
   .home-credentials-strip .credibility-grid {
     grid-template-columns: 1fr;
+    justify-items: center;
+  }
+
+  .home-credentials-strip .credential-item {
+    column-gap: 10px;
+    display: grid;
+    grid-template-columns: 8px minmax(0, 300px);
+    justify-content: center;
+    max-width: 360px;
+    text-align: left;
+    width: 100%;
+  }
+
+  .home-credentials-strip .credential-item strong {
+    display: block;
+  }
+
+  .home-credentials-strip .credential-dot {
+    margin-top: 0;
   }
 
   .services-hero {
@@ -3039,6 +3087,27 @@ select:focus-visible {
     justify-content: center;
   }
 
+  .booking-mobile-calendar-action {
+    background: rgba(255, 255, 255, 0.78);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-md);
+    display: grid;
+    gap: 12px;
+    margin: 0 0 16px;
+    padding: 16px;
+  }
+
+  .booking-mobile-calendar-action p {
+    color: var(--color-muted);
+    line-height: 1.62;
+    margin: 0;
+  }
+
+  .booking-mobile-calendar-action .button {
+    justify-self: stretch;
+    text-align: center;
+  }
+
   .legal-toc ol {
     columns: 1;
   }
@@ -3048,7 +3117,8 @@ select:focus-visible {
   }
 
   .booking-frame {
-    min-height: 680px;
+    height: 920px;
+    min-height: 920px;
   }
 }
 

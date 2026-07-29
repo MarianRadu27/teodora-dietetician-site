@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { LegalPlaceholder, LegalValue } from "../../app/components/legal/LegalPlaceholder";
+import { LegalValue } from "../../app/components/legal/LegalPlaceholder";
 import type { LegalTocItem } from "../../app/components/legal/LegalTableOfContents";
 import { legalConfig } from "../../config/legal";
 
@@ -296,25 +296,25 @@ export function PrivacyContent() {
           care au fost colectate și pentru respectarea obligațiilor legale sau
           profesionale.
         </p>
-        <p>Perioadele aplicabile vor fi completate astfel:</p>
+        <p>Perioadele orientative de păstrare sunt:</p>
         <ul>
           <li>
-            solicitări fără programare: maximum 6 luni de la ultima comunicare sau de la soluționarea solicitării.;
+            solicitări fără programare: maximum 6 luni de la ultima comunicare sau de la soluționarea solicitării.
           </li>
           <li>
-            programări anulate: maximum 6 luni de la anulare, cu excepția informațiilor care trebuie păstrate pentru îndeplinirea obligațiilor fiscale, soluționarea reclamațiilor sau apărarea unor drepturi.;
+            programări anulate: maximum 6 luni de la anulare, cu excepția informațiilor care trebuie păstrate pentru îndeplinirea obligațiilor fiscale, soluționarea reclamațiilor sau apărarea unor drepturi.
           </li>
           <li>
-            informații administrative privind consultațiile: pe durata colaborării și maximum 3 ani de la ultima consultație sau de la încetarea colaborării, în măsura în care sunt necesare pentru soluționarea reclamațiilor ori apărarea drepturilor.;
+            informații administrative privind consultațiile: pe durata colaborării și maximum 3 ani de la ultima consultație sau de la încetarea colaborării, în măsura în care sunt necesare pentru soluționarea reclamațiilor ori apărarea drepturilor.
           </li>
           <li>
-            comunicări prin email sau WhatsApp: maximum 6 luni de la ultima comunicare. Informațiile relevante pentru desfășurarea consultației, evidența profesională, îndeplinirea obligațiilor legale ori apărarea drepturilor pot fi extrase și păstrate pentru perioada aplicabilă categoriei respective.;
+            comunicări prin email sau WhatsApp: maximum 6 luni de la ultima comunicare. Informațiile relevante pentru desfășurarea consultației, evidența profesională, îndeplinirea obligațiilor legale ori apărarea drepturilor pot fi extrase și păstrate pentru perioada aplicabilă categoriei respective.
           </li>
           <li>
-            documente fiscale și contabile: 5 ani, calculați de la data de 1 iulie a anului următor celui încheierii exercițiului financiar în care au fost întocmite, sau pentru o altă perioadă prevăzută de legislația aplicabilă.;
+            documente fiscale și contabile: 5 ani, calculați de la data de 1 iulie a anului următor celui încheierii exercițiului financiar în care au fost întocmite, sau pentru o altă perioadă prevăzută de legislația aplicabilă.
           </li>
           <li>
-            loguri tehnice și de securitate: de regulă, maximum 6 luni, în funcție de natura logului, scopul de securitate și perioadele aplicate de furnizorii tehnici utilizați.;
+            loguri tehnice și de securitate: de regulă, maximum 6 luni, în funcție de natura logului, scopul de securitate și perioadele aplicate de furnizorii tehnici utilizați.
           </li>
           <li>
             consimțăminte pentru newsletter sau marketing, dacă vor fi introduse: până la retragerea consimțământului. După retragere, dovada consimțământului, data retragerii și informațiile minime necesare pentru respectarea opțiunii de dezabonare pot fi păstrate maximum 3 ani.

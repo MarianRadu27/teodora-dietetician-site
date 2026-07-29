@@ -2,6 +2,11 @@ import Link from "next/link";
 import Image from "next/image";
 
 import { RevealOnScroll } from "./components/RevealOnScroll";
+import { formatReadingTime } from "../lib/readingTime";
+import { client } from "../sanity/client";
+import { urlFor } from "../sanity/image";
+import { HOME_RECENT_ARTICLES_QUERY } from "../sanity/queries";
+import type { BlogArticleCard } from "../sanity/types";
 import {
   brand,
   credentials,
@@ -13,7 +18,24 @@ import {
 
 const SHOW_TESTIMONIALS = false;
 
-export default function HomePage() {
+const dateFormatter = new Intl.DateTimeFormat("ro-RO", {
+  day: "numeric",
+  month: "long",
+  year: "numeric",
+});
+
+async function getHomeRecentArticles() {
+  try {
+    return await client.fetch<BlogArticleCard[]>(HOME_RECENT_ARTICLES_QUERY);
+  } catch (error) {
+    console.error("Nu am putut prelua articolele recente din Sanity.", error);
+    return [];
+  }
+}
+
+export default async function HomePage() {
+  const recentArticles = await getHomeRecentArticles();
+
   return (
     <main>
       <section className="hero">
@@ -235,6 +257,95 @@ export default function HomePage() {
           </div>
         </section>
       )}
+
+      <section className="section home-blog-section" id="blog">
+        <div className="container">
+          <RevealOnScroll>
+            <div className="section-heading center home-blog-heading">
+              <h2 className="h2">Articole recente</h2>
+            </div>
+          </RevealOnScroll>
+
+          {recentArticles.length > 0 ? (
+            <div
+              className={`card-grid home-blog-grid ${
+                recentArticles.length === 1 ? "home-blog-grid-single" : "grid-3"
+              }`.trim()}
+            >
+              {recentArticles.map((article, index) => {
+                const imageUrl = article.mainImage?.asset
+                  ? urlFor(article.mainImage).width(900).height(620).fit("crop").url()
+                  : null;
+                const imageAlt = article.mainImage?.alt ?? "";
+                const publishedDate = article.publishedAt
+                  ? dateFormatter.format(new Date(article.publishedAt))
+                  : null;
+                const readingTime = formatReadingTime(
+                  article.bodyPlainText ?? article.excerpt,
+                );
+                const articleHref = article.slug ? `/blog/${article.slug}` : "/blog";
+
+                return (
+                  <RevealOnScroll delay={index * 80} key={article._id}>
+                    <Link
+                      aria-label={`Citește articolul ${article.title ?? ""}`}
+                      className="blog-card-link"
+                      href={articleHref}
+                    >
+                      <article className="soft-card blog-card">
+                        {imageUrl ? (
+                          <Image
+                            alt={imageAlt}
+                            blurDataURL={article.mainImage?.asset?.metadata?.lqip}
+                            className="blog-card-image"
+                            height={620}
+                            placeholder={
+                              article.mainImage?.asset?.metadata?.lqip
+                                ? "blur"
+                                : "empty"
+                            }
+                            src={imageUrl}
+                            width={900}
+                          />
+                        ) : null}
+
+                        <div className="blog-card-meta">
+                          <p className="eyebrow">
+                            {article.category?.title ?? "Articol"}
+                          </p>
+                          <div className="blog-card-meta-details">
+                            {publishedDate ? (
+                              <time dateTime={article.publishedAt}>
+                                {publishedDate}
+                              </time>
+                            ) : null}
+                            {readingTime ? (
+                              <span className="reading-time">{readingTime}</span>
+                            ) : null}
+                          </div>
+                        </div>
+
+                        <h3 className="h3">{article.title}</h3>
+                        {article.excerpt ? (
+                          <p className="blog-card-excerpt">{article.excerpt}</p>
+                        ) : null}
+                      </article>
+                    </Link>
+                  </RevealOnScroll>
+                );
+              })}
+            </div>
+          ) : null}
+
+          <RevealOnScroll delay={recentArticles.length ? 220 : 0}>
+            <div className="home-blog-actions">
+              <Link className="button button-secondary" href="/blog">
+                Vezi toate articolele
+              </Link>
+            </div>
+          </RevealOnScroll>
+        </div>
+      </section>
 
       <section className="section" id="faq">
         <div className="container">

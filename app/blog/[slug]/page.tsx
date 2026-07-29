@@ -26,7 +26,6 @@ type BlogArticlePageProps = {
 };
 
 export const dynamicParams = false;
-export const revalidate = 3600;
 
 const dateFormatter = new Intl.DateTimeFormat("ro-RO", {
   day: "numeric",

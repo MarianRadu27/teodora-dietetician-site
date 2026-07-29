@@ -42,6 +42,46 @@ export const BLOG_ARTICLES_QUERY = defineQuery(/* groq */ `
   }
 `);
 
+export const HOME_RECENT_ARTICLES_QUERY = defineQuery(/* groq */ `
+  *[
+    _type == "article"
+    && defined(slug.current)
+    && defined(publishedAt)
+    && !(_id in path("drafts.**"))
+  ]
+  | order(featured desc, publishedAt desc)[0...3] {
+    _id,
+    title,
+    "slug": slug.current,
+    excerpt,
+    "bodyPlainText": pt::text(body),
+    publishedAt,
+    featured,
+    mainImage {
+      asset->{
+        _id,
+        url,
+        metadata {
+          lqip,
+          dimensions {
+            width,
+            height
+          }
+        }
+      },
+      alt,
+      caption,
+      crop,
+      hotspot
+    },
+    category->{
+      _id,
+      title,
+      "slug": slug.current
+    }
+  }
+`);
+
 export const BLOG_ARTICLE_SLUGS_QUERY = defineQuery(/* groq */ `
   *[
     _type == "article"

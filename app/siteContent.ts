@@ -12,11 +12,11 @@ export const brand = {
     "https://wa.me/40778186580?text=Buna%2C%20as%20vrea%20sa%20programez%20o%20consultatie.",
   instagramUrl: "https://www.instagram.com/dietetician.teodora/?hl=en",
   facebookUrl: "https://www.facebook.com/profile.php?id=61574269958054",
-  heroImage: "/images/Teodora-fruit-donut3-transparent.PNG",
-  aboutImage: "/images/Teodora-Graduation1.JPEG",
-  aboutImage1: "/images/Teodora-cabinet.JPEG",
-  aboutHomeImage: "/images/Teodora-lemons.PNG",
-  contacImage: "/images/Teodora-fruit-phone.PNG",
+  heroImage: "/images/teodora-hero.webp",
+  aboutImage: "/images/teodora-despre.webp",
+  aboutImage1: "/images/teodora-cabinet.webp",
+  aboutHomeImage: "/images/teodora-lamai.webp",
+  contacImage: "/images/teodora-contact.webp",
 };
 
 export const navItems = [

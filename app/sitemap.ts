@@ -2,6 +2,8 @@ import type { MetadataRoute } from "next";
 
 const siteUrl = "https://dieteticianteodora.ro";
 
+export const dynamic = "force-static";
+
 const routes = [
   "",
   "/despre",

@@ -30,7 +30,6 @@ export function buildCalEmbedUrl(
 ): string {
   const url = new URL(`https://cal.com/${calLink}`);
   url.searchParams.set("embed", "true");
-  url.searchParams.set("layout", "month_view");
   url.searchParams.set("timezone", "Europe/Bucharest");
   url.searchParams.set("_retry", String(retryKey));
 

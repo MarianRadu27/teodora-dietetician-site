@@ -1,4 +1,4 @@
-import { LegalPlaceholder, LegalValue } from "../../app/components/legal/LegalPlaceholder";
+import { LegalValue } from "../../app/components/legal/LegalPlaceholder";
 import type { LegalTocItem } from "../../app/components/legal/LegalTableOfContents";
 import { legalConfig } from "../../config/legal";
 import { getOfficeLocationAddress, officeLocation } from "../../config/officeLocation";
@@ -87,11 +87,6 @@ export function TermsContent() {
           <li>consultații de control;</li>
           <li>consultații online;</li>
           <li>consultații în cabinet;</li>
-          {/*
-          <li>
-           <LegalPlaceholder>[ALTE SERVICII CARE VOR FI ADĂUGATE]</LegalPlaceholder>. 
-          </li>
-          */}
         </ul>
         <p>
           Descrierea, durata, tariful și condițiile specifice fiecărui serviciu

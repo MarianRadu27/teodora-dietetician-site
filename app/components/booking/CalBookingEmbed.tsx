@@ -88,21 +88,39 @@ export default function CalBookingEmbed({
   }
 
   return (
-    <div className="booking-frame-wrap" aria-live="polite">
-      {!hasLoaded ? (
-        <div className="booking-frame-loading" role="status">
-          Se încarcă intervalele disponibile…
+    <>
+      {calLink && !hasPlaceholderLink ? (
+        <div className="booking-mobile-calendar-action">
+          <p>
+            Pe telefon, dacă selecția datei nu răspunde corect, poți deschide
+            calendarul direct în Cal.com.
+          </p>
+          <a
+            className="button button-secondary"
+            href={getExternalCalUrl(calLink)}
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            Deschide calendarul
+          </a>
         </div>
       ) : null}
-      <iframe
-        className="booking-frame"
-        onLoad={() => {
-          loadedRef.current = true;
-          setHasLoaded(true);
-        }}
-        src={embedUrl}
-        title={`Calendar Cal.com pentru ${service.title}`}
-      />
-    </div>
+      <div className="booking-frame-wrap" aria-live="polite">
+        {!hasLoaded ? (
+          <div className="booking-frame-loading" role="status">
+            Se încarcă intervalele disponibile…
+          </div>
+        ) : null}
+        <iframe
+          className="booking-frame"
+          onLoad={() => {
+            loadedRef.current = true;
+            setHasLoaded(true);
+          }}
+          src={embedUrl}
+          title={`Calendar Cal.com pentru ${service.title}`}
+        />
+      </div>
+    </>
   );
 }

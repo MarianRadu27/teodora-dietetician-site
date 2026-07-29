@@ -17,8 +17,6 @@ export const metadata: Metadata = {
   },
 };
 
-export const revalidate = 3600;
-
 const dateFormatter = new Intl.DateTimeFormat("ro-RO", {
   day: "numeric",
   month: "long",
