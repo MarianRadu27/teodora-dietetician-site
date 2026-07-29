@@ -1,11 +1,16 @@
+import type { Metadata } from "next";
+
 import { FAQCategoryAccordion } from "../components/FAQAccordion";
 import { RevealOnScroll } from "../components/RevealOnScroll";
 import { brand, faqCategories } from "../siteContent";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Întrebări frecvente | Teodora Pălii",
   description:
-    "Răspunsuri despre consultațiile nutriționale, plan alimentar, analize și ședințe online.",
+    "Răspunsuri despre consultațiile nutriționale, plan alimentar, analize, monitorizare și ședințe online sau în cabinet.",
+  alternates: {
+    canonical: "/faq",
+  },
 };
 
 export default function FAQPage() {

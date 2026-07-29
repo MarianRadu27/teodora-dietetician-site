@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import type { Metadata } from "next";
 
 import { client } from "../../sanity/client";
 import { urlFor } from "../../sanity/image";
@@ -7,10 +8,13 @@ import { BLOG_ARTICLES_QUERY } from "../../sanity/queries";
 import type { BlogArticleCard } from "../../sanity/types";
 import { formatReadingTime } from "../../lib/readingTime";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Blog nutriție | Teodora Pălii",
   description:
-    "Articole educative despre nutriție, alimentație echilibrată și obiceiuri sustenabile.",
+    "Articole educative despre nutriție, alimentație echilibrată, obiceiuri sustenabile și relația cu mâncarea.",
+  alternates: {
+    canonical: "/blog",
+  },
 };
 
 export const revalidate = 3600;

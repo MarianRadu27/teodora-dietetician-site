@@ -11,7 +11,7 @@ export const legalConfig = {
   memberCode: "110825",
   domain: "dieteticianteodora.ro",
   vatStatus: "NEPLĂTITOR TVA",
-  hostingProvider: "[FURNIZORUL DE GĂZDUIRE]",
+  hostingProvider: "Cloudflare Pages",
   emailProvider: "Google, prin serviciul Gmail",
   calPrivacyUrl: "https://cal.com/privacy",
   cancellationNoticeHours: 24,
