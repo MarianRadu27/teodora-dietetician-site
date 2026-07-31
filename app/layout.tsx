@@ -31,6 +31,7 @@ export const metadata: Metadata = {
     title: "Teodora Pălii | Nutriționist-Dietetician autorizat",
     description:
       "Nutriție personalizată, fără diete rigide, în Iași și online.",
+    siteName: "Dietetician Teodora Pălii",
     type: "website",
     locale: "ro_RO",
     url: "/",
@@ -38,7 +39,7 @@ export const metadata: Metadata = {
       {
         url: brand.socialImage,
         width: 1200,
-        height: 675,
+        height: 630,
         alt: "Teodora Pălii, nutriționist-dietetician autorizat",
       },
     ],

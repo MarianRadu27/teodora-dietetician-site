@@ -65,6 +65,14 @@ export default async function HomePage() {
 
           <div className="hero-photo-wrap">
             <Image
+              alt=""
+              aria-hidden="true"
+              className="hero-organic-background"
+              height={600}
+              src="/images/blob.svg"
+              width={900}
+            />
+            <Image
               alt="Teodora Pălii, nutriționist-dietetician autorizat"
               className="hero-photo"
               height={1200}

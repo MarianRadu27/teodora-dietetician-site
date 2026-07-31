@@ -13,7 +13,7 @@ export const brand = {
   instagramUrl: "https://www.instagram.com/dietetician.teodora/?hl=en",
   facebookUrl: "https://www.facebook.com/profile.php?id=61574269958054",
   heroImage: "/images/teodora-hero.webp",
-  socialImage: "/images/teodora-contact.webp",
+  socialImage: "/images/teodora-social-preview.jpg",
   aboutImage: "/images/teodora-despre.webp",
   aboutImage1: "/images/teodora-cabinet.webp",
   aboutHomeImage: "/images/teodora-lamai.webp",
