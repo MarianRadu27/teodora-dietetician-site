@@ -21,7 +21,7 @@ const fraunces = Fraunces({
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: "Nutriționist-Dietetician autorizat în Iași și online | Teodora Pălii",
+  title: "Nutriționist-Dietetician Iași | Teodora Pălii",
   description:
     "Consultații nutriționale personalizate pentru scădere în greutate, afecțiuni metabolice și digestive și o relație echilibrată cu alimentația.",
   alternates: {
