@@ -275,19 +275,44 @@ select:focus-visible {
 .hero-photo-wrap {
   align-self: stretch;
   display: grid;
+  isolation: isolate;
   min-height: 540px;
   place-items: center center;
   position: relative;
 }
 
+.hero-photo-wrap::before {
+  aspect-ratio: 0.86;
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255, 249, 238, 0.94) 0%,
+      rgba(229, 239, 222, 0.92) 58%,
+      rgba(255, 255, 255, 0.82) 100%
+    );
+  border: 1px solid rgba(79, 118, 90, 0.18);
+  border-radius: 58% 42% 48% 52% / 45% 50% 50% 55%;
+  bottom: 12px;
+  box-shadow: 0 28px 70px rgba(41, 66, 53, 0.16);
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  right: 4%;
+  transform: rotate(-4deg);
+  width: min(88%, 520px);
+  z-index: 0;
+}
+
 .hero-photo {
   display: block;
+  filter: drop-shadow(0 18px 30px rgba(41, 66, 53, 0.14));
   height: min(80vh, 620px);
   max-height: 1000px;
   object-fit: contain;
   object-position: center top;
   position: relative;
   width: min(100%, 500px);
+  z-index: 1;
 }
 
 @media (min-width: 1081px) {
@@ -322,6 +347,12 @@ select:focus-visible {
     top: 68px;
     width: min(58vw, 850px);
     z-index: 1;
+  }
+
+  .hero-photo-wrap::before {
+    bottom: 8px;
+    right: clamp(68px, 13vw, 190px);
+    width: min(44vw, 560px);
   }
 
   .hero-photo {
@@ -2947,6 +2978,13 @@ select:focus-visible {
     min-height: 315px;
     overflow: hidden;
     place-items: end center;
+  }
+
+  .hero-photo-wrap::before {
+    bottom: 2px;
+    right: 50%;
+    transform: translateX(52%) rotate(-4deg);
+    width: min(88vw, 390px);
   }
 
   .hero-photo {

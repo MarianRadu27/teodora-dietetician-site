@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     url: "/",
     images: [
       {
-        url: brand.heroImage,
+        url: brand.socialImage,
         width: 1200,
         height: 675,
         alt: "Teodora Pălii, nutriționist-dietetician autorizat",
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
     title: "Teodora Pălii | Nutriționist-Dietetician autorizat",
     description:
       "Consultații nutriționale personalizate în Iași și online.",
-    images: [brand.heroImage],
+    images: [brand.socialImage],
   },
 };
 
@@ -60,7 +60,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     description:
       "Consultații nutriționale personalizate pentru scădere în greutate, afecțiuni metabolice și digestive și o relație echilibrată cu alimentația.",
     url: "https://dieteticianteodora.ro",
-    image: `${siteUrl}${brand.heroImage}`,
+    image: `${siteUrl}${brand.socialImage}`,
     email: brand.email,
     telephone: "+40778186580",
     address: {
