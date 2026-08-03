@@ -51,10 +51,7 @@ export default async function HomePage() {
           <div className="hero-copy">
             <p className="lead">
               Cu răbdare și explicații clare, construim împreună un plan
-              realist ușor de integrat în viața de zi cu zi. Nu cred în
-              perfecțiune sau restricții inutile, ci în progres, consecvență și
-              alegeri potrivite în funcție de obiectivele, nevoile și stilul de
-              viață al fiecărui pacient
+              realist ușor de integrat în viața de zi cu zi.
             </p>
             <div className="button-row">
               <Link className="button button-primary" href={brand.bookingUrl}>

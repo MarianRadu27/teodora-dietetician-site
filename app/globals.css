@@ -306,12 +306,16 @@ select:focus-visible {
 }
 
 @media (min-width: 1081px) {
+  .hero {
+    padding: 18px 0 0;
+  }
+
   .hero-grid {
     align-items: start;
     column-gap: 0;
     grid-template-columns: minmax(0, 1fr) minmax(260px, 0.34fr);
-    min-height: 520px;
-    row-gap: 14px;
+    min-height: 420px;
+    row-gap: 0;
   }
 
   .hero-title span {
@@ -320,8 +324,8 @@ select:focus-visible {
 
   .hero-copy {
     grid-column: 1;
+    margin-top: -20px;
     max-width: 700px;
-    margin-top: -4px;
   }
 
   .hero-photo-wrap {
@@ -334,7 +338,7 @@ select:focus-visible {
     place-items: start end;
     position: absolute;
     right: clamp(-800px, -20vw, -48px);
-    top: 68px;
+    top: -32px;
     width: min(58vw, 850px);
     z-index: 1;
   }
