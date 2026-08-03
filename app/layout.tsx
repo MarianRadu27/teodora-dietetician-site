@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     canonical: "/",
   },
   openGraph: {
-    title: "Teodora Pălii | Nutriționist-Dietetician autorizat",
+    title: "Teodora Pălii | Nutriționist-Dietetician Autorizat",
     description:
       "Nutriție personalizată, fără diete rigide, în Iași și online.",
     siteName: "Dietetician Teodora Pălii",
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Teodora Pălii | Nutriționist-Dietetician autorizat",
+    title: "Teodora Pălii | Nutriționist-Dietetician Autorizat",
     description:
       "Consultații nutriționale personalizate în Iași și online.",
     images: [brand.socialImage],

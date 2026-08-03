@@ -93,6 +93,19 @@ export const BLOG_ARTICLE_SLUGS_QUERY = defineQuery(/* groq */ `
   }
 `);
 
+export const BLOG_SITEMAP_QUERY = defineQuery(/* groq */ `
+  *[
+    _type == "article"
+    && defined(slug.current)
+    && defined(publishedAt)
+    && !(_id in path("drafts.**"))
+  ]
+  | order(publishedAt desc) {
+    "slug": slug.current,
+    "lastModified": coalesce(updatedAt, _updatedAt, publishedAt)
+  }
+`);
+
 export const BLOG_ARTICLE_BY_SLUG_QUERY = defineQuery(/* groq */ `
   *[
     _type == "article"

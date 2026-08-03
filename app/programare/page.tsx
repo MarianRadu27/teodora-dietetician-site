@@ -1,16 +1,14 @@
-import type { Metadata } from "next";
 import { Suspense } from "react";
 
 import { BookingFlow } from "../components/booking/BookingFlow";
+import { createPageMetadata } from "../../lib/pageMetadata";
 
-export const metadata: Metadata = {
-  title: "Programare consultație nutrițională | Teodora Pălii",
+export const metadata = createPageMetadata({
+  title: "Programare nutrițională | Teodora Pălii",
   description:
     "Programează o consultație nutrițională online sau în cabinet, în Iași, cu Teodora Pălii, nutriționist-dietetician autorizat.",
-  alternates: {
-    canonical: "/programare",
-  },
-};
+  canonical: "/programare",
+});
 
 export default function BookingPage() {
   return (

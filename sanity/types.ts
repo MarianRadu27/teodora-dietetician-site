@@ -44,6 +44,11 @@ export type BlogArticleSlug = {
   slug: string;
 };
 
+export type BlogSitemapArticle = {
+  slug: string;
+  lastModified?: string;
+};
+
 export type BlogArticle = BlogArticleCard & {
   body?: Array<PortableTextBlock | TypedObject>;
   seoTitle?: string;

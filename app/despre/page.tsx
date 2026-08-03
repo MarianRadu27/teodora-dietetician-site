@@ -1,21 +1,19 @@
 import Link from "next/link";
 import Image from "next/image";
-import type { Metadata } from "next";
 
 import { RevealOnScroll } from "../components/RevealOnScroll";
 import { brand } from "../siteContent";
 import { aboutIntro, aboutSections } from "../../content/about";
+import { createPageMetadata } from "../../lib/pageMetadata";
 
 const consultationSectionTitle = "Cum lucrez în consultații";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "Despre Teodora Pălii | Nutriționist-Dietetician",
   description:
-    "Află mai multe despre Teodora Pălii, nutriționist-dietetician autorizat, abordarea sa și modul de lucru în consultații.",
-  alternates: {
-    canonical: "/despre",
-  },
-};
+    "Descoperă pregătirea, abordarea și modul de lucru al Teodorei Pălii, nutriționist-dietetician autorizat în Iași, în cadrul consultațiilor.",
+  canonical: "/despre",
+});
 
 export default function AboutPage() {
   return (

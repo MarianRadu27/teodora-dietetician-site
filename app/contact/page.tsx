@@ -1,23 +1,21 @@
 import Link from "next/link";
 import Image from "next/image";
-import type { Metadata } from "next";
 
 import { SocialIcon } from "../components/SocialIcon";
 import { brand } from "../siteContent";
+import { createPageMetadata } from "../../lib/pageMetadata";
 import {
   hasOfficeLocationMapUrl,
   isOfficeLocationValueComplete,
   officeLocation,
 } from "../../config/officeLocation";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "Contact și consultații în Iași | Teodora Pălii",
   description:
-    "Date de contact și locația consultațiilor nutriționale desfășurate în Iași, la DietON – Centrul de Dietetică și Nutriție.",
-  alternates: {
-    canonical: "/contact",
-  },
-};
+    "Găsește datele de contact și locația consultațiilor nutriționale desfășurate în Iași, la DietON – Centrul de Dietetică și Nutriție.",
+  canonical: "/contact",
+});
 
 export default function ContactPage() {
   const optionalLocationDetails = [

@@ -1,17 +1,14 @@
-import type { Metadata } from "next";
-
 import { FAQCategoryAccordion } from "../components/FAQAccordion";
 import { RevealOnScroll } from "../components/RevealOnScroll";
 import { brand, faqCategories } from "../siteContent";
+import { createPageMetadata } from "../../lib/pageMetadata";
 
-export const metadata: Metadata = {
-  title: "Întrebări frecvente | Teodora Pălii",
+export const metadata = createPageMetadata({
+  title: "Întrebări frecvente despre consultații | Teodora Pălii",
   description:
-    "Răspunsuri despre consultațiile nutriționale, plan alimentar, analize, monitorizare și ședințe online sau în cabinet.",
-  alternates: {
-    canonical: "/faq",
-  },
-};
+    "Găsește răspunsuri despre consultația inițială, planul nutrițional, monitorizare și ședințele online sau în cabinet.",
+  canonical: "/faq",
+});
 
 export default function FAQPage() {
   return (

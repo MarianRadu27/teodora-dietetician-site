@@ -1,21 +1,19 @@
 import Link from "next/link";
 import Image from "next/image";
-import type { Metadata } from "next";
 
 import { client } from "../../sanity/client";
 import { urlFor } from "../../sanity/image";
 import { BLOG_ARTICLES_QUERY } from "../../sanity/queries";
 import type { BlogArticleCard } from "../../sanity/types";
 import { formatReadingTime } from "../../lib/readingTime";
+import { createPageMetadata } from "../../lib/pageMetadata";
 
-export const metadata: Metadata = {
-  title: "Blog nutriție | Teodora Pălii",
+export const metadata = createPageMetadata({
+  title: "Blog despre nutriție și dietetică | Teodora Pălii",
   description:
-    "Articole educative despre nutriție, alimentație echilibrată, obiceiuri sustenabile și relația cu mâncarea.",
-  alternates: {
-    canonical: "/blog",
-  },
-};
+    "Citește articole despre nutriție, alimentație echilibrată, obiceiuri sustenabile și alegeri alimentare adaptate vieții de zi cu zi.",
+  canonical: "/blog",
+});
 
 const dateFormatter = new Intl.DateTimeFormat("ro-RO", {
   day: "numeric",
