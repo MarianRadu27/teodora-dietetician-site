@@ -1,7 +1,16 @@
+import {
+  getOfficeLocationAddress,
+  officeLocation,
+} from "../../../config/officeLocation";
 import { hashBookingToken } from "../../_shared/bookingTokens";
+import { sendResendEmail } from "../../_shared/resend";
 
 type ConfirmationEnvironment = {
+  BOOKING_FROM_EMAIL?: string;
+  BOOKING_NOTIFICATION_EMAIL?: string;
+  BOOKING_REPLY_TO_EMAIL?: string;
   BOOKINGS_DB?: D1Database;
+  RESEND_API_KEY?: string;
 };
 
 type D1Database = {
@@ -33,6 +42,14 @@ type ConfirmationRow = {
   booking_expires_at: string;
   booking_id: string;
   booking_status: string;
+  duration_minutes_snapshot: number;
+  email: string;
+  full_name: string;
+  mode: "online" | "office";
+  phone: string | null;
+  price_bani_snapshot: number | null;
+  service_title_snapshot: string;
+  starts_at_utc: string;
   token_expires_at: string;
   token_id: string;
   used_at: string | null;
@@ -41,6 +58,7 @@ type ConfirmationRow = {
 const MAX_REQUEST_BYTES = 5_000;
 const MIN_TOKEN_LENGTH = 20;
 const MAX_TOKEN_LENGTH = 2_048;
+const TIME_ZONE = "Europe/Bucharest";
 
 function jsonResponse(body: unknown, status = 200) {
   return Response.json(body, {
@@ -66,6 +84,254 @@ function getToken(value: unknown) {
 
 function getChanges(result: D1Result | undefined) {
   return result?.meta?.changes ?? 0;
+}
+
+function escapeHtml(value: string) {
+  return value.replace(/[&<>"']/g, (character) => {
+    const entities: Record<string, string> = {
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#039;",
+    };
+
+    return entities[character];
+  });
+}
+
+function formatBookingDetails(booking: ConfirmationRow) {
+  const startsAt = new Date(booking.starts_at_utc);
+  const date = new Intl.DateTimeFormat("ro-RO", {
+    dateStyle: "long",
+    timeZone: TIME_ZONE,
+  }).format(startsAt);
+  const time = new Intl.DateTimeFormat("ro-RO", {
+    hour: "2-digit",
+    hour12: false,
+    minute: "2-digit",
+    timeZone: TIME_ZONE,
+  }).format(startsAt);
+  const mode =
+    booking.mode === "office" ? "În cabinet" : "Online";
+  const location =
+    booking.mode === "office"
+      ? `${officeLocation.name}, ${getOfficeLocationAddress()}`
+      : "Consultație online. Linkul întâlnirii va fi transmis separat prin email.";
+  const price =
+    booking.price_bani_snapshot === null
+      ? "Prețul va fi comunicat separat"
+      : `${booking.price_bani_snapshot / 100} lei`;
+
+  return {
+    date,
+    duration: `${booking.duration_minutes_snapshot} de minute`,
+    location,
+    mode,
+    price,
+    time,
+  };
+}
+
+function createPatientConfirmationEmail(
+  booking: ConfirmationRow,
+  from: string,
+  replyTo?: string,
+) {
+  const details = formatBookingDetails(booking);
+  const safeName = escapeHtml(booking.full_name);
+  const safeService = escapeHtml(booking.service_title_snapshot);
+  const safeDate = escapeHtml(details.date);
+  const safeTime = escapeHtml(details.time);
+  const safeMode = escapeHtml(details.mode);
+  const safeDuration = escapeHtml(details.duration);
+  const safePrice = escapeHtml(details.price);
+  const safeLocation = escapeHtml(details.location);
+  const text = [
+    `Bună, ${booking.full_name}!`,
+    "",
+    "Programarea ta a fost confirmată.",
+    `Serviciu: ${booking.service_title_snapshot}`,
+    `Data: ${details.date}`,
+    `Ora: ${details.time}`,
+    `Durată: ${details.duration}`,
+    `Preț: ${details.price}`,
+    `Modalitate: ${details.mode}`,
+    `Locație: ${details.location}`,
+    "",
+    "Pentru întrebări, poți răspunde direct la acest email.",
+  ].join("\n");
+  const html = `
+    <div style="background:#f7f7f2;padding:32px 16px;font-family:Arial,sans-serif;color:#294235">
+      <div style="max-width:600px;margin:0 auto;background:#ffffff;border:1px solid #dde8de;border-radius:8px;padding:32px">
+        <p style="margin:0 0 16px">Bună, ${safeName}!</p>
+        <h1 style="margin:0 0 20px;font-size:26px;line-height:1.25;color:#294235">
+          Programarea ta a fost confirmată
+        </h1>
+        <p style="margin:0 0 20px;line-height:1.6">
+          Te aștept la consultația programată. Mai jos găsești toate detaliile.
+        </p>
+        <div style="background:#f2f6f1;border-left:3px solid #4f765a;padding:16px 18px;margin:0 0 24px;line-height:1.7">
+          <strong>Serviciu:</strong> ${safeService}<br>
+          <strong>Data:</strong> ${safeDate}<br>
+          <strong>Ora:</strong> ${safeTime}<br>
+          <strong>Durată:</strong> ${safeDuration}<br>
+          <strong>Preț:</strong> ${safePrice}<br>
+          <strong>Modalitate:</strong> ${safeMode}<br>
+          <strong>Locație:</strong> ${safeLocation}
+        </div>
+        <p style="margin:0;color:#5e665f;font-size:14px;line-height:1.6">
+          Pentru întrebări, poți răspunde direct la acest email.
+        </p>
+      </div>
+    </div>
+  `;
+
+  return {
+    from,
+    html,
+    replyTo,
+    subject: `Programare confirmată – ${details.date}, ${details.time}`,
+    text,
+    to: booking.email,
+  };
+}
+
+function createPractitionerNotificationEmail(
+  booking: ConfirmationRow,
+  from: string,
+  to: string,
+) {
+  const details = formatBookingDetails(booking);
+  const safeName = escapeHtml(booking.full_name);
+  const safeEmail = escapeHtml(booking.email);
+  const safePhone = escapeHtml(booking.phone || "Nu a fost completat");
+  const safeService = escapeHtml(booking.service_title_snapshot);
+  const safeDate = escapeHtml(details.date);
+  const safeTime = escapeHtml(details.time);
+  const safeMode = escapeHtml(details.mode);
+  const safeDuration = escapeHtml(details.duration);
+  const safePrice = escapeHtml(details.price);
+  const safeLocation = escapeHtml(details.location);
+  const text = [
+    "O programare nouă a fost confirmată.",
+    "",
+    `Pacient: ${booking.full_name}`,
+    `Email: ${booking.email}`,
+    `Telefon: ${booking.phone || "Nu a fost completat"}`,
+    `Serviciu: ${booking.service_title_snapshot}`,
+    `Data: ${details.date}`,
+    `Ora: ${details.time}`,
+    `Durată: ${details.duration}`,
+    `Preț: ${details.price}`,
+    `Modalitate: ${details.mode}`,
+    `Locație: ${details.location}`,
+  ].join("\n");
+  const html = `
+    <div style="background:#f7f7f2;padding:32px 16px;font-family:Arial,sans-serif;color:#294235">
+      <div style="max-width:600px;margin:0 auto;background:#ffffff;border:1px solid #dde8de;border-radius:8px;padding:32px">
+        <h1 style="margin:0 0 20px;font-size:26px;line-height:1.25;color:#294235">
+          Programare nouă confirmată
+        </h1>
+        <div style="background:#f2f6f1;border-left:3px solid #4f765a;padding:16px 18px;line-height:1.7">
+          <strong>Pacient:</strong> ${safeName}<br>
+          <strong>Email:</strong> ${safeEmail}<br>
+          <strong>Telefon:</strong> ${safePhone}<br>
+          <strong>Serviciu:</strong> ${safeService}<br>
+          <strong>Data:</strong> ${safeDate}<br>
+          <strong>Ora:</strong> ${safeTime}<br>
+          <strong>Durată:</strong> ${safeDuration}<br>
+          <strong>Preț:</strong> ${safePrice}<br>
+          <strong>Modalitate:</strong> ${safeMode}<br>
+          <strong>Locație:</strong> ${safeLocation}
+        </div>
+      </div>
+    </div>
+  `;
+
+  return {
+    from,
+    html,
+    replyTo: booking.email,
+    subject: `Programare nouă – ${details.date}, ${details.time}`,
+    text,
+    to,
+  };
+}
+
+async function sendWithOneRetry(
+  apiKey: string,
+  email: Parameters<typeof sendResendEmail>[1],
+  idempotencyKey: string,
+) {
+  try {
+    await sendResendEmail(apiKey, email, idempotencyKey);
+  } catch (firstError) {
+    console.error("First transactional email attempt failed.", firstError);
+    await sendResendEmail(apiKey, email, idempotencyKey);
+  }
+}
+
+async function sendFinalBookingEmails(
+  env: ConfirmationEnvironment,
+  booking: ConfirmationRow,
+) {
+  if (
+    !env.RESEND_API_KEY ||
+    !env.BOOKING_FROM_EMAIL ||
+    !env.BOOKING_NOTIFICATION_EMAIL
+  ) {
+    console.error("Final booking emails are not configured.");
+    return false;
+  }
+
+  const results = await Promise.allSettled([
+    sendWithOneRetry(
+      env.RESEND_API_KEY,
+      createPatientConfirmationEmail(
+        booking,
+        env.BOOKING_FROM_EMAIL,
+        env.BOOKING_REPLY_TO_EMAIL,
+      ),
+      `booking-confirmed-patient-${booking.booking_id}`,
+    ),
+    sendWithOneRetry(
+      env.RESEND_API_KEY,
+      createPractitionerNotificationEmail(
+        booking,
+        env.BOOKING_FROM_EMAIL,
+        env.BOOKING_NOTIFICATION_EMAIL,
+      ),
+      `booking-confirmed-practitioner-${booking.booking_id}`,
+    ),
+  ]);
+  const failedDeliveries = results.filter(
+    (result) => result.status === "rejected",
+  );
+
+  for (const failure of failedDeliveries) {
+    console.error("Final booking email could not be sent.", failure.reason);
+  }
+
+  return failedDeliveries.length === 0;
+}
+
+async function confirmedResponse(
+  env: ConfirmationEnvironment,
+  booking: ConfirmationRow,
+  wasAlreadyConfirmed: boolean,
+) {
+  const emailsSent = await sendFinalBookingEmails(env, booking);
+
+  return jsonResponse({
+    emailsSent,
+    message: emailsSent
+      ? wasAlreadyConfirmed
+        ? "Programarea era deja confirmată."
+        : "Programarea a fost confirmată."
+      : "Programarea este confirmată. Emailul final poate ajunge cu întârziere.",
+    status: wasAlreadyConfirmed ? "already_confirmed" : "confirmed",
+  });
 }
 
 export async function onRequestPost({
@@ -132,7 +398,15 @@ export async function onRequestPost({
           booking_tokens.expires_at AS token_expires_at,
           booking_tokens.used_at,
           bookings.status AS booking_status,
-          bookings.expires_at AS booking_expires_at
+          bookings.expires_at AS booking_expires_at,
+          bookings.service_title_snapshot,
+          bookings.duration_minutes_snapshot,
+          bookings.price_bani_snapshot,
+          bookings.mode,
+          bookings.starts_at_utc,
+          bookings.full_name,
+          bookings.email,
+          bookings.phone
         FROM booking_tokens
         INNER JOIN bookings
           ON bookings.id = booking_tokens.booking_id
@@ -155,10 +429,7 @@ export async function onRequestPost({
     }
 
     if (confirmation.booking_status === "confirmed") {
-      return jsonResponse({
-        message: "Programarea era deja confirmată.",
-        status: "already_confirmed",
-      });
+      return confirmedResponse(env, confirmation, true);
     }
 
     const isExpired =
@@ -242,10 +513,7 @@ export async function onRequestPost({
     ]);
 
     if (getChanges(results[0]) === 1 && getChanges(results[1]) === 1) {
-      return jsonResponse({
-        message: "Programarea a fost confirmată.",
-        status: "confirmed",
-      });
+      return confirmedResponse(env, confirmation, false);
     }
 
     const currentBooking = await env.BOOKINGS_DB.prepare(
@@ -255,10 +523,7 @@ export async function onRequestPost({
       .first<{ status: string }>();
 
     if (currentBooking?.status === "confirmed") {
-      return jsonResponse({
-        message: "Programarea era deja confirmată.",
-        status: "already_confirmed",
-      });
+      return confirmedResponse(env, confirmation, true);
     }
 
     return jsonResponse(
