@@ -4,7 +4,7 @@ type GoogleTagCommand = [command: string, ...parameters: unknown[]];
 
 declare global {
   interface Window {
-    dataLayer?: GoogleTagCommand[];
+    dataLayer?: unknown[];
     gtag?: (...args: GoogleTagCommand) => void;
   }
 }
@@ -26,9 +26,9 @@ export function initializeGoogleTagQueue() {
   window.dataLayer = window.dataLayer ?? [];
   window.gtag =
     window.gtag ??
-    ((...args: GoogleTagCommand) => {
-      window.dataLayer?.push(args);
-    });
+    function gtag(..._args: GoogleTagCommand) {
+      window.dataLayer?.push(arguments);
+    };
 }
 
 export function setGoogleAnalyticsConsent(

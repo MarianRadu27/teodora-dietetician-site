@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Script from "next/script";
 import { usePathname } from "next/navigation";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import type {
   BookingAnalyticsEvent,
@@ -70,10 +70,24 @@ export function CookieConsentManager() {
     };
   }, []);
 
-  const handleAnalyticsReady = useCallback(() => {
+  useEffect(() => {
+    if (
+      choice !== "accepted" ||
+      !isProductionHost ||
+      isBookingConfirmationPage ||
+      analyticsReady
+    ) {
+      return;
+    }
+
     configureGoogleAnalytics();
     setAnalyticsReady(true);
-  }, []);
+  }, [
+    analyticsReady,
+    choice,
+    isBookingConfirmationPage,
+    isProductionHost,
+  ]);
 
   useEffect(() => {
     if (
@@ -183,7 +197,6 @@ export function CookieConsentManager() {
       !isBookingConfirmationPage ? (
         <Script
           id="google-analytics-library"
-          onReady={handleAnalyticsReady}
           src={`https://www.googletagmanager.com/gtag/js?id=${analyticsConfig.measurementId}`}
           strategy="afterInteractive"
         />
