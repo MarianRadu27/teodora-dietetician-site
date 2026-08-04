@@ -6,7 +6,6 @@ export const brand = {
   email: "dietetician.teodora@gmail.com",
   phoneDisplay: "0778 186 580",
   bookingUrl: "/programare",
-  calComUrl: "https://cal.com/teodora-palii",
   whatsappUrl:
     process.env.NEXT_PUBLIC_WHATSAPP_URL ||
     "https://wa.me/40778186580?text=Buna%2C%20as%20vrea%20sa%20programez%20o%20consultatie.",

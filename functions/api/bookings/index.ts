@@ -685,7 +685,7 @@ export async function onRequestPost({
     ]);
 
     const confirmationUrl = new URL(
-      "/programare-noua/confirmare",
+      "/programare/confirmare",
       publicSiteOrigin,
     );
     confirmationUrl.hash = new URLSearchParams({

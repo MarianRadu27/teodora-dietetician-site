@@ -127,7 +127,9 @@ export function TermsContent() {
 
       <section className="legal-section" id="programare">
         <h2>Efectuarea programării</h2>
-        <p>Programările sunt gestionate prin Cal.com.</p>
+        <p>
+          Programările sunt gestionate prin formularul disponibil pe website.
+        </p>
         <p>Pentru programare, utilizatorul va putea selecta:</p>
         <ol>
           <li>serviciul;</li>
@@ -223,8 +225,7 @@ export function TermsContent() {
         <p>
           Programarea poate fi anulată fără costuri cu cel puțin{" "}
           <strong>{legalConfig.cancellationNoticeHours} de ore</strong> înaintea
-          orei stabilite, prin linkul din emailul de confirmare sau prin
-          contactarea Prestatorului.
+          orei stabilite, prin contactarea Prestatorului.
         </p>
 
         <h3>Reprogramarea</h3>
@@ -374,8 +375,8 @@ export function TermsContent() {
         <h2>Servicii și linkuri externe</h2>
         <p>
           Website-ul poate utiliza sau conține legături către servicii externe,
-          precum Cal.com, Google Meet, Google Calendar, WhatsApp, Facebook și
-          Instagram.
+          precum WhatsApp, Facebook, Instagram și servicii de comunicare prin
+          email.
         </p>
         <p>
           Prestatorul nu controlează integral funcționarea, disponibilitatea și

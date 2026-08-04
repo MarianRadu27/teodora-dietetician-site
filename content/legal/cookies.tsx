@@ -1,11 +1,11 @@
 import type { LegalTocItem } from "../../app/components/legal/LegalTableOfContents";
-import { cookieInventory, legalConfig } from "../../config/legal";
+import { cookieInventory } from "../../config/legal";
 
 export const cookiesTocItems: LegalTocItem[] = [
   { id: "ce-sunt-cookies", title: "Ce sunt cookies" },
   { id: "tehnologii", title: "Ce tehnologii utilizează website-ul" },
   { id: "categorii", title: "Categorii de cookies" },
-  { id: "cal-com", title: "Cal.com" },
+  { id: "turnstile", title: "Cloudflare Turnstile" },
   { id: "lista-cookies", title: "Lista cookies utilizate" },
   { id: "preferinte", title: "Alegerea și modificarea preferințelor" },
   { id: "browser", title: "Setările browserului" },
@@ -41,8 +41,8 @@ export function CookiesContent() {
           <li>protecția și performanța oferite de platforma de găzduire;</li>
           <li>memorarea opțiunii privind Google Analytics;</li>
           <li>
-            încărcarea calendarului Cal.com atunci când utilizatorul deschide
-            funcția de programare.
+            verificarea anti-spam a formularului de programare prin Cloudflare
+            Turnstile.
           </li>
         </ul>
         <p>
@@ -91,28 +91,26 @@ export function CookiesContent() {
         </p>
       </section>
 
-      <section className="legal-section" id="cal-com">
-        <h2>Cal.com</h2>
-        <p>Pagina de programare utilizează serviciul extern Cal.com.</p>
+      <section className="legal-section" id="turnstile">
+        <h2>Cloudflare Turnstile</h2>
         <p>
-          Atunci când componenta Cal.com este încărcată sau utilizată, furnizorul
-          poate prelucra informații tehnice și poate utiliza cookies sau
-          tehnologii similare conform propriei politici.
+          Formularul de programare utilizează Cloudflare Turnstile pentru a
+          diferenția utilizatorii legitimi de trimiterile automate sau abuzive.
         </p>
         <p>
-          Calendarul Cal.com va fi încărcat numai atunci când utilizatorul
-          accesează sau solicită funcția de programare, în funcție de
-          implementarea tehnică aleasă.
+          În acest scop, Cloudflare poate prelucra informații tehnice și poate
+          folosi cookies sau tehnologii similare strict necesare verificării de
+          securitate. Aceste mecanisme nu sunt folosite de website pentru
+          publicitate și nu depind de acceptarea categoriei de analiză.
         </p>
         <p>
-          Informații suplimentare sunt disponibile în politica de
-          confidențialitate a Cal.com:{" "}
+          Informații suplimentare sunt disponibile în{" "}
           <a
-            href={legalConfig.calPrivacyUrl}
+            href="https://www.cloudflare.com/privacypolicy/"
             rel="noopener noreferrer"
             target="_blank"
           >
-            Cal.com Privacy Policy
+            Politica de confidențialitate Cloudflare
           </a>
           .
         </p>
@@ -180,7 +178,7 @@ export function CookiesContent() {
         </p>
         <p>
           Blocarea tuturor cookies poate afecta funcționarea website-ului sau a
-          calendarului de programări.
+          formularului de programare.
         </p>
       </section>
 

@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 
-import { BookingFlow } from "../components/booking/BookingFlow";
+import { CustomBookingFlow } from "../components/custom-booking/CustomBookingFlow";
 import { createPageMetadata } from "../../lib/pageMetadata";
 
 export const metadata = createPageMetadata({
@@ -18,8 +18,8 @@ export default function BookingPage() {
           <div className="section-heading center booking-page-heading">
             <h1 className="h1">Programează o consultație nutrițională</h1>
             <p className="lead">
-              Alege cum dorești să se desfășoare consultația, apoi selectează
-              serviciul și intervalul potrivit.
+              Alege modalitatea, serviciul și intervalul potrivit, apoi
+              completează datele necesare programării.
             </p>
           </div>
 
@@ -30,7 +30,7 @@ export default function BookingPage() {
               </div>
             }
           >
-            <BookingFlow />
+            <CustomBookingFlow />
           </Suspense>
         </div>
       </section>

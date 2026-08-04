@@ -138,7 +138,7 @@ export function BookingConfirmation() {
         {isError ? (
           <Link
             className="button button-secondary"
-            href="/programare-noua"
+            href="/programare"
           >
             Trimite o cerere nouă
           </Link>

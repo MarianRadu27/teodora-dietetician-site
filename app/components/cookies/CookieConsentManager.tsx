@@ -36,7 +36,7 @@ const trackedBookingEvents = new Set<BookingAnalyticsEvent>([
 export function CookieConsentManager() {
   const pathname = usePathname();
   const isBookingConfirmationPage =
-    pathname === "/programare-noua/confirmare";
+    pathname === "/programare/confirmare";
   const [analyticsReady, setAnalyticsReady] = useState(false);
   const [choice, setChoice] = useState<ConsentChoice | null>(null);
   const [isInitialized, setIsInitialized] = useState(false);
@@ -203,7 +203,7 @@ export function CookieConsentManager() {
               <p id="cookie-consent-description">
                 Google Analytics este activat numai cu acordul tău. Ne arată
                 statistici generale despre paginile vizitate și accesarea
-                programărilor, fără a primi datele introduse în Cal.com. Poți
+                programărilor, fără a primi datele introduse în formular. Poți
                 modifica oricând alegerea din footer.{" "}
                 <Link href="/politica-de-cookies">Citește politica de cookies</Link>.
               </p>

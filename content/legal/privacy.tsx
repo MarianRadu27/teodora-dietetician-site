@@ -89,22 +89,20 @@ export function PrivacyContent() {
         <h2>Ce date putem colecta</h2>
 
         <h3>Date furnizate pentru programare</h3>
-        <p>Programările sunt gestionate prin intermediul serviciului Cal.com.</p>
         <p>
-          În funcție de câmpurile configurate în formularul de programare, pot fi
-          colectate:
+          Pentru înregistrarea și confirmarea unei programări prin formularul
+          website-ului pot fi colectate:
         </p>
         <ul>
           <li>numele și prenumele;</li>
           <li>adresa de email;</li>
-          <li>numărul de telefon, dacă acest câmp este activat;</li>
+          <li>numărul de telefon, dacă este furnizat;</li>
           <li>serviciul selectat;</li>
           <li>modalitatea consultației: online sau în cabinet;</li>
           <li>data și ora programării;</li>
-          <li>fusul orar;</li>
-          <li>răspunsurile la întrebările din formular;</li>
-          <li>observațiile introduse voluntar;</li>
-          <li>informații privind anularea sau reprogramarea.</li>
+          <li>obiectivul general, dacă este completat voluntar;</li>
+          <li>confirmarea acceptării Politicii de confidențialitate;</li>
+          <li>date tehnice necesare prevenirii abuzurilor și securizării formularului.</li>
         </ul>
         <p className="legal-note">
           Vă rugăm să nu introduceți în formularul de programare diagnostice,
@@ -163,7 +161,7 @@ export function PrivacyContent() {
           Evenimentele trimise de website pentru programare indică numai etapa
           generală accesată. Nu sunt trimise către Google Analytics serviciul
           selectat, modalitatea consultației, numele, emailul, telefonul,
-          răspunsurile din Cal.com sau informații privind sănătatea.
+          obiectivul introdus în formular sau informații privind sănătatea.
         </p>
         <p>
           Parametrii de publicitate, personalizarea reclamelor și Google Signals
@@ -263,15 +261,17 @@ export function PrivacyContent() {
         </p>
         <ul>
           <li>
-            <strong>Cal.com</strong>, pentru gestionarea programărilor;
+            <strong>Cloudflare Pages și Cloudflare D1</strong>, pentru găzduirea
+            website-ului, funcționarea sistemului de programări și stocarea
+            datelor asociate programărilor;
           </li>
           <li>
-            <strong>Google Calendar</strong>, dacă este utilizat pentru
-            verificarea disponibilității și înregistrarea programărilor;
+            <strong>Cloudflare Turnstile</strong>, pentru protejarea formularului
+            de programare împotriva roboților și a utilizării abuzive;
           </li>
           <li>
-            <strong>Google Meet</strong>, dacă este folosit pentru consultații
-            online;
+            <strong>Resend</strong>, pentru trimiterea emailurilor tranzacționale
+            necesare confirmării și administrării programărilor;
           </li>
           <li>
             <strong>Google Analytics</strong>, pentru statistici privind
@@ -283,11 +283,7 @@ export function PrivacyContent() {
           </li>
           <li>
             <LegalValue value={legalConfig.emailProvider} />, pentru comunicările
-            prin email;
-          </li>
-          <li>
-            <strong>Cloudflare</strong>, dacă este utilizat pentru găzduire,
-            livrare sau protecție;
+            directe prin email;
           </li>
           <li>furnizori de servicii IT și mentenanță;</li>
           <li>
@@ -302,18 +298,6 @@ export function PrivacyContent() {
         <p>
           Furnizorii primesc numai datele necesare îndeplinirii serviciilor
           pentru care au fost contractați.
-        </p>
-        <p>
-          Utilizarea Cal.com este supusă și propriei politici de confidențialitate
-          a acestui furnizor, disponibilă la{" "}
-          <a
-            href={legalConfig.calPrivacyUrl}
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            Cal.com Privacy Policy
-          </a>
-          .
         </p>
       </section>
 
@@ -330,13 +314,10 @@ export function PrivacyContent() {
           clauze contractuale standard, după caz.
         </p>
         <p>
-          Informații suplimentare privind transferurile efectuate de Cal.com sunt
-          disponibile în politica proprie de confidențialitate a furnizorului.
-        </p>
-        <p>
-          Google poate prelucra date prin infrastructură situată în afara
-          Spațiului Economic European, în condițiile și pe baza mecanismelor
-          descrise în politicile proprii ale furnizorului.
+          Furnizori precum Cloudflare, Resend sau Google pot prelucra date prin
+          infrastructură situată în afara Spațiului Economic European, în
+          condițiile și pe baza mecanismelor descrise în politicile proprii ale
+          acestora.
         </p>
       </section>
 
@@ -442,7 +423,7 @@ export function PrivacyContent() {
         <h2>Linkuri și servicii externe</h2>
         <p>
           Website-ul poate conține legături sau componente furnizate de terți,
-          precum Cal.com, Google, WhatsApp, Facebook sau Instagram.
+          precum Google, WhatsApp, Facebook sau Instagram.
         </p>
         <p>
           Aceste servicii pot prelucra date conform propriilor politici.

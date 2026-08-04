@@ -13,12 +13,11 @@ export const legalConfig = {
   vatStatus: "NEPLĂTITOR TVA",
   hostingProvider: "Cloudflare Pages",
   emailProvider: "Google, prin serviciul Gmail",
-  calPrivacyUrl: "https://cal.com/privacy",
   cancellationNoticeHours: 24,
   lateArrivalMinutes: 15,
   privacyLastUpdated: "04.08.2026",
   cookiesLastUpdated: "04.08.2026",
-  termsLastUpdated: "21.07.2026",
+  termsLastUpdated: "04.08.2026",
 };
 
 export type CookieInventoryItem = {
