@@ -14,23 +14,38 @@ import {
   officeLocation,
 } from "../../../config/officeLocation";
 import type { BookingContactData } from "./BookingContactFormDemo";
+import { BookingTurnstile } from "./BookingTurnstile";
 
 type BookingReviewDemoProps = {
   contactData: BookingContactData;
+  isSubmitting: boolean;
   mode: BookingMode;
   onBack: () => void;
+  onSubmit: () => void;
+  onTurnstileTokenChange: (token: string) => void;
   selectedDateLabel: string;
   selectedService: BookingService;
   selectedTime: string;
+  submissionMessage: string;
+  submissionStatus: "idle" | "error" | "success";
+  turnstileAttempt: number;
+  turnstileToken: string;
 };
 
 export function BookingReviewDemo({
   contactData,
+  isSubmitting,
   mode,
   onBack,
+  onSubmit,
+  onTurnstileTokenChange,
   selectedDateLabel,
   selectedService,
   selectedTime,
+  submissionMessage,
+  submissionStatus,
+  turnstileAttempt,
+  turnstileToken,
 }: BookingReviewDemoProps) {
   const locationName =
     mode === "office" ? officeLocation.name : "Consultație online";
@@ -55,13 +70,16 @@ export function BookingReviewDemo({
             trimiterea cererii.
           </p>
         </div>
-        <button
-          className="booking-back-button"
-          onClick={onBack}
-          type="button"
-        >
-          ← Înapoi și modifică datele
-        </button>
+        {submissionStatus !== "success" ? (
+          <button
+            className="booking-back-button"
+            disabled={isSubmitting}
+            onClick={onBack}
+            type="button"
+          >
+            ← Înapoi și modifică datele
+          </button>
+        ) : null}
       </div>
 
       <section
@@ -129,20 +147,64 @@ export function BookingReviewDemo({
         </dl>
       </section>
 
+      <section
+        aria-labelledby="booking-review-security-title"
+        className="custom-booking-review-section"
+      >
+        <h3 id="booking-review-security-title">Verificare anti-spam</h3>
+        {submissionStatus === "success" ? (
+          <p className="custom-booking-security-complete">
+            Verificarea anti-spam a fost finalizată.
+          </p>
+        ) : (
+          <BookingTurnstile
+            key={turnstileAttempt}
+            onTokenChange={onTurnstileTokenChange}
+          />
+        )}
+      </section>
+
       <div className="custom-booking-submit custom-booking-review-submit">
         <button
           aria-describedby="booking-review-submit-note"
           className="button button-primary"
-          disabled
+          disabled={
+            !turnstileToken ||
+            isSubmitting ||
+            submissionStatus === "success"
+          }
+          onClick={onSubmit}
           type="button"
         >
-          Confirmă și trimite cererea
+          {isSubmitting
+            ? "Se trimite cererea..."
+            : submissionStatus === "success"
+              ? "Cerere trimisă"
+              : "Confirmă și trimite cererea"}
         </button>
         <p id="booking-review-submit-note">
-          Trimiterea rămâne dezactivată până la conectarea bazei de date,
-          verificării anti-spam și confirmării prin email.
+          {submissionStatus === "success"
+            ? "Intervalul este rezervat temporar timp de 30 de minute. Emailurile de confirmare nu sunt încă active în această versiune de test."
+            : turnstileToken
+              ? "Verificarea anti-spam este pregătită. Poți trimite cererea de test."
+              : "Finalizează verificarea anti-spam pentru a putea trimite cererea."}
         </p>
       </div>
+
+      {submissionMessage ? (
+        <div
+          aria-live="polite"
+          className={`custom-booking-submission-message is-${submissionStatus}`}
+          role={submissionStatus === "error" ? "alert" : "status"}
+        >
+          <strong>
+            {submissionStatus === "success"
+              ? "Cererea a fost salvată"
+              : "Cererea nu a putut fi trimisă"}
+          </strong>
+          <p>{submissionMessage}</p>
+        </div>
+      ) : null}
     </div>
   );
 }

@@ -231,17 +231,6 @@ export function BookingContactFormDemo({
         </label>
       </div>
 
-      <div className="custom-booking-turnstile-placeholder" role="note">
-        <span aria-hidden="true">✓</span>
-        <div>
-          <strong>Verificare anti-spam</strong>
-          <p>
-            Componenta Cloudflare Turnstile va fi conectată într-o etapă
-            ulterioară.
-          </p>
-        </div>
-      </div>
-
       <div className="custom-booking-submit">
         <button
           aria-describedby="booking-demo-submit-note"

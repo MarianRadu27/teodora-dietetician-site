@@ -34,10 +34,11 @@ export default function NewBookingPage() {
           </div>
 
           <div className="custom-booking-demo-notice" role="note">
-            <strong>Aceasta este o demonstrație.</strong>
+            <strong>Acesta este un mediu de test.</strong>
             <span>
-              Datele completate nu sunt trimise și nu se creează nicio
-              programare.
+              Folosește numai date fictive. Cererile sunt salvate temporar în
+              baza de date Preview, dar nu generează încă emailuri sau
+              programări confirmate.
             </span>
           </div>
 

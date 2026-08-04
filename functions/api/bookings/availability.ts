@@ -2,6 +2,14 @@ import {
   getBookingServiceById,
   type BookingMode,
 } from "../../../config/bookingServices";
+import {
+  bucharestDateTimeToUtc,
+  createCandidateSlots,
+  formatDateValue,
+  isDateInsideBookingWindow,
+  parseDateValue,
+  TIME_ZONE,
+} from "../../_shared/bookingRules";
 
 type AvailabilityEnvironment = {
   BOOKINGS_DB?: D1Database;
@@ -24,15 +32,6 @@ type PagesFunctionContext = {
 type OccupiedSlotRow = {
   slot_start_utc: string;
 };
-
-const TIME_ZONE = "Europe/Bucharest";
-const BOOKING_WINDOW_DAYS = 30;
-const OPENING_MINUTES = 9 * 60;
-const CLOSING_MINUTES = 20 * 60;
-const MINIMUM_NOTICE_MINUTES = 6 * 60;
-const SLOT_STEP_MINUTES = 10;
-const MILLISECONDS_PER_MINUTE = 60_000;
-const MILLISECONDS_PER_DAY = 24 * 60 * MILLISECONDS_PER_MINUTE;
 
 const OCCUPIED_SLOTS_QUERY = `
   SELECT calendar_slots.slot_start_utc
@@ -70,95 +69,6 @@ function jsonResponse(body: unknown, status = 200) {
   });
 }
 
-function parseDateValue(value: string | null) {
-  if (!value || !/^\d{4}-\d{2}-\d{2}$/.test(value)) {
-    return null;
-  }
-
-  const [year, month, day] = value.split("-").map(Number);
-  const date = new Date(Date.UTC(year, month - 1, day, 12));
-
-  if (
-    date.getUTCFullYear() !== year ||
-    date.getUTCMonth() !== month - 1 ||
-    date.getUTCDate() !== day
-  ) {
-    return null;
-  }
-
-  return { date, day, month, year };
-}
-
-function formatDateValue(date: Date) {
-  return [
-    date.getUTCFullYear(),
-    String(date.getUTCMonth() + 1).padStart(2, "0"),
-    String(date.getUTCDate()).padStart(2, "0"),
-  ].join("-");
-}
-
-function getBucharestParts(date: Date) {
-  const parts = new Intl.DateTimeFormat("en-CA", {
-    day: "2-digit",
-    hour: "2-digit",
-    hourCycle: "h23",
-    minute: "2-digit",
-    month: "2-digit",
-    second: "2-digit",
-    timeZone: TIME_ZONE,
-    year: "numeric",
-  }).formatToParts(date);
-
-  return Object.fromEntries(
-    parts
-      .filter((part) => part.type !== "literal")
-      .map((part) => [part.type, Number(part.value)]),
-  ) as Record<
-    "year" | "month" | "day" | "hour" | "minute" | "second",
-    number
-  >;
-}
-
-function getTimeZoneOffset(date: Date) {
-  const parts = getBucharestParts(date);
-  const representedAsUtc = Date.UTC(
-    parts.year,
-    parts.month - 1,
-    parts.day,
-    parts.hour,
-    parts.minute,
-    parts.second,
-  );
-
-  return representedAsUtc - date.getTime();
-}
-
-function bucharestDateTimeToUtc(
-  dateValue: string,
-  totalMinutes: number,
-) {
-  const [year, month, day] = dateValue.split("-").map(Number);
-  const hour = Math.floor(totalMinutes / 60);
-  const minute = totalMinutes % 60;
-  const localTimeAsUtc = Date.UTC(year, month - 1, day, hour, minute);
-  const firstOffset = getTimeZoneOffset(new Date(localTimeAsUtc));
-  let utcTime = localTimeAsUtc - firstOffset;
-  const correctedOffset = getTimeZoneOffset(new Date(utcTime));
-
-  if (correctedOffset !== firstOffset) {
-    utcTime = localTimeAsUtc - correctedOffset;
-  }
-
-  return new Date(utcTime);
-}
-
-function formatTime(totalMinutes: number) {
-  const hour = Math.floor(totalMinutes / 60);
-  const minute = totalMinutes % 60;
-
-  return `${String(hour).padStart(2, "0")}:${String(minute).padStart(2, "0")}`;
-}
-
 function isMode(value: string | null): value is BookingMode {
   return value === "online" || value === "office";
 }
@@ -170,75 +80,6 @@ function isServiceAvailableForMode(
   return mode === "online"
     ? service.availableOnline
     : service.availableInOffice;
-}
-
-function isDateInsideBookingWindow(selectedDate: Date, now: Date) {
-  const nowParts = getBucharestParts(now);
-  const today = Date.UTC(nowParts.year, nowParts.month - 1, nowParts.day, 12);
-  const selected = Date.UTC(
-    selectedDate.getUTCFullYear(),
-    selectedDate.getUTCMonth(),
-    selectedDate.getUTCDate(),
-    12,
-  );
-  const differenceInDays = Math.round(
-    (selected - today) / MILLISECONDS_PER_DAY,
-  );
-
-  return differenceInDays >= 0 && differenceInDays < BOOKING_WINDOW_DAYS;
-}
-
-function createCandidateSlots(
-  dateValue: string,
-  durationMinutes: number,
-  occupiedSlotStarts: Set<number>,
-  now: Date,
-) {
-  const availableTimes: string[] = [];
-  const latestStart = CLOSING_MINUTES - durationMinutes;
-  const earliestAllowedStart =
-    now.getTime() + MINIMUM_NOTICE_MINUTES * MILLISECONDS_PER_MINUTE;
-
-  for (
-    let startMinutes = OPENING_MINUTES;
-    startMinutes <= latestStart;
-    startMinutes += SLOT_STEP_MINUTES
-  ) {
-    const startsAt = bucharestDateTimeToUtc(dateValue, startMinutes);
-
-    if (startsAt.getTime() < earliestAllowedStart) {
-      continue;
-    }
-
-    const endsAtMinutes = startMinutes + durationMinutes;
-    const occupiedUntilMinutes =
-      endsAtMinutes === CLOSING_MINUTES
-        ? endsAtMinutes
-        : endsAtMinutes + SLOT_STEP_MINUTES;
-    let isAvailable = true;
-
-    for (
-      let slotMinutes = startMinutes;
-      slotMinutes < occupiedUntilMinutes;
-      slotMinutes += SLOT_STEP_MINUTES
-    ) {
-      const slotStart = bucharestDateTimeToUtc(
-        dateValue,
-        slotMinutes,
-      ).getTime();
-
-      if (occupiedSlotStarts.has(slotStart)) {
-        isAvailable = false;
-        break;
-      }
-    }
-
-    if (isAvailable) {
-      availableTimes.push(formatTime(startMinutes));
-    }
-  }
-
-  return availableTimes;
 }
 
 export async function onRequestGet({

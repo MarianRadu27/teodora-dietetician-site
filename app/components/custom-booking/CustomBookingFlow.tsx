@@ -34,6 +34,8 @@ type FocusTarget =
   | "review"
   | null;
 
+type BookingSubmissionStatus = "idle" | "error" | "success";
+
 const INITIAL_CONTACT_DATA: BookingContactData = {
   email: "",
   fullName: "",
@@ -70,6 +72,12 @@ export function CustomBookingFlow() {
   const [selectedTime, setSelectedTime] = useState("");
   const [isContactStep, setIsContactStep] = useState(false);
   const [isReviewStep, setIsReviewStep] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submissionMessage, setSubmissionMessage] = useState("");
+  const [submissionStatus, setSubmissionStatus] =
+    useState<BookingSubmissionStatus>("idle");
+  const [turnstileAttempt, setTurnstileAttempt] = useState(0);
+  const [turnstileToken, setTurnstileToken] = useState("");
   const [contactData, setContactData] = useState<BookingContactData>(
     INITIAL_CONTACT_DATA,
   );
@@ -125,6 +133,10 @@ export function CustomBookingFlow() {
     setSelectedTime("");
     setIsContactStep(false);
     setIsReviewStep(false);
+    setIsSubmitting(false);
+    setSubmissionMessage("");
+    setSubmissionStatus("idle");
+    setTurnstileToken("");
   }
 
   function selectMode(nextMode: BookingMode) {
@@ -181,6 +193,10 @@ export function CustomBookingFlow() {
     setSelectedTime("");
     setIsContactStep(false);
     setIsReviewStep(false);
+    setIsSubmitting(false);
+    setSubmissionMessage("");
+    setSubmissionStatus("idle");
+    setTurnstileToken("");
     focusTargetRef.current = "date";
     goTo(nextMode, nextService.id);
   }
@@ -200,6 +216,72 @@ export function CustomBookingFlow() {
     }
 
     goTo(nextMode, serviceForMode.id);
+  }
+
+  async function submitBookingRequest() {
+    if (
+      !selectedMode ||
+      !selectedService ||
+      !selectedDate ||
+      !selectedTime ||
+      !turnstileToken ||
+      isSubmitting
+    ) {
+      return;
+    }
+
+    setIsSubmitting(true);
+    setSubmissionMessage("");
+    setSubmissionStatus("idle");
+
+    try {
+      const response = await fetch("/api/bookings", {
+        body: JSON.stringify({
+          date: selectedDate,
+          email: contactData.email,
+          fullName: contactData.fullName,
+          mode: selectedMode,
+          objective: contactData.objective,
+          phone: contactData.phone,
+          privacyAcknowledged: contactData.privacyAcknowledged,
+          serviceId: selectedService.id,
+          time: selectedTime,
+          turnstileToken,
+        }),
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        method: "POST",
+      });
+      const result = (await response.json().catch(() => null)) as {
+        message?: string;
+      } | null;
+
+      if (!response.ok) {
+        throw new Error(
+          result?.message ??
+            "Cererea nu a putut fi salvată. Verifică datele și încearcă din nou.",
+        );
+      }
+
+      setSubmissionMessage(
+        result?.message ??
+          "Cererea a fost salvată temporar în mediul de test.",
+      );
+      setSubmissionStatus("success");
+    } catch (error) {
+      setSubmissionMessage(
+        error instanceof Error
+          ? error.message
+          : "A apărut o eroare neașteptată. Încearcă din nou.",
+      );
+      setSubmissionStatus("error");
+      setTurnstileToken("");
+      setTurnstileAttempt((attempt) => attempt + 1);
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   useEffect(() => {
@@ -335,6 +417,9 @@ export function CustomBookingFlow() {
             onContactDataChange={setContactData}
             onContinue={() => {
               focusTargetRef.current = "review";
+              setSubmissionMessage("");
+              setSubmissionStatus("idle");
+              setTurnstileToken("");
               setIsReviewStep(true);
             }}
             onModeChange={handleFormModeChange}
@@ -355,14 +440,24 @@ export function CustomBookingFlow() {
         >
           <BookingReviewDemo
             contactData={contactData}
+            isSubmitting={isSubmitting}
             mode={selectedMode}
             onBack={() => {
               focusTargetRef.current = "contact";
+              setSubmissionMessage("");
+              setSubmissionStatus("idle");
+              setTurnstileToken("");
               setIsReviewStep(false);
             }}
+            onSubmit={() => void submitBookingRequest()}
+            onTurnstileTokenChange={setTurnstileToken}
             selectedDateLabel={selectedDateLabel}
             selectedService={selectedService}
             selectedTime={selectedTime}
+            submissionMessage={submissionMessage}
+            submissionStatus={submissionStatus}
+            turnstileAttempt={turnstileAttempt}
+            turnstileToken={turnstileToken}
           />
         </section>
       ) : null}
