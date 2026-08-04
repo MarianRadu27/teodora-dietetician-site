@@ -1,15 +1,20 @@
 import type { BookingMode } from "../config/bookingServices";
 
-type BookingAnalyticsEvent =
+export type BookingAnalyticsEvent =
   | "booking_mode_selected"
   | "booking_service_selected"
   | "booking_calendar_opened"
   | "booking_completed"
   | "booking_error";
 
-type BookingAnalyticsPayload = {
+export type BookingAnalyticsPayload = {
   mode?: BookingMode;
   serviceId?: string;
+};
+
+export type BookingAnalyticsEventDetail = {
+  name: BookingAnalyticsEvent;
+  payload: BookingAnalyticsPayload;
 };
 
 export function trackBookingEvent(

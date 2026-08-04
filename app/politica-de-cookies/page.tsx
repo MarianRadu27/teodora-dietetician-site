@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 export default function CookiePolicyPage() {
   return (
     <LegalPageLayout
-      description="Informații despre cookies, tehnologii similare și preferințele care vor putea fi gestionate în viitor."
+      description="Informații despre cookies, Google Analytics și gestionarea preferințelor de analiză."
       lastUpdated={legalConfig.cookiesLastUpdated}
       title="Politica de cookies"
       tocItems={cookiesTocItems}

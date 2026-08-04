@@ -31,18 +31,24 @@ export function CookiesContent() {
       <section className="legal-section" id="tehnologii">
         <h2>Ce tehnologii utilizează website-ul</h2>
         <p>
-          La data ultimei actualizări, website-ul nu utilizează în mod
-          intenționat cookies de analiză sau marketing proprii.
+          Website-ul utilizează Google Analytics 4 pentru statistici generale
+          privind utilizarea paginilor. Google Analytics este încărcat numai
+          după ce utilizatorul acceptă categoria de analiză.
         </p>
-        <p>Website-ul poate utiliza doar tehnologii necesare pentru:</p>
+        <p>Website-ul utilizează sau poate utiliza tehnologii necesare pentru:</p>
         <ul>
           <li>funcționarea, livrarea și securitatea website-ului;</li>
           <li>protecția și performanța oferite de platforma de găzduire;</li>
+          <li>memorarea opțiunii privind Google Analytics;</li>
           <li>
             încărcarea calendarului Cal.com atunci când utilizatorul deschide
             funcția de programare.
           </li>
         </ul>
+        <p>
+          Funcțiile Google destinate publicității, personalizării reclamelor și
+          Google Signals sunt dezactivate în implementarea website-ului.
+        </p>
       </section>
 
       <section className="legal-section" id="categorii">
@@ -69,12 +75,9 @@ export function CookiesContent() {
           Acestea ajută la înțelegerea modului în care este utilizat website-ul.
         </p>
         <p>
-          La momentul publicării acestei versiuni, Google Analytics nu este
-          activat.
-        </p>
-        <p>
-          Dacă va fi introdus ulterior, cookies de analiză vor fi activate numai
-          după exprimarea opțiunii utilizatorului, iar politica va fi actualizată.
+          Website-ul folosește Google Analytics 4 numai după acordul
+          utilizatorului. Dacă utilizatorul refuză, eticheta Google Analytics nu
+          este încărcată și nu transmite date către Google.
         </p>
 
         <h3>Cookies de marketing</h3>
@@ -129,55 +132,43 @@ export function CookiesContent() {
               </tr>
             </thead>
             <tbody>
-              {cookieInventory.length === 0 ? (
-                <tr>
-                  <td colSpan={5}>
-                    La data ultimei actualizări, website-ul nu utilizează în mod
-                    intenționat cookies proprii de analiză sau marketing. Dacă vor
-                    fi introduse ulterior astfel de tehnologii, această listă va
-                    fi actualizată înainte de activarea lor.
-                  </td>
+              {cookieInventory.map((cookie) => (
+                <tr key={`${cookie.provider}-${cookie.name}`}>
+                  <td>{cookie.name}</td>
+                  <td>{cookie.provider}</td>
+                  <td>{cookie.purpose}</td>
+                  <td>{cookie.category}</td>
+                  <td>{cookie.duration}</td>
                 </tr>
-              ) : (
-                cookieInventory.map((cookie) => (
-                  <tr key={`${cookie.provider}-${cookie.name}`}>
-                    <td>{cookie.name}</td>
-                    <td>{cookie.provider}</td>
-                    <td>{cookie.purpose}</td>
-                    <td>{cookie.category}</td>
-                    <td>{cookie.duration}</td>
-                  </tr>
-                ))
-              )}
+              ))}
             </tbody>
           </table>
         </div>
+        <p>
+          Duratele indicate pentru cookies Google Analytics sunt duratele
+          implicite comunicate de Google. Aceste cookies apar numai după
+          acceptarea categoriei de analiză.
+        </p>
       </section>
 
       <section className="legal-section" id="preferinte">
         <h2>Alegerea și modificarea preferințelor</h2>
         <p>
-          Atunci când website-ul va utiliza cookies opționale, utilizatorul va
-          putea:
+          La prima vizită, utilizatorul poate:
         </p>
         <ul>
-          <li>accepta toate categoriile opționale;</li>
-          <li>refuza toate categoriile opționale;</li>
-          <li>selecta individual categoriile;</li>
+          <li>accepta utilizarea Google Analytics;</li>
+          <li>refuza utilizarea Google Analytics;</li>
           <li>modifica ulterior alegerea.</li>
         </ul>
         <p>
-          Preferințele vor putea fi redeschise printr-un buton dedicat din
-          footer.
+          Opțiunea este păstrată timp de 12 luni în spațiul local al browserului.
+          După expirare, website-ul va solicita din nou alegerea.
         </p>
         <p>
-          Acest buton nu conduce către o pagină nouă. El redeschide panoul în care
-          utilizatorul își poate modifica alegerile.
-        </p>
-        <p>
-          În prezent, website-ul nu afișează un panou de consimțământ pentru
-          cookies opționale, deoarece nu folosește în mod intenționat cookies de
-          analiză sau marketing.
+          Preferințele pot fi redeschise prin butonul „Setări cookies” din
+          footer. Refuzarea ulterioară oprește măsurarea și șterge cookies Google
+          Analytics accesibile website-ului.
         </p>
       </section>
 

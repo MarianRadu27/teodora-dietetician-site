@@ -11,6 +11,7 @@ export const privacyTocItems: LegalTocItem[] = [
   { id: "operator", title: "Cine prelucrează datele personale" },
   { id: "aplicare", title: "Cui i se aplică această politică" },
   { id: "date-colectate", title: "Ce date putem colecta" },
+  { id: "analytics", title: "Google Analytics" },
   { id: "scopuri", title: "În ce scopuri folosim datele" },
   { id: "temeiuri", title: "Temeiurile prelucrării" },
   { id: "date-sanatate", title: "Date privind sănătatea" },
@@ -146,6 +147,48 @@ export function PrivacyContent() {
         </p>
       </section>
 
+      <section className="legal-section" id="analytics">
+        <h2>Google Analytics</h2>
+        <p>
+          Website-ul utilizează Google Analytics 4 numai după ce vizitatorul își
+          exprimă acordul prin panoul de preferințe.
+        </p>
+        <p>
+          În urma acceptării, pot fi prelucrate informații precum paginile
+          vizitate, momentul și durata aproximativă a vizitei, tipul
+          dispozitivului și al browserului, localizarea aproximativă, sursa
+          accesării și interacțiuni generale cu fluxul de programare.
+        </p>
+        <p>
+          Evenimentele trimise de website pentru programare indică numai etapa
+          generală accesată. Nu sunt trimise către Google Analytics serviciul
+          selectat, modalitatea consultației, numele, emailul, telefonul,
+          răspunsurile din Cal.com sau informații privind sănătatea.
+        </p>
+        <p>
+          Parametrii de publicitate, personalizarea reclamelor și Google Signals
+          sunt dezactivați. Dacă utilizatorul refuză analiza, eticheta Google
+          Analytics nu este încărcată.
+        </p>
+        <p>
+          Preferința poate fi modificată oricând folosind butonul „Setări
+          cookies” din footer. Mai multe informații sunt disponibile în{" "}
+          <Link href="/politica-de-cookies">Politica de cookies</Link>.
+        </p>
+        <p>
+          Informații despre modul în care Google prelucrează datele sunt
+          disponibile în{" "}
+          <a
+            href="https://policies.google.com/privacy"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            Politica de confidențialitate Google
+          </a>
+          .
+        </p>
+      </section>
+
       <section className="legal-section" id="scopuri">
         <h2>În ce scopuri folosim datele</h2>
         <p>Datele pot fi prelucrate pentru:</p>
@@ -161,12 +204,11 @@ export function PrivacyContent() {
           <li>protejarea securității website-ului;</li>
           <li>prevenirea utilizării abuzive sau frauduloase;</li>
           <li>apărarea unor drepturi sau interese legitime.</li>
+          <li>
+            realizarea de statistici privind utilizarea website-ului și
+            îmbunătățirea conținutului, numai pe baza consimțământului.
+          </li>
         </ul>
-        <p>
-          În viitor, dacă vor fi introduse Google Analytics, newslettere sau
-          comunicări comerciale, această politică va fi actualizată înaintea
-          activării lor.
-        </p>
       </section>
 
       <section className="legal-section" id="temeiuri">
@@ -232,6 +274,10 @@ export function PrivacyContent() {
             online;
           </li>
           <li>
+            <strong>Google Analytics</strong>, pentru statistici privind
+            utilizarea website-ului, numai după acceptarea analizei;
+          </li>
+          <li>
             <LegalValue value={legalConfig.hostingProvider} />, pentru găzduirea
             website-ului;
           </li>
@@ -287,6 +333,11 @@ export function PrivacyContent() {
           Informații suplimentare privind transferurile efectuate de Cal.com sunt
           disponibile în politica proprie de confidențialitate a furnizorului.
         </p>
+        <p>
+          Google poate prelucra date prin infrastructură situată în afara
+          Spațiului Economic European, în condițiile și pe baza mecanismelor
+          descrise în politicile proprii ale furnizorului.
+        </p>
       </section>
 
       <section className="legal-section" id="pastrare">
@@ -315,6 +366,11 @@ export function PrivacyContent() {
           </li>
           <li>
             loguri tehnice și de securitate: de regulă, maximum 6 luni, în funcție de natura logului, scopul de securitate și perioadele aplicate de furnizorii tehnici utilizați.
+          </li>
+          <li>
+            date la nivel de utilizator și eveniment din Google Analytics:
+            maximum 14 luni, în funcție de setările proprietății Analytics;
+            rapoartele agregate pot fi păstrate pentru perioade mai lungi.
           </li>
           <li>
             consimțăminte pentru newsletter sau marketing, dacă vor fi introduse: până la retragerea consimțământului. După retragere, dovada consimțământului, data retragerii și informațiile minime necesare pentru respectarea opțiunii de dezabonare pot fi păstrate maximum 3 ani.
