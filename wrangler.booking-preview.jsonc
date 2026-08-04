@@ -1,0 +1,13 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "teodora-bookings-preview-tools",
+  "compatibility_date": "2026-08-04",
+  "d1_databases": [
+    {
+      "binding": "BOOKINGS_DB",
+      "database_name": "teodora-bookings-preview",
+      "database_id": "2ef7671f-7562-4fc8-ab02-1de5d01f6726",
+      "migrations_dir": "migrations"
+    }
+  ]
+}

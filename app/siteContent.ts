@@ -35,12 +35,36 @@ export const credentials = [
 ];
 
 export const patientNeeds = [
-  "Îți dorești să îți gestionezi greutatea într-un mod echilibrat, fără diete extreme.",
-  "Ai o afecțiune în care alimentația are un rol important și ai nevoie de sprijin nutrițional specializat.",
-  "Te confrunți cu probleme digestive care îți afectează confortul și viața de zi cu zi.",
-  "Te simți copleșit de informațiile contradictorii despre alimentație și nu mai știi ce să alegi.",
-  "Ai urmat mai multe diete, dar rezultatele nu s-au menținut pe termen lung.",
-  "Îți dorești să construiești obiceiuri alimentare echilibrate, pe care să le poți menține fără reguli rigide.",
+  {
+    keyword: "Greutate",
+    description:
+      "Îți dorești să îți gestionezi greutatea într-un mod echilibrat, fără diete extreme.",
+  },
+  {
+    keyword: "Afecțiuni",
+    description:
+      "Ai o afecțiune în care alimentația are un rol important și ai nevoie de sprijin nutrițional specializat.",
+  },
+  {
+    keyword: "Digestie",
+    description:
+      "Te confrunți cu probleme digestive care îți afectează confortul și viața de zi cu zi.",
+  },
+  {
+    keyword: "Claritate",
+    description:
+      "Te simți copleșit de informațiile contradictorii despre alimentație și nu mai știi ce să alegi.",
+  },
+  {
+    keyword: "Rezultate",
+    description:
+      "Ai urmat mai multe diete, dar rezultatele nu s-au menținut pe termen lung.",
+  },
+  {
+    keyword: "Obiceiuri",
+    description:
+      "Îți dorești să construiești obiceiuri alimentare echilibrate, pe care să le poți menține fără reguli rigide.",
+  },
 ];
 
 export const services = [
@@ -49,7 +73,7 @@ export const services = [
     label: "PUNCTUL DE PLECARE",
     title: "Consultație nutrițională inițială",
     description:
-      "Evaluăm alimentația, istoricul medical, stilul de viață și obiectivele tale, pentru a stabili direcția potrivită de intervenție.",
+      "Evaluăm nevoile și obiectivele tale și stabilim direcția potrivită de colaborare.",
     href: "/servicii#consultatie-initiala",
     featured: true,
   },
@@ -58,7 +82,7 @@ export const services = [
     label: "MODALITATE DE COLABORARE",
     title: "Plan nutrițional personalizat",
     description:
-      "Primești un plan structurat pe mese, adaptat programului, preferințelor și nevoilor tale nutriționale.",
+      "Primești un plan structurat pe mese, adaptat nevoilor și programului tău.",
     href: "/servicii#plan-nutritional-personalizat",
   },
   {
@@ -66,7 +90,7 @@ export const services = [
     label: "MODALITATE DE COLABORARE",
     title: "Consiliere și educație nutrițională",
     description:
-      "Înveți să îți organizezi singur mesele și să faci alegeri alimentare potrivite, fără să depinzi de un meniu fix.",
+      "Înveți să îți organizezi alimentația fără să depinzi de un meniu fix.",
     href: "/servicii#consiliere-educatie-nutritionala",
   },
 ];
@@ -82,21 +106,21 @@ export const workProcess = {
       principle: "PERSONALIZARE",
       title: "Ne cunoaștem",
       description:
-        "Discutăm despre obiectivele tale, starea de sănătate, programul zilnic, preferințele alimentare și dificultățile întâmpinate, pentru a înțelege ce ți se potrivește cu adevărat.",
+        "Discutăm despre obiectivele, starea de sănătate, programul și preferințele tale pentru a înțelege ce ți se potrivește.",
     },
     {
       number: "2",
       principle: "EDUCAȚIE ȘI ECHILIBRU",
       title: "Stabilim direcția potrivită",
       description:
-        "Construim împreună o abordare echilibrată și îți explic motivele din spatele recomandărilor, fără reguli rigide sau împărțirea alimentelor în „bune” și „rele”.",
+        "Construim o abordare echilibrată și îți explic motivele din spatele recomandărilor, fără reguli rigide.",
     },
     {
       number: "3",
       principle: "APLICABILITATE",
       title: "Aplicăm și ajustăm",
       description:
-        "Integrăm recomandările treptat în viața ta de zi cu zi, urmărim ce funcționează și facem ajustări realiste, care pot fi menținute pe termen lung.",
+        "Integrăm recomandările în viața de zi cu zi, urmărim ce funcționează și le ajustăm pe parcurs.",
     },
   ],
 };

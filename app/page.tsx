@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 
+import { HomeNeedsAccordion } from "./components/HomeNeedsAccordion";
 import { RevealOnScroll } from "./components/RevealOnScroll";
 import { formatReadingTime } from "../lib/readingTime";
 import { client } from "../sanity/client";
@@ -102,25 +103,15 @@ export default async function HomePage() {
           <RevealOnScroll>
             <div className="section-heading needs-heading">
               <p className="eyebrow">CUM TE POT SPRIJINI</p>
-              <h2 className="h2">
-                Te regăsești în una dintre aceste situații?
-              </h2>
+              <h2 className="h2">Ce te aduce aici?</h2>
               <p className="lead">
-                Fiecare persoană pornește de la nevoi diferite, iar sprijinul nutrițional potrivit poate face diferența.
+                Alege tema care te reprezintă pentru a descoperi situațiile în
+                care te pot sprijini.
               </p>
             </div>
           </RevealOnScroll>
 
-          <div className="card-grid grid-3 needs-grid">
-            {patientNeeds.map((item, index) => (
-              <RevealOnScroll delay={index * 70} key={item}>
-                <article className="soft-card need-card">
-                  <span aria-hidden="true" className="credential-dot" />
-                  <p className="body-text">{item}</p>
-                </article>
-              </RevealOnScroll>
-            ))}
-          </div>
+          <HomeNeedsAccordion items={patientNeeds} />
         </div>
       </section>
 
@@ -141,16 +132,15 @@ export default async function HomePage() {
           <div className="card-grid grid-3 home-services-grid">
             {services.map((service, index) => (
               <RevealOnScroll delay={index * 80} key={service.slug}>
-                <Link
+                <article
                   className={`soft-card service-card home-service-card ${
                     service.featured ? "home-service-card-featured" : ""
                   }`.trim()}
-                  href={service.href}
                 >
                   <p className="eyebrow service-card-label">{service.label}</p>
                   <h3 className="h3">{service.title}</h3>
                   <p className="body-text">{service.description}</p>
-                </Link>
+                </article>
               </RevealOnScroll>
             ))}
           </div>
@@ -194,6 +184,26 @@ export default async function HomePage() {
                     <p className="body-text">{step.description}</p>
                   </div>
                 </article>
+                {index < workProcess.steps.length - 1 ? (
+                  <span
+                    aria-hidden="true"
+                    className="work-process-chevron"
+                  >
+                    <svg
+                      fill="none"
+                      focusable="false"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        d="m9 6 6 6-6 6"
+                        stroke="currentColor"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="1.6"
+                      />
+                    </svg>
+                  </span>
+                ) : null}
               </RevealOnScroll>
             ))}
           </div>

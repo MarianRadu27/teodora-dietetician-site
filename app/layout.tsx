@@ -3,6 +3,7 @@ import { Fraunces, Inter } from "next/font/google";
 import type { ReactNode } from "react";
 
 import { CookieConsentManager } from "./components/cookies/CookieConsentManager";
+import { ScrollToTopButton } from "./components/ScrollToTopButton";
 import { SiteFooter } from "./components/SiteFooter";
 import { SiteHeader } from "./components/SiteHeader";
 import { brand } from "./siteContent";
@@ -106,6 +107,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           {children}
           <SiteFooter />
         </div>
+        <ScrollToTopButton />
         <CookieConsentManager />
       </body>
     </html>

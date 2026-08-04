@@ -1,17 +1,37 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { usePathname } from "next/navigation";
+import { type MouseEvent, useState } from "react";
 
 import { brand, navItems } from "../siteContent";
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
+
+  const handleHomeLink = (event: MouseEvent<HTMLAnchorElement>) => {
+    setOpen(false);
+
+    if (pathname !== "/") {
+      return;
+    }
+
+    event.preventDefault();
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+
+    window.scrollTo({
+      behavior: reduceMotion ? "auto" : "smooth",
+      top: 0,
+    });
+  };
 
   return (
     <header className="site-header">
       <nav aria-label="Navigație principală" className="container site-nav">
-        <Link className="brand-mark" href="/" onClick={() => setOpen(false)}>
+        <Link className="brand-mark" href="/" onClick={handleHomeLink}>
           <strong>{brand.name}</strong>
           <span>{brand.role}</span>
         </Link>
@@ -35,7 +55,9 @@ export function SiteHeader() {
               className="nav-link"
               href={item.href}
               key={item.href}
-              onClick={() => setOpen(false)}
+              onClick={
+                item.href === "/" ? handleHomeLink : () => setOpen(false)
+              }
             >
               {item.label}
             </Link>
