@@ -184,7 +184,7 @@ export function BookingReviewDemo({
         </button>
         <p id="booking-review-submit-note">
           {submissionStatus === "success"
-            ? "Intervalul este rezervat temporar timp de 30 de minute. Emailurile de confirmare nu sunt încă active în această versiune de test."
+            ? "Intervalul este rezervat temporar timp de 30 de minute. Verifică emailul și folosește linkul primit pentru confirmare."
             : turnstileToken
               ? "Verificarea anti-spam este pregătită. Poți trimite cererea de test."
               : "Finalizează verificarea anti-spam pentru a putea trimite cererea."}

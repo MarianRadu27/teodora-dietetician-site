@@ -35,6 +35,8 @@ const trackedBookingEvents = new Set<BookingAnalyticsEvent>([
 
 export function CookieConsentManager() {
   const pathname = usePathname();
+  const isBookingConfirmationPage =
+    pathname === "/programare-noua/confirmare";
   const [analyticsReady, setAnalyticsReady] = useState(false);
   const [choice, setChoice] = useState<ConsentChoice | null>(null);
   const [isInitialized, setIsInitialized] = useState(false);
@@ -74,7 +76,11 @@ export function CookieConsentManager() {
   }, []);
 
   useEffect(() => {
-    if (choice !== "accepted" || !analyticsReady) {
+    if (
+      choice !== "accepted" ||
+      !analyticsReady ||
+      isBookingConfirmationPage
+    ) {
       return;
     }
 
@@ -83,10 +89,19 @@ export function CookieConsentManager() {
     });
 
     return () => window.cancelAnimationFrame(frame);
-  }, [analyticsReady, choice, pathname]);
+  }, [
+    analyticsReady,
+    choice,
+    isBookingConfirmationPage,
+    pathname,
+  ]);
 
   useEffect(() => {
-    if (choice !== "accepted" || !analyticsReady) {
+    if (
+      choice !== "accepted" ||
+      !analyticsReady ||
+      isBookingConfirmationPage
+    ) {
       return;
     }
 
@@ -103,7 +118,7 @@ export function CookieConsentManager() {
     return () => {
       window.removeEventListener("booking_analytics_event", trackBookingStep);
     };
-  }, [analyticsReady, choice]);
+  }, [analyticsReady, choice, isBookingConfirmationPage]);
 
   function saveChoice(nextChoice: ConsentChoice) {
     const storedConsent: StoredConsent = {
@@ -162,7 +177,10 @@ export function CookieConsentManager() {
 
   return (
     <>
-      {isInitialized && choice === "accepted" && isProductionHost ? (
+      {isInitialized &&
+      choice === "accepted" &&
+      isProductionHost &&
+      !isBookingConfirmationPage ? (
         <Script
           id="google-analytics-library"
           onReady={handleAnalyticsReady}

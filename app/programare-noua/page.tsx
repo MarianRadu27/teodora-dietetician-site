@@ -36,9 +36,8 @@ export default function NewBookingPage() {
           <div className="custom-booking-demo-notice" role="note">
             <strong>Acesta este un mediu de test.</strong>
             <span>
-              Folosește numai date fictive. Cererile sunt salvate temporar în
-              baza de date Preview, dar nu generează încă emailuri sau
-              programări confirmate.
+              Folosește date fictive și o adresă de email de test la care ai
+              acces. Cererile sunt salvate numai în baza de date Preview.
             </span>
           </div>
 

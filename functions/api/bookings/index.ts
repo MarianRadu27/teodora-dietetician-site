@@ -1,4 +1,5 @@
 import {
+  bookingModeContent,
   getBookingServiceById,
   type BookingMode,
 } from "../../../config/bookingServices";
@@ -7,9 +8,18 @@ import {
   SLOT_STEP_MINUTES,
   TIME_ZONE,
 } from "../../_shared/bookingRules";
+import {
+  createBookingToken,
+  hashBookingToken,
+} from "../../_shared/bookingTokens";
+import { sendResendEmail } from "../../_shared/resend";
 
 type BookingEnvironment = {
+  BOOKING_FROM_EMAIL?: string;
+  BOOKING_REPLY_TO_EMAIL?: string;
   BOOKINGS_DB?: D1Database;
+  PUBLIC_SITE_URL?: string;
+  RESEND_API_KEY?: string;
   TURNSTILE_SECRET_KEY?: string;
 };
 
@@ -154,6 +164,116 @@ function isConstraintError(error: unknown, target: string) {
   );
 }
 
+function escapeHtml(value: string) {
+  return value.replace(/[&<>"']/g, (character) => {
+    const entities: Record<string, string> = {
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#039;",
+    };
+
+    return entities[character];
+  });
+}
+
+function getPublicSiteOrigin(value: string) {
+  try {
+    const url = new URL(value);
+
+    return url.protocol === "https:" ? url.origin : null;
+  } catch {
+    return null;
+  }
+}
+
+function formatBookingDate(date: Date) {
+  return new Intl.DateTimeFormat("ro-RO", {
+    dateStyle: "long",
+    timeZone: TIME_ZONE,
+  }).format(date);
+}
+
+function createConfirmationEmail({
+  confirmationUrl,
+  date,
+  from,
+  fullName,
+  mode,
+  replyTo,
+  serviceTitle,
+  time,
+  to,
+}: {
+  confirmationUrl: string;
+  date: string;
+  from: string;
+  fullName: string;
+  mode: string;
+  replyTo?: string;
+  serviceTitle: string;
+  time: string;
+  to: string;
+}) {
+  const safeName = escapeHtml(fullName);
+  const safeService = escapeHtml(serviceTitle);
+  const safeDate = escapeHtml(date);
+  const safeTime = escapeHtml(time);
+  const safeMode = escapeHtml(mode);
+  const safeUrl = escapeHtml(confirmationUrl);
+  const text = [
+    `Bună, ${fullName}!`,
+    "",
+    "Am primit cererea ta de programare:",
+    `Serviciu: ${serviceTitle}`,
+    `Data: ${date}`,
+    `Ora: ${time}`,
+    `Modalitate: ${mode}`,
+    "",
+    "Confirmă adresa de email și programarea accesând linkul:",
+    confirmationUrl,
+    "",
+    "Linkul este valabil 30 de minute.",
+  ].join("\n");
+  const html = `
+    <div style="background:#f7f7f2;padding:32px 16px;font-family:Arial,sans-serif;color:#294235">
+      <div style="max-width:600px;margin:0 auto;background:#ffffff;border:1px solid #dde8de;border-radius:8px;padding:32px">
+        <p style="margin:0 0 16px">Bună, ${safeName}!</p>
+        <h1 style="margin:0 0 20px;font-size:26px;line-height:1.25;color:#294235">
+          Confirmă programarea
+        </h1>
+        <p style="margin:0 0 20px;line-height:1.6">
+          Am primit cererea ta și am rezervat temporar intervalul de mai jos.
+        </p>
+        <div style="background:#f2f6f1;border-left:3px solid #4f765a;padding:16px 18px;margin:0 0 24px;line-height:1.7">
+          <strong>Serviciu:</strong> ${safeService}<br>
+          <strong>Data:</strong> ${safeDate}<br>
+          <strong>Ora:</strong> ${safeTime}<br>
+          <strong>Modalitate:</strong> ${safeMode}
+        </div>
+        <p style="margin:0 0 24px">
+          <a href="${safeUrl}" style="display:inline-block;background:#294235;color:#ffffff;text-decoration:none;border-radius:6px;padding:13px 20px;font-weight:700">
+            Confirmă programarea
+          </a>
+        </p>
+        <p style="margin:0;color:#5e665f;font-size:14px;line-height:1.6">
+          Linkul este valabil 30 de minute. Dacă nu ai făcut această cerere, poți ignora emailul.
+        </p>
+      </div>
+    </div>
+  `;
+
+  return {
+    from,
+    html,
+    replyTo,
+    subject: "Confirmă programarea la Dietetician Teodora Pălii",
+    text,
+    to,
+  };
+}
+
 async function verifyTurnstile(
   request: Request,
   secret: string,
@@ -216,6 +336,29 @@ async function expireOldPendingBookings(db: D1Database, nowIso: string) {
         `,
       )
       .bind(nowIso, nowIso),
+  ]);
+}
+
+async function removeUnsentBooking(
+  db: D1Database,
+  bookingId: string,
+) {
+  await db.batch([
+    db
+      .prepare("DELETE FROM calendar_slots WHERE booking_id = ?")
+      .bind(bookingId),
+    db
+      .prepare("DELETE FROM booking_tokens WHERE booking_id = ?")
+      .bind(bookingId),
+    db
+      .prepare(
+        `
+          DELETE FROM bookings
+          WHERE id = ?
+            AND status = 'pending_email_confirmation'
+        `,
+      )
+      .bind(bookingId),
   ]);
 }
 
@@ -286,7 +429,17 @@ export async function onRequestPost({
     );
   }
 
-  if (!env.BOOKINGS_DB || !env.TURNSTILE_SECRET_KEY) {
+  const publicSiteOrigin = env.PUBLIC_SITE_URL
+    ? getPublicSiteOrigin(env.PUBLIC_SITE_URL)
+    : null;
+
+  if (
+    !env.BOOKINGS_DB ||
+    !env.TURNSTILE_SECRET_KEY ||
+    !env.RESEND_API_KEY ||
+    !env.BOOKING_FROM_EMAIL ||
+    !publicSiteOrigin
+  ) {
     return jsonResponse(
       {
         code: "BOOKINGS_UNAVAILABLE",
@@ -434,6 +587,9 @@ export async function onRequestPost({
     }
 
     const bookingId = crypto.randomUUID();
+    const confirmationToken = createBookingToken();
+    const confirmationTokenHash = await hashBookingToken(confirmationToken);
+    const confirmationTokenId = crypto.randomUUID();
     const bookingStatement = env.BOOKINGS_DB.prepare(
       `
         INSERT INTO bookings (
@@ -484,6 +640,25 @@ export async function onRequestPost({
       nowIso,
       nowIso,
     );
+    const confirmationTokenStatement = env.BOOKINGS_DB.prepare(
+      `
+        INSERT INTO booking_tokens (
+          id,
+          booking_id,
+          purpose,
+          token_hash,
+          expires_at,
+          created_at
+        )
+        VALUES (?, ?, 'confirm_email', ?, ?, ?)
+      `,
+    ).bind(
+      confirmationTokenId,
+      bookingId,
+      confirmationTokenHash,
+      expiresAt.toISOString(),
+      nowIso,
+    );
     const slotStatements = slotPlan.slotStarts.map((slotStart) =>
       env.BOOKINGS_DB!.prepare(
         `
@@ -505,15 +680,62 @@ export async function onRequestPost({
 
     await env.BOOKINGS_DB.batch([
       bookingStatement,
+      confirmationTokenStatement,
       ...slotStatements,
     ]);
+
+    const confirmationUrl = new URL(
+      "/programare-noua/confirmare",
+      publicSiteOrigin,
+    );
+    confirmationUrl.hash = new URLSearchParams({
+      token: confirmationToken,
+    }).toString();
+
+    try {
+      await sendResendEmail(
+        env.RESEND_API_KEY,
+        createConfirmationEmail({
+          confirmationUrl: confirmationUrl.toString(),
+          date: formatBookingDate(slotPlan.startsAt),
+          from: env.BOOKING_FROM_EMAIL,
+          fullName,
+          mode: bookingModeContent[body.mode].summaryLabel,
+          replyTo: env.BOOKING_REPLY_TO_EMAIL,
+          serviceTitle: service.title,
+          time,
+          to: email,
+        }),
+        `booking-confirmation-${bookingId}`,
+      );
+    } catch (error) {
+      console.error("Could not send booking confirmation email.", error);
+
+      try {
+        await removeUnsentBooking(env.BOOKINGS_DB, bookingId);
+      } catch (cleanupError) {
+        console.error(
+          "Could not clean up a booking without email.",
+          cleanupError,
+        );
+      }
+
+      return jsonResponse(
+        {
+          code: "CONFIRMATION_EMAIL_FAILED",
+          message:
+            "Emailul de confirmare nu a putut fi trimis. Cererea nu a fost păstrată. Încearcă din nou.",
+        },
+        502,
+      );
+    }
 
     return jsonResponse(
       {
         bookingId,
         expiresAt: expiresAt.toISOString(),
         message:
-          "Cererea de test a fost salvată și intervalul a fost rezervat temporar.",
+          "Cererea a fost salvată. Verifică emailul și confirmă programarea în maximum 30 de minute.",
         status: "pending_email_confirmation",
       },
       201,
